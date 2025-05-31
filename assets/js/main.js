@@ -41,21 +41,24 @@ async function fetchPostMeta(url) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.querySelector(".card-container");
+  const posts = [
+    { url: "blog/post-1.html", date: null },
+    { url: "blog/post-2.html", date: "10.12.2021" }
+  ];
 
-  try {
-    const post1Meta = await fetchPostMeta("blog/post-1.html");
-    const post1Card = createPostCard(post1Meta.title, post1Meta.summary, post1Meta.date, "blog/post-1.html");
-    container.appendChild(post1Card);
-  } catch (err) {
-    console.error("Error loading Post 1:", err);
-  }
+  const results = await Promise.all(posts.map(async ({ url, date }) => {
+    try {
+      const meta = await fetchPostMeta(url);
+      return createPostCard(meta.title, meta.summary, date || meta.date, url);
+    } catch (err) {
+      console.error("Failed to load:", url, err);
+      return null;
+    }
+  }));
 
-  try {
-    const post2Meta = await fetchPostMeta("blog/post-2.html");
-    const post2Card = createPostCard(post2Meta.title, post2Meta.summary, "10.12.2021", "blog/post-2.html");
-    container.appendChild(post2Card);
-  } catch (err) {
-    console.error("Error loading Post 2:", err);
-  }
+  results.forEach(card => {
+    if (card) container.appendChild(card);
+  });
 });
+
 
