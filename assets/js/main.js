@@ -42,14 +42,20 @@ async function fetchPostMeta(url) {
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.querySelector(".card-container");
 
-  // Fetch metadata for post 1 dynamically
-  const post1Meta = await fetchPostMeta("blog/post-1.html");
-  const post1Card = createPostCard(post1Meta.title, post1Meta.summary, post1Meta.date, "blog/post-1.html");  // To change the date, replace post2Meta.date with "10.12.2021"
-  container.appendChild(post1Card);
+  try {
+    const post1Meta = await fetchPostMeta("blog/post-1.html");
+    const post1Card = createPostCard(post1Meta.title, post1Meta.summary, post1Meta.date, "blog/post-1.html");
+    container.appendChild(post1Card);
+  } catch (err) {
+    console.error("Error loading Post 1:", err);
+  }
 
-  // Fetch metadata for post 2 dynamically
-  const post2Meta = await fetchPostMeta("blog/post-2.html");
-  const post2Card = createPostCard(post2Meta.title, post2Meta.summary, post2Meta.date, "blog/post-2.html"); // To change the date, replace post2Meta.date with "10.12.2021"
-  container.appendChild(post2Card);  
-
+  try {
+    const post2Meta = await fetchPostMeta("blog/post-2.html");
+    const post2Card = createPostCard(post2Meta.title, post2Meta.summary, "10.12.2021", "blog/post-2.html");
+    container.appendChild(post2Card);
+  } catch (err) {
+    console.error("Error loading Post 2:", err);
+  }
 });
+
