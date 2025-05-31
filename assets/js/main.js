@@ -13,7 +13,9 @@ function createPostCard(title, summary, date = null, url = "#") {
   const datePara = document.createElement("p");
   datePara.className = "post-date";
   const today = new Date();
-  datePara.textContent = date || today.toISOString().split("T")[0];
+  datePara.textContent = date 
+  ? date.split('-').reverse().join('.') 
+  : today.toISOString().split("T")[0].split('-').reverse().join('.');
 
   card.appendChild(heading);
   card.appendChild(summaryPara);
