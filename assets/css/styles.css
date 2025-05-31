@@ -48,7 +48,7 @@ nav {
 
 
 nav a {
-  background-color: #f9c412;
+  background-color: white;
   color: black;
   padding: 0.5rem 1rem;
   margin: 0 0.5rem;
@@ -60,7 +60,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: white;
+  background-color: #f9c412;
 }
 
 .logo {
