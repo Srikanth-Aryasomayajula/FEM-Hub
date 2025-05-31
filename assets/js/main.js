@@ -32,7 +32,7 @@ function createPostCard(title, summary, date = null, url = "#", readTime = null)
 
   card.appendChild(infoWrapper);
 
-  return createPostCard(meta.title, meta.summary, date || meta.date, url, meta.readTime);
+  return card;
 }
 
 // Helper to fetch and parse HTML, then extract title and summary
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const results = await Promise.all(posts.map(async ({ url, date }) => {
     try {
       const meta = await fetchPostMeta(url);
-      return createPostCard(meta.title, meta.summary, date || meta.date, url);
+      return createPostCard(meta.title, meta.summary, date || meta.date, url, meta.readTime);
     } catch (err) {
       console.error("Failed to load:", url, err);
       return null;
