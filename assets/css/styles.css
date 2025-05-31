@@ -117,16 +117,17 @@ footer p {
 .card {
   display: flex;
   flex-direction: column;
-  background: white;
+  background: #FFD45D;
   padding: 1rem;
   border-radius: 5px;
   text-decoration: none;
   color: black;
   width: 300px;
-  height: 100%; /* ensures full height so .card-info can be pushed to bottom */
+  height: 230px;
   max-height: 220px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   transition: transform 0.2s;
+  overflow: hidden; /* Prevent content from spilling */
 }
 
 .card-info {
@@ -138,6 +139,14 @@ footer p {
 .card p,
 .card h2 {
   margin-bottom: 0.5rem;
+}
+
+.card p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
 }
 
 .card:hover {
