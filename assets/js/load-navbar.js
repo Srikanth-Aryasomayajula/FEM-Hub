@@ -1,8 +1,17 @@
+// assets/js/load-navbar.js
+
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("/FEM-Hub/includes/navbar.html")
+  // Load header
+  fetch("/FEM-Hub/assets/includes/header.html")
     .then(response => response.text())
     .then(data => {
-      document.getElementById("navbar").innerHTML = data;
-    })
-    .catch(error => console.error("Navbar load error:", error));
+      document.getElementById("header").innerHTML = data;
+    });
+
+  // Load footer
+  fetch("/FEM-Hub/assets/includes/footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer").innerHTML = data;
+    });
 });
