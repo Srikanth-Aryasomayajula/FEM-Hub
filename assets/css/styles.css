@@ -50,7 +50,7 @@ main {
 }
 
 footer {
-  margin-top: auto; /* pushes footer to bottom */
+  margin: 0;
   background: #222;
   color: white;
   text-align: center;
