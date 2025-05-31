@@ -58,31 +58,54 @@ async function fetchPostMeta(url) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const container = document.querySelector(".general-card-container");
-  if (!container) return; // Avoids errors if the container doesn't exist
+  // Map container class to relevant posts
+  const containerMap = {
+    "general-card-container": [
+      { url: "blog/general_post-1.html", date: null },   //date: "10.12.2021" for manual date
+      { url: "blog/general_post-2.html", date: null },
+      { url: "blog/general_post-3.html", date: null },
+      { url: "blog/general_post-4.html", date: null },
+      { url: "blog/general_post-5.html", date: null },
+      { url: "blog/general_post-6.html", date: null }
+    ],
+    "engineering-card-container": [
+      { url: "blog/engineering_post-1.html", date: null },
+      { url: "blog/engineering_post-2.html", date: null },
+	  { url: "blog/engineering_post-3.html", date: null },
+	  { url: "blog/engineering_post-4.html", date: null },
+	  { url: "blog/engineering_post-5.html", date: null }
+      // Add more engineering posts here
+    ],
+    "ls-dyna-card-container": [
+      { url: "blog/lsdyna_post-1.html", date: null },
+      { url: "blog/lsdyna_post-2.html", date: null },
+	  { url: "blog/lsdyna_post-3.html", date: null },
+	  { url: "blog/lsdyna_post-4.html", date: null },
+	  { url: "blog/lsdyna_post-5.html", date: null },
+	  { url: "blog/lsdyna_post-6.html", date: null },
+	  { url: "blog/lsdyna_post-7.html", date: null }
+    ]
+  };
 
-  const posts = [
-    { url: "blog/general_post-1.html", date: null },  //to change the date manually, use date: "10.12.2021"
-    { url: "blog/general_post-2.html", date: null }, 
-	{ url: "blog/general_post-3.html", date: null },
-	{ url: "blog/general_post-4.html", date: null },
-	{ url: "blog/general_post-5.html", date: null },
-	{ url: "blog/general_post-6.html", date: null }
-  ];
+  // Loop through each known container
+  for (const [className, posts] of Object.entries(containerMap)) {
+    const container = document.querySelector(`.${className}`);
+    if (!container) continue; // If this container doesn't exist on the page, skip
 
-  const results = await Promise.all(posts.map(async ({ url, date }) => {
-    try {
-      const meta = await fetchPostMeta(url);
-      return createPostCard(meta.title, meta.summary, date || meta.date, url, meta.readTime);
-    } catch (err) {
-      console.error("Failed to load:", url, err);
-      return null;
-    }
-  }));
+    const results = await Promise.all(posts.map(async ({ url, date }) => {
+      try {
+        const meta = await fetchPostMeta(url);
+        return createPostCard(meta.title, meta.summary, date || meta.date, url, meta.readTime);
+      } catch (err) {
+        console.error("Failed to load:", url, err);
+        return null;
+      }
+    }));
 
-  results.forEach(card => {
-    if (card) container.appendChild(card);
-  });
+    results.forEach(card => {
+      if (card) container.appendChild(card);
+    });
+  }
 });
 
 
