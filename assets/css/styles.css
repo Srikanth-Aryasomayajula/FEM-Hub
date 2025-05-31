@@ -42,7 +42,7 @@ nav {
   flex-direction: column;
   gap: 1rem;
   position: absolute;
-  top: 250%;
+  top: 10rem;
   right: 2rem;
 }
 
