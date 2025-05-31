@@ -77,13 +77,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Add more engineering posts here
     ],
     "ls-dyna-card-container": [
-      { url: "blog/lsdyna_post-1.html", date: null },
-      { url: "blog/lsdyna_post-2.html", date: null },
-	  { url: "blog/lsdyna_post-3.html", date: null },
-	  { url: "blog/lsdyna_post-4.html", date: null },
-	  { url: "blog/lsdyna_post-5.html", date: null },
-	  { url: "blog/lsdyna_post-6.html", date: null },
-	  { url: "blog/lsdyna_post-7.html", date: null }
+      { url: "blog/ls-dyna_post-1.html", date: null },
+      { url: "blog/ls-dyna_post-2.html", date: null },
+	  { url: "blog/ls-dyna_post-3.html", date: null },
+	  { url: "blog/ls-dyna_post-4.html", date: null },
+	  { url: "blog/ls-dyna_post-5.html", date: null },
+	  { url: "blog/ls-dyna_post-6.html", date: null },
+	  { url: "blog/ls-dyna_post-7.html", date: null }
     ]
   };
 
