@@ -50,7 +50,7 @@ main {
 }
 
 footer {
-  margin: 0;
+  margin-top: auto; /* pushes footer to bottom */
   background: #222;
   color: white;
   text-align: center;
@@ -59,6 +59,11 @@ footer {
   bottom: auto; /* remove bottom: 0 */
   left: auto;
   z-index: 100;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
 }
 
 .general-card-container {
