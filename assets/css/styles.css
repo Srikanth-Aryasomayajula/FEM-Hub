@@ -24,9 +24,7 @@ body {
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  background: #f9c412;
+  background: transparent;
   color: black;
   padding: 1rem 2rem;
   position: relative;
@@ -41,7 +39,11 @@ header {
 
 nav {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+  position: fixed;
+  top: 20%;
+  right: 2rem;
 }
 
 
