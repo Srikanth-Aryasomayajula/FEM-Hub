@@ -120,6 +120,8 @@ footer p {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   background: white;
   padding: 1rem;
   border-radius: 5px;
