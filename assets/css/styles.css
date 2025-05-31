@@ -26,10 +26,15 @@ body {
 header {
   background: #f9c412;
   color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 1rem 2rem;
+  position: relative;
+}
+
+.header-container {
+  position: relative;
+  display: flex;
+  justify-content: center; /* center nav */
+  align-items: center;
 }
 
 nav {
@@ -37,22 +42,29 @@ nav {
   gap: 1rem;
 }
 
+
 nav a {
-  color: black;
-  background-color: white;
+  background-color: black;
+  color: white;
   padding: 0.5rem 1rem;
-  border-radius: 20px;
+  margin: 0 0.5rem;
   text-decoration: none;
+  border-radius: 20px;
   font-weight: bold;
   transition: background-color 0.3s;
 }
 
 nav a:hover {
-  background-color: #ffe280;
+  background-color: #333;
+}
+
+.logo {
+  position: absolute;
+  left: 0;
 }
 
 .logo img {
-  height: 50px; /* Adjust as needed */
+  height: 50px;
   width: auto;
 }
 
