@@ -26,20 +26,34 @@ body {
 header {
   background: #f9c412;
   color: black;
-  padding: 0;
-  font-size: 2rem;
-  text-align: center;
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
 }
 
 nav {
-  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 nav a {
   color: black;
-  margin: 0 1rem;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
   text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+nav a:hover {
+  background-color: #ffe280;
+}
+
+.logo img {
+  height: 50px; /* Adjust as needed */
+  width: auto;
 }
 
 .tagline {
