@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create New Post | FEM Hub</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script src="assets/js/load-navbar.js" defer></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="editor-form">
+    <h2>Create New Blog Post</h2>
+    <form id="postForm">
+      <label for="title">Title:</label>
+      <input type="text" id="title" required>
+
+      <label for="summary">Summary:</label>
+      <textarea id="summary" required></textarea>
+
+      <label for="date">Date (optional):</label>
+      <input type="date" id="date">
+
+      <label for="url">Link to full post:</label>
+      <input type="text" id="url" placeholder="e.g. blog/post-3.html" required>
+
+      <button type="submit">Generate Post Card</button>
+    </form>
+
+    <div id="generatedCodeContainer">
+      <h3>Generated Code:</h3>
+      <textarea id="generatedCode" rows="6" readonly></textarea>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    document.getElementById("postForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const summary = document.getElementById("summary").value;
+      const date = document.getElementById("date").value;
+      const url = document.getElementById("url").value;
+
+      const code = `createPostCard("${title}", "${summary}", "${date}", "${url}");`;
+      document.getElementById("generatedCode").value = code;
+    });
+  </script>
+</body>
+</html>
