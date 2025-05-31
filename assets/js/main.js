@@ -62,8 +62,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!container) return; // Avoids errors if the container doesn't exist
 
   const posts = [
-    { url: "blog/post-1.html", date: null },
-    { url: "blog/post-2.html", date: "10.12.2021" }
+    { url: "blog/general_post-1.html", date: null },  //to change the date manually, use date: "10.12.2021"
+    { url: "blog/general_post-2.html", date: null }, 
+	{ url: "blog/general_post-3.html", date: null },
+	{ url: "blog/general_post-4.html", date: null },
+	{ url: "blog/general_post-5.html", date: null },
+	{ url: "blog/general_post-6.html", date: null }
   ];
 
   const results = await Promise.all(posts.map(async ({ url, date }) => {
