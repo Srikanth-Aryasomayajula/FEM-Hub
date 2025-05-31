@@ -41,7 +41,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  position: fixed;
+  position: absolute;
   top: 20%;
   right: 2rem;
 }
