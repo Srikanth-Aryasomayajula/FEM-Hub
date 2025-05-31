@@ -61,7 +61,7 @@ footer {
   z-index: 100;
 }
 
-.card-container {
+.general-card-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;

@@ -40,7 +40,7 @@ async function fetchPostMeta(url) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const container = document.querySelector(".card-container");
+  const container = document.querySelector(".general-card-container");
   const posts = [
     { url: "blog/post-1.html", date: null },
     { url: "blog/post-2.html", date: "10.12.2021" }
