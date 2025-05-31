@@ -116,6 +116,7 @@ footer p {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  height: 100%; /* ensures full height so .card-info can be pushed to bottom */
 }
 
 .card {
