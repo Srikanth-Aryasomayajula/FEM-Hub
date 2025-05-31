@@ -20,12 +20,12 @@ body {
   margin: 0;
   padding: 0;
   background-color: #181818;
-  color: #333;
+  color: white;
 }
 
 header {
   background: #f9c412;
-  color: white;
+  color: black;
   padding: 2rem;
   text-align: center;
 }
