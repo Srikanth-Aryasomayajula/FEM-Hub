@@ -89,11 +89,6 @@ main {
   padding: 2rem;
 }
 
-.read-time {
-  font-size: 0.85rem;
-  color: #666;
-}
-
 footer {
   margin-top: auto; /* pushes footer to bottom */
   background: #222;
@@ -155,6 +150,12 @@ footer p {
 }
 
 .post-date {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.read-time {
   font-size: 0.8rem;
   color: #666;
   margin-top: 0.5rem;
