@@ -1,5 +1,5 @@
 // Function to create a post card (same as before)
-function createPostCard(title, summary, date = null, url = "#") {
+function createPostCard(title, summary, date = null, url = "#", readTime = null) {
   const card = document.createElement("a");
   card.className = "card";
   card.href = url;
@@ -19,9 +19,20 @@ function createPostCard(title, summary, date = null, url = "#") {
 
   card.appendChild(heading);
   card.appendChild(summaryPara);
-  card.appendChild(datePara);
+  
+  const readTimePara = document.createElement("p");
+  readTimePara.className = "read-time";
+  readTimePara.textContent = `${readTime} min read`;
 
-  return card;
+  const infoWrapper = document.createElement("div");
+  infoWrapper.style.display = "flex";
+  infoWrapper.style.justifyContent = "space-between";
+  infoWrapper.appendChild(datePara);
+  infoWrapper.appendChild(readTimePara);
+
+  card.appendChild(infoWrapper);
+
+  return createPostCard(meta.title, meta.summary, date || meta.date, url, meta.readTime);
 }
 
 // Helper to fetch and parse HTML, then extract title and summary
@@ -33,10 +44,18 @@ async function fetchPostMeta(url) {
   const title = doc.querySelector('h1')?.textContent || "No Title";
   const summary = doc.querySelector('meta[name="post-summary"]')?.getAttribute('content') || "No Summary";
   
+  const content = doc.querySelector('main.post')?.textContent || "";
+  const wordCount = content.trim().split(/\s+/).length;
+  let readTime = Math.ceil(wordCount / 200); // Average 200 wpm
+  
   // Optionally extract date if you add it similarly
-  // For now, we hardcode or default
   const date = null; 
-  return { title, summary, date };
+  
+  // Allow override
+  const customTime = doc.querySelector('meta[name="read-time"]')?.getAttribute('content');
+  if (customTime) readTime = customTime;
+  
+  return { title, summary, date, readTime };
 }
 
 document.addEventListener("DOMContentLoaded", async () => {

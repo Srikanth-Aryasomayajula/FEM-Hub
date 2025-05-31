@@ -88,6 +88,11 @@ main {
   padding: 2rem;
 }
 
+.read-time {
+  font-size: 0.85rem;
+  color: #666;
+}
+
 footer {
   margin-top: auto; /* pushes footer to bottom */
   background: #222;
