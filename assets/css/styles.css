@@ -63,7 +63,7 @@ nav a:hover {
 }
 
 .banner img {
-	width: calc(100vw * 0.7);
+	width: calc(100vw * 0.65);
 	max-width: 70%; 
 	height: auto; 
 	display: block; 
@@ -125,6 +125,7 @@ footer p {
   text-decoration: none;
   color: black;
   width: 300px;
+  max-width: 220px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   transition: transform 0.2s;
 }
