@@ -125,9 +125,21 @@ footer p {
   text-decoration: none;
   color: black;
   width: 300px;
+  height: 100%; /* ensures full height so .card-info can be pushed to bottom */
   max-height: 220px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   transition: transform 0.2s;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto; /* pushes it to the bottom */
+}
+
+.card p,
+.card h2 {
+  margin-bottom: 0.5rem;
 }
 
 .card:hover {

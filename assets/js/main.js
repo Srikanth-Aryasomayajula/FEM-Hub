@@ -25,8 +25,7 @@ function createPostCard(title, summary, date = null, url = "#", readTime = null)
   readTimePara.textContent = `${readTime} min read`;
 
   const infoWrapper = document.createElement("div");
-  infoWrapper.style.display = "flex";
-  infoWrapper.style.justifyContent = "space-between";
+  infoWrapper.className = "card-info";
   infoWrapper.appendChild(datePara);
   infoWrapper.appendChild(readTimePara);
 
