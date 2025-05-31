@@ -44,15 +44,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Fetch metadata for post 1 dynamically
   const post1Meta = await fetchPostMeta("blog/post-1.html");
-  const post1Card = createPostCard(post1Meta.title, post1Meta.summary, post1Meta.date, "blog/post-1.html");
+  const post1Card = createPostCard(post1Meta.title, post1Meta.summary, post1Meta.date, "blog/post-1.html");  // To change the date, replace post2Meta.date with "10.12.2021"
   container.appendChild(post1Card);
 
-  // For post 2, you can still hardcode or replicate this fetching process
-  const post2 = createPostCard(
-    "Stress Analysis in Composites",
-    "Understanding how FEM helps analyze composite materials.",
-    null,
-    "blog/post-2.html"
-  );
-  container.appendChild(post2);
+  // Fetch metadata for post 2 dynamically
+  const post2Meta = await fetchPostMeta("blog/post-2.html");
+  const post2Card = createPostCard(post2Meta.title, post2Meta.summary, post2Meta.date, "blog/post-2.html"); // To change the date, replace post2Meta.date with "10.12.2021"
+  container.appendChild(post2Card);  
+
 });
