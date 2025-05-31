@@ -63,7 +63,8 @@ nav a:hover {
 }
 
 .banner img {
-	width: 70%; 
+	width: calc(100vw * 0.7);
+	max-width: 70%; 
 	height: auto; 
 	display: block; 
 	margin: 0 auto;
