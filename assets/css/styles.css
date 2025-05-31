@@ -50,11 +50,15 @@ main {
 }
 
 footer {
+  margin-top: auto; /* pushes footer to bottom */
   background: #222;
   color: white;
   text-align: center;
-  padding: 0;
-  margin-top: 8px;
+  padding: 6px 0;
+  position: relative; /* keep this or remove it, no absolute/fixed */
+  bottom: auto; /* remove bottom: 0 */
+  left: auto;
+  z-index: 100;
 }
 
 .card-container {
