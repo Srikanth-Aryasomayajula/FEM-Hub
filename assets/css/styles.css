@@ -120,6 +120,30 @@ main {
   margin-right: 150px;
 }
 
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  width: 60px;
+}
+
+/* Style for the search input field */
+#searchInput {
+  width: 60%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+/* Optional: Add focus effect */
+#searchInput:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #007bff;
+}
+
 .card {
   display: flex;
   flex-direction: column;
