@@ -124,7 +124,7 @@ main {
   display: flex;
   justify-content: center;
   margin: 10px 0;
-  width: 250px;
+  width: 350px;
   position: absolute;       /* Take it out of the normal flow */
   top: 1rem;                /* Distance from the top of the page */
   right: 1rem;               /* Distance from the right edge */
