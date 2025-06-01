@@ -71,52 +71,47 @@ async function openPostCard(url) {
   const content = doc.querySelector("main.post")?.innerHTML || "<p>No content found.</p>";
   const title = doc.querySelector("h1")?.textContent || "Untitled";
 
-  // Clear main container
   container.innerHTML = "";
 
   const card = document.createElement("div");
   card.className = "post-expanded-card";
   card.innerHTML = `
-    <button onclick="location.reload()" style="margin-bottom: 20px;">← Back</button>
+    <button onclick="location.reload()">← Back</button>
     <h2>${title}</h2>
-	
-	<div class="like-comment-section" style="margin: 15px 0;">
-	  <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
-	  <span id="likeCount">0</span> Likes
-	</div>
 
-	
-    <div style="margin-top: 20px;">${content}</div>
-    <h3 style="margin-top: 30px;">Comments</h3>
-    <div id="commentsContainer" style="margin-bottom: 10px;"></div>
-    <textarea id="newComment" placeholder="Add a comment..." rows="3" style="width:100%;"></textarea><br/>
+    <div class="like-comment-section">
+      <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
+      <span id="likeCount">0</span> Likes
+    </div>
+
+    <div class="post-content">${content}</div>
+
+    <h3>Comments</h3>
+    <div id="commentsContainer"></div>
+    <textarea id="newComment" placeholder="Add a comment..." rows="3"></textarea><br/>
     <button onclick="addComment('${url}')">Post Comment</button>
+
     <p><a href="#generalPostsContainer">See all</a></p>
-    <button onclick="scrollToTop()" style="margin-top: 20px;">↑ Scroll to Top</button>
+    <button onclick="scrollToTop()">↑ Scroll to Top</button>
   `;
 
   container.appendChild(card);
-  
+
   // Restore like state
   const likes = JSON.parse(localStorage.getItem("likes") || "{}");
   const liked = likes[url];
   document.getElementById("likeCount").textContent = liked ? "1" : "0";
   document.getElementById("likeBtn").textContent = liked ? "💔 Unlike" : "❤️ Like";
-  
+
   // Load saved comments
   const comments = JSON.parse(localStorage.getItem("comments") || "{}")[url] || [];
   const commentsContainer = document.getElementById("commentsContainer");
   comments.forEach(c => {
     const comment = document.createElement("div");
+    comment.className = "comment";
     comment.textContent = c;
-    comment.style.padding = "8px";
-    comment.style.margin = "5px 0";
-    comment.style.border = "1px solid #ccc";
-    comment.style.backgroundColor = "#f9f9f9";
-    comment.style.color = "black";
     commentsContainer.appendChild(comment);
   });
-
 }
 
 function toggleLike(postUrl) {
@@ -140,12 +135,8 @@ function addComment(postUrl) {
   const container = document.getElementById("commentsContainer");
 
   const comment = document.createElement("div");
+  comment.className = "comment";
   comment.textContent = text;
-  comment.style.padding = "8px";
-  comment.style.margin = "5px 0";
-  comment.style.border = "1px solid #ccc";
-  comment.style.backgroundColor = "#f9f9f9";
-  comment.style.color = "black";
 
   container.appendChild(comment);
   document.getElementById("newComment").value = "";
@@ -156,6 +147,7 @@ function addComment(postUrl) {
   comments[postUrl].push(text);
   localStorage.setItem("comments", JSON.stringify(comments));
 }
+
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
