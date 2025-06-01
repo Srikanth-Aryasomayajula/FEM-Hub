@@ -222,6 +222,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Scroll-to-top button functionality
+  const scrollToTopBtn = document.getElementById('scroll-to-top');
+  
+  if (scrollToTopBtn) {
+    // Show or hide the button based on scroll position
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        scrollToTopBtn.classList.add('visible');
+        scrollToTopBtn.classList.remove('hidden');
+      } else {
+        scrollToTopBtn.classList.add('hidden');
+        scrollToTopBtn.classList.remove('visible');
+      }
+    });
+  
+    // Attach click handler (optional if you want to keep your existing scrollToTop function)
+    scrollToTopBtn.addEventListener('click', scrollToTop);
+  }
 
 });
 
