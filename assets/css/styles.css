@@ -198,6 +198,15 @@ main {
   margin-top: 0.5rem;
 }
 
+.subscribe-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
 .contact-form {
   background-color: #fff;
   border: 1px solid #ccc;
