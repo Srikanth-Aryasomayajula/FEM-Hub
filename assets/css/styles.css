@@ -78,9 +78,10 @@ nav a:hover {
 }
 
 .logo img {
-  height: 50px;
+  height: 80px;
   width: auto;
   display: block;
+  border-radius: 8px;
 }
 
 .tagline {
