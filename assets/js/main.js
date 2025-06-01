@@ -150,8 +150,10 @@ async function updateLikeCount(postUrl) {
   document.getElementById("likeCount").textContent = snapshot.size;
 }
 
-function sharePost(url) {
-  const fullUrl = window.location.origin + '/' + url;
+function sharePost(postUrl) {
+  const baseUrl = window.location.origin + '/FEM-Hub/general.html';
+  const fullUrl = `${baseUrl}?post=${encodeURIComponent(postUrl)}`;
+  
   if (navigator.share) {
     navigator.share({
       title: document.title,
@@ -419,4 +421,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     scrollToTopBtn.addEventListener('click', scrollToTop);
   }
 
+
+  // Auto-open post if ?post=... is in URL
+  const params = new URLSearchParams(window.location.search);
+  const postToOpen = params.get("post");
+  if (postToOpen) {
+    const rawDate = new Date().toISOString().split('T')[0]; // fallback if no date
+    openPostCard(postToOpen, rawDate);
+  }
+  
 });
