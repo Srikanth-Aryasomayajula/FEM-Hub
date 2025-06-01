@@ -128,7 +128,7 @@ async function loadComments(postUrl) {
   const container = document.getElementById("commentsContainer");
   container.innerHTML = "<p>Loading comments...</p>";
 
-  const snapshot = await db.collection("comments")
+  const snapshot = await window.db.collection("comments")
     .where("postUrl", "==", postUrl)
     .orderBy("timestamp", "desc")
     .get();
@@ -148,7 +148,7 @@ async function addComment(postUrl) {
   const name = prompt("Enter your name:");
   if (!name || !text) return;
 
-  await db.collection("comments").add({
+  await window.db.collection("comments").add({
     postUrl,
     name,
     text,
