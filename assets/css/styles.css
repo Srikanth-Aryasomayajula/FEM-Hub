@@ -164,6 +164,13 @@ main {
   margin: auto;
 }
 
+.post-expanded-card {
+  background: #282828;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 .post-date {
   font-size: 0.8rem;
   color: #666;

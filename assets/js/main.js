@@ -2,7 +2,10 @@
 function createPostCard(title, summary, date = null, url = "#", readTime = null) {
   const card = document.createElement("a");
   card.className = "card";
-  card.href = url;
+  card.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await openPostCard(url);
+  });
 
   const heading = document.createElement("h2");
   heading.textContent = title;
@@ -57,6 +60,64 @@ async function fetchPostMeta(url) {
   return { title, summary, date, readTime };
 }
 
+// Open post in a separate card
+async function openPostCard(url) {
+  const container = document.getElementById("generalPostsContainer");
+  const res = await fetch(url);
+  const text = await res.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, "text/html");
+
+  const content = doc.querySelector("main.post")?.innerHTML || "<p>No content found.</p>";
+  const title = doc.querySelector("h1")?.textContent || "Untitled";
+
+  // Clear main container
+  container.innerHTML = "";
+
+  const card = document.createElement("div");
+  card.className = "post-expanded-card";
+  card.innerHTML = `
+    <button onclick="location.reload()" style="margin-bottom: 20px;">← Back</button>
+    <h2>${title}</h2>
+    <div class="like-comment-section" style="margin: 15px 0;">
+      ❤️ <button id="likeBtn">Like</button>
+      <span id="likeCount">0</span> Likes
+    </div>
+    <div style="margin-top: 20px;">${content}</div>
+    <h3 style="margin-top: 30px;">Comments</h3>
+    <div id="commentsContainer" style="margin-bottom: 10px;"></div>
+    <textarea id="newComment" placeholder="Add a comment..." rows="3" style="width:100%;"></textarea><br/>
+    <button onclick="addComment()">Post Comment</button>
+    <p><a href="#generalPostsContainer">See all</a></p>
+    <button onclick="scrollToTop()" style="margin-top: 20px;">↑ Scroll to Top</button>
+  `;
+
+  container.appendChild(card);
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function addComment() {
+  const container = document.getElementById("commentsContainer");
+  const text = document.getElementById("newComment").value;
+  if (!text.trim()) return;
+  
+  const comment = document.createElement("div");
+  comment.textContent = text;
+  comment.style.padding = "8px";
+  comment.style.margin = "5px 0";
+  comment.style.border = "1px solid #ccc";
+  comment.style.backgroundColor = "#f9f9f9";
+  comment.style.color = "black";
+
+  container.appendChild(comment);
+  document.getElementById("newComment").value = "";
+}
+
+
+// Main code 
 document.addEventListener("DOMContentLoaded", async () => {
   // Map container class to relevant posts
   const containerMap = {
@@ -106,6 +167,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (card) container.appendChild(card);
     });
   }
+  
+  // Make Search Work
+  document.getElementById("searchInput")?.addEventListener("input", function () {
+    const search = this.value.toLowerCase();
+    document.querySelectorAll(".card").forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(search) ? "block" : "none";
+    });
+  });
+
 });
 
 
