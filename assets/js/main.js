@@ -114,6 +114,9 @@ async function openPostCard(url, date = "", readTime = null) {
 
   // Load saved likes
   updateLikeCount(url);
+  
+  // Track current post URL
+  currentPostUrl = url;
 
   // Load saved comments
   loadComments(url);
@@ -161,11 +164,6 @@ function sharePost(url) {
 }
 
 async function loadComments(postUrl) {
-  if (!window.db) {
-    console.error("Firebase DB not initialized");
-    return;
-  }
-  
   const container = document.getElementById("commentsContainer");
   container.innerHTML = "<p>Loading comments...</p>";
 
@@ -180,22 +178,22 @@ async function loadComments(postUrl) {
     const comment = document.createElement("div");
     comment.className = "comment";
     comment.innerHTML = `
-	  <div class="comment-header">
-		<span class="comment-name">${c.name}</span>
-		<span class="comment-time">${new Date(c.timestamp.toDate()).toLocaleString()}</span>
-	  </div>
-	  <div class="comment-text">${c.text}</div>
-	  <div class="comment-actions">
-		<button class="comment-like">👍</button>
-		<button class="comment-dislike">👎</button>
-		<button class="comment-reply">Reply</button>
-		<button class="comment-share" onclick="shareComment('${c.text}')">Share</button>
-	  </div>
-	`;
-
+      <div class="comment-header">
+        <span class="comment-name">${c.name}</span>
+        <span class="comment-time">${new Date(c.timestamp.toDate()).toLocaleString()}</span>
+      </div>
+      <div class="comment-text">${c.text}</div>
+      <div class="comment-actions">
+        <button onclick="likeComment('${doc.id}')">👍 ${c.likes || 0}</button>
+        <button onclick="dislikeComment('${doc.id}')">👎 ${c.dislikes || 0}</button>
+        <button onclick="replyToComment('${doc.id}', '${c.name}')">Reply</button>
+        <button onclick="shareComment('${c.text}')">Share</button>
+      </div>
+    `;
     container.appendChild(comment);
   });
 }
+
 
 async function addComment(postUrl) {
   const text = document.getElementById("newComment").value.trim();
@@ -206,8 +204,11 @@ async function addComment(postUrl) {
     postUrl,
     name,
     text,
-    timestamp: new Date()
+    timestamp: new Date(),
+    likes: 0,
+    dislikes: 0
   });
+
 
   document.getElementById("newComment").value = '';
   loadComments(postUrl);
@@ -225,10 +226,45 @@ function shareComment(text) {
   }
 }
 
+async function likeComment(commentId) {
+  const ref = window.db.collection("comments").doc(commentId);
+  await ref.update({
+    likes: firebase.firestore.FieldValue.increment(1)
+  });
+  loadComments(currentPostUrl); // currentPostUrl is added next step
+}
+
+async function dislikeComment(commentId) {
+  const ref = window.db.collection("comments").doc(commentId);
+  await ref.update({
+    dislikes: firebase.firestore.FieldValue.increment(1)
+  });
+  loadComments(currentPostUrl);
+}
+
+async function replyToComment(parentId, parentName) {
+  const text = prompt(`Reply to ${parentName}:`);
+  const name = prompt("Your name:");
+  if (!text || !name) return;
+
+  await window.db.collection("comments").add({
+    postUrl: currentPostUrl,
+    name,
+    text: `@${parentName} ${text}`,
+    timestamp: new Date(),
+    likes: 0,
+    dislikes: 0,
+    parentId
+  });
+
+  loadComments(currentPostUrl);
+}
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+let currentPostUrl = "";
 
 // Main code 
 document.addEventListener("DOMContentLoaded", async () => {
