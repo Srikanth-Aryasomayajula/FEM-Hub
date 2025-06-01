@@ -100,29 +100,49 @@ async function openPostCard(url, date = "", readTime = null) {
 
   container.appendChild(card);
 
-  // Restore like state
-  const likes = JSON.parse(localStorage.getItem("likes") || "{}");
-  const liked = likes[url];
-  document.getElementById("likeCount").textContent = liked ? "1" : "0";
-  document.getElementById("likeBtn").textContent = liked ? "💔 Unlike" : "❤️ Like";
+  // Restore likes
+  const likeBtn = document.getElementById("likeBtn");
+  const snapshot = await window.db.collection("likes").where("postUrl", "==", url).get();
+  likeBtn.textContent = snapshot.empty ? "❤️ Like" : "💔 Unlike";
+  document.getElementById("likeCount").textContent = snapshot.size;
+
+
+  // Load saved likes
+  updateLikeCount(url);
 
   // Load saved comments
   loadComments(url);
 }
 
-function toggleLike(postUrl) {
-  const countSpan = document.getElementById("likeCount");
-  const button = document.getElementById("likeBtn");
+async function toggleLike(postUrl) {
+  const likesRef = window.db.collection("likes");
+  const snapshot = await likesRef.where("postUrl", "==", postUrl).limit(1).get();
 
-  let liked = JSON.parse(localStorage.getItem("likes") || "{}");
-  const isLiked = liked[postUrl] || false;
+  const likeBtn = document.getElementById("likeBtn");
 
-  liked[postUrl] = !isLiked;
-  localStorage.setItem("likes", JSON.stringify(liked));
+  if (!snapshot.empty) {
+    // Unlike: delete the like
+    snapshot.forEach(doc => doc.ref.delete());
+    likeBtn.textContent = "❤️ Like";
+  } else {
+    // Like: add a new like
+    await likesRef.add({
+      postUrl,
+      timestamp: new Date()
+    });
+    likeBtn.textContent = "💔 Unlike";
+  }
 
-  countSpan.textContent = liked[postUrl] ? "1" : "0";
-  button.textContent = liked[postUrl] ? "💔 Unlike" : "❤️ Like";
+  updateLikeCount(postUrl);
 }
+
+
+async function updateLikeCount(postUrl) {
+  const likesRef = window.db.collection("likes");
+  const snapshot = await likesRef.where("postUrl", "==", postUrl).get();
+  document.getElementById("likeCount").textContent = snapshot.size;
+}
+
 
 async function loadComments(postUrl) {
   if (!window.db) {
