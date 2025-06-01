@@ -170,7 +170,6 @@ function scrollToTop() {
 }
 
 // Main code 
-window.addEventListener('firebaseReady', () => {
 document.addEventListener("DOMContentLoaded", async () => {
   // Map container class to relevant posts
   const containerMap = {
@@ -254,7 +253,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Attach click handler (optional if you want to keep your existing scrollToTop function)
     scrollToTopBtn.addEventListener('click', scrollToTop);
   }
-
-});
 
 });
