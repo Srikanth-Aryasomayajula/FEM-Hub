@@ -79,11 +79,11 @@ async function openPostCard(url) {
     <button onclick="location.reload()">👈 Back</button>
     <h2>${title}</h2>
 	
-	<div class="post-content">${content}</div>
+	
 
     <div class="like-comment-section">
       <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
-      <span id="likeCount">0</span> Likes
+      <span id="likeCount">0</span> Like(s)
     </div>
 
     <h3>Comments</h3>

@@ -196,10 +196,10 @@ main {
 .post-expanded-card {
   background: white;
   color: black;
-  padding: 20px;
+  padding: 20px 50px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 60rem;
+  width: calc(100vw - 30rem);
   justify-content: center;
 }
 
