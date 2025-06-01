@@ -79,7 +79,8 @@ async function openPostCard(url, date = "", readTime = null) {
     <button onclick="location.reload()" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
 	
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
-	<p class="post-date-inPost">${date}<br/>${readTime} min read</p>
+	<p class="post-date-inPost">${new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/ /, ' ').replace(/,/, ',')}<br/>${readTime} min read</p>
+
 
 	
 	<div class="post-content">${content}</div>
