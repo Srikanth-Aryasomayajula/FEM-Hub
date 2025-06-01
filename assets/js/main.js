@@ -198,31 +198,41 @@ async function loadComments(postUrl) {
   const container = document.getElementById("commentsContainer");
   container.innerHTML = "<p>Loading comments...</p>";
 
-  const snapshot = await window.db.collection("comments")
+  // Fetch top-level comments
+  const commentSnap = await window.db.collection("comments")
     .where("postUrl", "==", postUrl)
     .orderBy("timestamp", "asc")
     .get();
 
-  container.innerHTML = "";
-
   const comments = {};
-  snapshot.forEach(doc => {
+  commentSnap.forEach(doc => {
     const data = doc.data();
     comments[doc.id] = { id: doc.id, ...data, children: [] };
   });
 
-  // Build comment tree
-  Object.values(comments).forEach(c => {
-    if (c.parentId && comments[c.parentId]) {
-      comments[c.parentId].children.push(c);
+  // Fetch replies from nestedComments
+  const replySnap = await window.db.collection("nestedComments")
+    .where("postUrl", "==", postUrl)
+    .orderBy("timestamp", "asc")
+    .get();
+
+  replySnap.forEach(doc => {
+    const reply = doc.data();
+    reply.id = doc.id;
+    reply.children = [];
+
+    if (reply.parentId && comments[reply.parentId]) {
+      comments[reply.parentId].children.push(reply);
     }
   });
 
-  // Render top-level comments
+  container.innerHTML = "";
+
+  // Render only top-level comments
   Object.values(comments)
-    .filter(c => !c.parentId)
     .forEach(c => container.appendChild(renderComment(c, comments)));
 }
+
 
 async function addComment(postUrl) {
   const text = document.getElementById("newComment").value.trim();
@@ -296,7 +306,7 @@ async function submitReply(parentId, button) {
 
   if (!text || !name) return;
 
-  await window.db.collection("comments").add({
+  await window.db.collection("nestedComments").add({
     postUrl: currentPostUrl,
     name,
     text,
