@@ -224,6 +224,10 @@ main {
   margin-top: -10px;
 }
 
+.post-content p {
+	text-align: justify;
+}
+
 .comment {
   padding: 8px;
   margin: 5px 0;
