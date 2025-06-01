@@ -140,6 +140,7 @@ main {
   border-radius: 50px;
   outline: none;
   transition: box-shadow 0.2s ease-in-out;
+  margin-left: 4rem;
 }
 
 /* Optional: Add focus effect */
