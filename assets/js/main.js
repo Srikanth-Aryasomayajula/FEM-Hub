@@ -2,9 +2,13 @@
 function createPostCard(title, summary, date = null, url = "#", readTime = null) {
   const card = document.createElement("a");
   card.className = "card";
+  
   card.addEventListener("click", async (e) => {
     e.preventDefault();
-    await openPostCard(url, date, readTime);
+    const rawDate = date 
+      ? date.split('.').reverse().join('-') 
+      : new Date().toISOString().split('T')[0];
+    await openPostCard(url, rawDate, readTime);
   });
 
   const heading = document.createElement("h2");
@@ -61,7 +65,7 @@ async function fetchPostMeta(url) {
 }
 
 // Open post in a separate card
-async function openPostCard(url, date, readTime = null) {
+async function openPostCard(url, date = "", readTime = null) {
   const container = document.getElementById("generalPostsContainer");
   const res = await fetch(url);
   const text = await res.text();
