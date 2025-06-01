@@ -217,7 +217,7 @@ footer p {
   padding: 1.5rem;
   width: 100%;
   max-width: 600px;
-  margin: 2rem 2rem;
+  margin: 2rem auto;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
