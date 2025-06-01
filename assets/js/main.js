@@ -181,7 +181,7 @@ function renderComment(comment, allComments, indent = 0) {
       <button onclick="likeComment('${comment.id}')">👍 ${comment.likes || 0}</button>
       <button onclick="dislikeComment('${comment.id}')">👎 ${comment.dislikes || 0}</button>
       <button onclick="replyToComment('${comment.id}', '${comment.name}')">Reply</button>
-      <button onclick="shareComment('${comment.text}')">Share</button>
+      <button onclick="shareComment(currentPostUrl, '${comment.id}')">Share</button>
     </div>
   `;
 
@@ -264,17 +264,21 @@ async function addComment(postUrl) {
   loadComments(postUrl);
 }
 
-function shareComment(text) {
+function shareComment(postUrl, commentId) {
+  const baseUrl = window.location.origin + '/FEM-Hub/general.html';
+  const fullUrl = `${baseUrl}?post=${encodeURIComponent(postUrl)}&comment=${encodeURIComponent(commentId)}`;
+  
   if (navigator.share) {
     navigator.share({
       title: "Check out this comment",
-      text
+      url: fullUrl
     });
   } else {
-    navigator.clipboard.writeText(text);
-    alert("Comment copied to clipboard!");
+    navigator.clipboard.writeText(fullUrl);
+    alert("Comment link copied to clipboard!");
   }
 }
+
 
 async function likeComment(commentId) {
   const ref = window.db.collection("comments").doc(commentId);
@@ -425,9 +429,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Auto-open post if ?post=... is in URL
   const params = new URLSearchParams(window.location.search);
   const postToOpen = params.get("post");
+  const commentToHighlight = params.get("comment");
+  
   if (postToOpen) {
-    const rawDate = new Date().toISOString().split('T')[0]; // fallback if no date
-    openPostCard(postToOpen, rawDate);
+    const rawDate = new Date().toISOString().split('T')[0];
+    await openPostCard(postToOpen, rawDate);
+    
+    if (commentToHighlight) {
+      // Scroll to comment element and highlight it
+      setTimeout(() => {
+        const commentEl = document.getElementById(`comment-${commentToHighlight}`);
+        if (commentEl) {
+          commentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          commentEl.style.transition = "background-color 2s ease";
+          commentEl.style.backgroundColor = "#ffff99"; // yellow highlight
+  
+          setTimeout(() => {
+            commentEl.style.backgroundColor = "";
+          }, 3000); // highlight lasts 3 seconds
+        }
+      }, 500); // small delay to ensure content is rendered
+    }
   }
+
   
 });
