@@ -83,8 +83,6 @@ async function openPostCard(url, date = "", readTime = null) {
 		<span>${new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
 		<span>${readTime} min read</span>
 	</p>
-
-
 	
 	<div class="post-content">${content}</div>
 
@@ -98,7 +96,6 @@ async function openPostCard(url, date = "", readTime = null) {
     <textarea id="newComment" placeholder="Add a comment..." rows="3"></textarea><br/>
     <button onclick="addComment('${url}')">Post Comment</button>
 
-    <button onclick="scrollToTop()">↑ Scroll to Top</button>
   `;
 
   container.appendChild(card);
