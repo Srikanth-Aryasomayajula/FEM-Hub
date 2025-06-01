@@ -93,6 +93,7 @@ async function openPostCard(url, date = "", readTime = null) {
     <div class="like-comment-section">
       <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
       <span id="likeCount">0</span> Like(s)
+	  <button onclick="sharePost('${url}')" id="shareBtn">🔗 Share</button>
     </div>
 
     <h3>Comments</h3>
@@ -140,13 +141,24 @@ async function toggleLike(postUrl) {
   updateLikeCount(postUrl);
 }
 
-
 async function updateLikeCount(postUrl) {
   const likesRef = window.db.collection("likes");
   const snapshot = await likesRef.where("postUrl", "==", postUrl).get();
   document.getElementById("likeCount").textContent = snapshot.size;
 }
 
+function sharePost(url) {
+  const fullUrl = window.location.origin + '/' + url;
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: fullUrl
+    });
+  } else {
+    navigator.clipboard.writeText(fullUrl);
+    alert("Post link copied to clipboard!");
+  }
+}
 
 async function loadComments(postUrl) {
   if (!window.db) {
@@ -167,7 +179,20 @@ async function loadComments(postUrl) {
     const c = doc.data();
     const comment = document.createElement("div");
     comment.className = "comment";
-    comment.innerHTML = `<strong>${c.name}</strong>: ${c.text}`;
+    comment.innerHTML = `
+	  <div class="comment-header">
+		<span class="comment-name">${c.name}</span>
+		<span class="comment-time">${new Date(c.timestamp.toDate()).toLocaleString()}</span>
+	  </div>
+	  <div class="comment-text">${c.text}</div>
+	  <div class="comment-actions">
+		<button class="comment-like">👍</button>
+		<button class="comment-dislike">👎</button>
+		<button class="comment-reply">Reply</button>
+		<button class="comment-share" onclick="shareComment('${c.text}')">Share</button>
+	  </div>
+	`;
+
     container.appendChild(comment);
   });
 }
@@ -188,6 +213,18 @@ async function addComment(postUrl) {
   loadComments(postUrl);
 }
 
+function shareComment(text) {
+  if (navigator.share) {
+    navigator.share({
+      title: "Check out this comment",
+      text
+    });
+  } else {
+    navigator.clipboard.writeText(text);
+    alert("Comment copied to clipboard!");
+  }
+}
+
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -200,7 +237,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "general-card-container": [
       { url: "blog/general_post-1.html", date: null },   //date: "10.12.2021" for manual date
       { url: "blog/general_post-2.html", date: null },
-      { url: "blog/general_post-3.html", date: null },
+      { url: "blog/general_post-3.html", date: null },   //date: null for today's date
       { url: "blog/general_post-4.html", date: null },
       { url: "blog/general_post-5.html", date: null },
       { url: "blog/general_post-6.html", date: null },

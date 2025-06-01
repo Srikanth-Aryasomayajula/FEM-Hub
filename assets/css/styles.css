@@ -229,13 +229,48 @@ main {
 }
 
 .comment {
-  padding: 8px;
-  margin: 5px 0;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  color: black;
-  border-radius: 4px;
-  width: 48%;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  width: 70%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+}
+
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.comment-time {
+  font-weight: normal;
+  color: #777;
+  font-size: 12px;
+}
+
+.comment-text {
+  margin-bottom: 10px;
+  color: #222;
+  line-height: 1.5;
+}
+
+.comment-actions button {
+  background: none;
+  border: none;
+  color: #007BFF;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.comment-actions button:hover {
+  text-decoration: underline;
 }
 
 /* Container for like & comment section */
