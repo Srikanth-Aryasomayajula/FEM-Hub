@@ -71,8 +71,10 @@ nav a:hover {
 }
 
 .logo {
-  padding: 1rem;
-  width: 80px;
+  position: absolute;       /* Take it out of the normal flow */
+  top: 1rem;                /* Distance from the top of the page */
+  left: 1rem;               /* Distance from the left edge */
+  z-index: 1000;            /* Make sure it stays above other elements */
 }
 
 .logo img {
