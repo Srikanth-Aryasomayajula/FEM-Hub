@@ -105,7 +105,7 @@ async function openPostCard(url) {
   
   // Load saved comments
   const comments = JSON.parse(localStorage.getItem("comments") || "{}")[url] || [];
-  const container = document.getElementById("commentsContainer");
+  const commentsContainer = document.getElementById("commentsContainer");
   comments.forEach(c => {
     const comment = document.createElement("div");
     comment.textContent = c;
@@ -114,7 +114,7 @@ async function openPostCard(url) {
     comment.style.border = "1px solid #ccc";
     comment.style.backgroundColor = "#f9f9f9";
     comment.style.color = "black";
-    container.appendChild(comment);
+    commentsContainer.appendChild(comment);
   });
 
 }
@@ -131,29 +131,6 @@ function toggleLike(postUrl) {
 
   countSpan.textContent = liked[postUrl] ? "1" : "0";
   button.textContent = liked[postUrl] ? "💔 Unlike" : "❤️ Like";
-}
-
-function incrementLike(button) {
-  const countSpan = button.nextElementSibling;
-  let count = parseInt(countSpan.textContent);
-  countSpan.textContent = count + 1;
-}
-
-function addComment() {
-  const container = document.getElementById("commentsContainer");
-  const text = document.getElementById("newComment").value;
-  if (!text.trim()) return;
-  
-  const comment = document.createElement("div");
-  comment.textContent = text;
-  comment.style.padding = "8px";
-  comment.style.margin = "5px 0";
-  comment.style.border = "1px solid #ccc";
-  comment.style.backgroundColor = "#f9f9f9";
-  comment.style.color = "black";
-
-  container.appendChild(comment);
-  document.getElementById("newComment").value = "";
 }
 
 function addComment(postUrl) {
