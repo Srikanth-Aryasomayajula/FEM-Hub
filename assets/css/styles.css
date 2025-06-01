@@ -169,7 +169,8 @@ main {
   color: black;
   padding: 20px;
   border-radius: 10px;
-  width: 15rem;
+  width: 60rem;
+  justify-content: center;
 }
 
 .post-date {
