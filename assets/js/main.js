@@ -169,7 +169,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       { url: "blog/general_post-3.html", date: null },
       { url: "blog/general_post-4.html", date: null },
       { url: "blog/general_post-5.html", date: null },
-      { url: "blog/general_post-6.html", date: null }
+      { url: "blog/general_post-6.html", date: null },
+	  { url: "blog/general_post-7.html", date: null },
+	  { url: "blog/general_post-8.html", date: null },
+	  { url: "blog/general_post-9.html", date: null }
     ],
     "engineering-card-container": [
       { url: "blog/engineering_post-1.html", date: null },
