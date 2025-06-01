@@ -4,7 +4,7 @@ function createPostCard(title, summary, date = null, url = "#", readTime = null)
   card.className = "card";
   card.addEventListener("click", async (e) => {
     e.preventDefault();
-    await openPostCard(url, datePara.textContent, readTime);
+    await openPostCard(url, date, readTime);
   });
 
   const heading = document.createElement("h2");
@@ -107,14 +107,7 @@ async function openPostCard(url, date = "", readTime = null) {
   document.getElementById("likeBtn").textContent = liked ? "💔 Unlike" : "❤️ Like";
 
   // Load saved comments
-  const comments = JSON.parse(localStorage.getItem("comments") || "{}")[url] || [];
-  const commentsContainer = document.getElementById("commentsContainer");
-  comments.forEach(c => {
-    const comment = document.createElement("div");
-    comment.className = "comment";
-    comment.textContent = c;
-    commentsContainer.appendChild(comment);
-  });
+  loadComments(url);
 }
 
 function toggleLike(postUrl) {
