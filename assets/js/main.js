@@ -170,6 +170,7 @@ function scrollToTop() {
 }
 
 // Main code 
+window.addEventListener('firebaseReady', () => {
 document.addEventListener("DOMContentLoaded", async () => {
   // Map container class to relevant posts
   const containerMap = {
@@ -256,4 +257,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
-
+});
