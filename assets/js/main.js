@@ -131,24 +131,39 @@ function toggleLike(postUrl) {
   button.textContent = liked[postUrl] ? "💔 Unlike" : "❤️ Like";
 }
 
-function addComment(postUrl) {
-  const text = document.getElementById("newComment").value.trim();
-  if (!text) return;
-
+async function loadComments(postUrl) {
   const container = document.getElementById("commentsContainer");
+  container.innerHTML = "<p>Loading comments...</p>";
 
-  const comment = document.createElement("div");
-  comment.className = "comment";
-  comment.textContent = text;
+  const snapshot = await db.collection("comments")
+    .where("postUrl", "==", postUrl)
+    .orderBy("timestamp", "desc")
+    .get();
 
-  container.appendChild(comment);
-  document.getElementById("newComment").value = "";
+  container.innerHTML = "";
+  snapshot.forEach(doc => {
+    const c = doc.data();
+    const comment = document.createElement("div");
+    comment.className = "comment";
+    comment.innerHTML = `<strong>${c.name}</strong>: ${c.text}`;
+    container.appendChild(comment);
+  });
+}
 
-  // Save to localStorage
-  let comments = JSON.parse(localStorage.getItem("comments") || "{}");
-  comments[postUrl] = comments[postUrl] || [];
-  comments[postUrl].push(text);
-  localStorage.setItem("comments", JSON.stringify(comments));
+async function addComment(postUrl) {
+  const text = document.getElementById("newComment").value.trim();
+  const name = prompt("Enter your name:");
+  if (!name || !text) return;
+
+  await db.collection("comments").add({
+    postUrl,
+    name,
+    text,
+    timestamp: new Date()
+  });
+
+  document.getElementById("newComment").value = '';
+  loadComments(postUrl);
 }
 
 
