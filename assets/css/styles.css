@@ -92,23 +92,6 @@ main {
   padding: 2rem;
 }
 
-footer {
-  margin-top: auto; /* pushes footer to bottom */
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 6px 0;
-  position: relative; /* keep this or remove it, no absolute/fixed */
-  bottom: auto; /* remove bottom: 0 */
-  left: auto;
-  z-index: 100;
-}
-
-footer p {
-  margin: 0;
-  padding: 0;
-}
-
 .general-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -231,6 +214,7 @@ footer p {
 .contact h1 {
   text-align: center;
   font-size: 2rem;
+  margin: 0;
 }
 
 .contact-form h2.form-title {
@@ -291,6 +275,23 @@ footer p {
   color: red;
   font-size: 0.9rem;
   margin-top: 0.5rem;
+}
+
+footer {
+  margin-top: auto; /* pushes footer to bottom */
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 6px 0;
+  position: relative; /* keep this or remove it, no absolute/fixed */
+  bottom: auto; /* remove bottom: 0 */
+  left: auto;
+  z-index: 100;
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
 }
 
 #generatedCode {
