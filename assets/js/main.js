@@ -76,8 +76,8 @@ async function openPostCard(url) {
   const card = document.createElement("div");
   card.className = "post-expanded-card";
   card.innerHTML = `
-    <button onclick="location.reload()">Back</button>
-    <h2>${title}</h2>
+    <button onclick="location.reload()" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
+    <h2 style="text-align: center; align-self: center;">${title}</h2>
 	
 	<div class="post-content">${content}</div>
 
@@ -91,7 +91,6 @@ async function openPostCard(url) {
     <textarea id="newComment" placeholder="Add a comment..." rows="3"></textarea><br/>
     <button onclick="addComment('${url}')">Post Comment</button>
 
-    <p><a href="#generalPostsContainer">See all</a></p>
     <button onclick="scrollToTop()">↑ Scroll to Top</button>
   `;
 
