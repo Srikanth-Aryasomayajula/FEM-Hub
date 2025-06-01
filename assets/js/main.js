@@ -76,15 +76,15 @@ async function openPostCard(url) {
   const card = document.createElement("div");
   card.className = "post-expanded-card";
   card.innerHTML = `
-    <button onclick="location.reload()">← Back</button>
+    <button onclick="location.reload()">👈 Back</button>
     <h2>${title}</h2>
+	
+	<div class="post-content">${content}</div>
 
     <div class="like-comment-section">
       <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
       <span id="likeCount">0</span> Likes
     </div>
-
-    <div class="post-content">${content}</div>
 
     <h3>Comments</h3>
     <div id="commentsContainer"></div>
