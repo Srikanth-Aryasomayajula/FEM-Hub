@@ -76,7 +76,11 @@ async function openPostCard(url) {
   const card = document.createElement("div");
   card.className = "post-expanded-card";
   card.innerHTML = `
-    <button onclick="location.reload()">👈 Back</button>
+	<button onclick="location.reload()" style="display: flex; align-items: center; gap: 6px; border: none; background: none; font-size: 1rem; cursor: pointer;">
+	<span style="display: inline-block; color: red; border: 2px solid red; border-radius: 50%; padding: 4px 8px; font-weight: bold;">←</span>
+	  Back
+	</button>
+	
     <h2>${title}</h2>
 	
 	<div class="post-content">${content}</div>
