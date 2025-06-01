@@ -119,7 +119,8 @@ async function openPostCard(url, date = "", readTime = null) {
   currentPostUrl = url;
 
   // Load saved comments
-  loadComments(url);
+  await loadComments(url);
+
 }
 
 async function toggleLike(postUrl) {
@@ -212,7 +213,7 @@ async function loadComments(postUrl) {
     comments[doc.id] = { id: doc.id, ...data, children: [] };
   });
 
-  // Fetch replies from nestedComments
+  // Fetch replies
   const replySnap = await window.db.collection("nestedComments")
     .where("postUrl", "==", postUrl)
     .orderBy("timestamp", "asc")
@@ -226,23 +227,29 @@ async function loadComments(postUrl) {
     allReplies[doc.id] = reply;
   });
 
-  // Attach replies to either top-level comments or to other replies
   Object.values(allReplies).forEach(reply => {
     const parentId = reply.parentId;
     if (comments[parentId]) {
-      comments[parentId].children.push(reply); // top-level comment
+      comments[parentId].children.push(reply);
     } else if (allReplies[parentId]) {
-      allReplies[parentId].children.push(reply); // reply to reply
+      allReplies[parentId].children.push(reply);
     }
   });
 
-
   container.innerHTML = "";
 
-  // Render only top-level comments
   Object.values(comments)
     .forEach(c => container.appendChild(renderComment(c, comments)));
+
+  // Wait a tick for DOM to render the comments
+  return new Promise(resolve => {
+    // Use requestAnimationFrame or setTimeout 0 to wait for rendering
+    requestAnimationFrame(() => {
+      resolve();
+    });
+  });
 }
+
 
 
 async function addComment(postUrl) {
@@ -436,21 +443,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     await openPostCard(postToOpen, rawDate);
     
     if (commentToHighlight) {
-      // Scroll to comment element and highlight it
-      setTimeout(() => {
-        const commentEl = document.getElementById(`comment-${commentToHighlight}`);
-        if (commentEl) {
-          commentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          commentEl.style.transition = "background-color 2s ease";
-          commentEl.style.backgroundColor = "#ffff99"; // yellow highlight
-  
-          setTimeout(() => {
-            commentEl.style.backgroundColor = "";
-          }, 3000); // highlight lasts 3 seconds
-        }
-      }, 500); // small delay to ensure content is rendered
+      await loadComments(postToOpen); // ensure comments loaded again if needed (or rely on previous await in openPostCard)
+      
+      const commentEl = document.getElementById(`comment-${commentToHighlight}`);
+      if (commentEl) {
+        commentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        commentEl.style.transition = "background-color 2s ease";
+        commentEl.style.backgroundColor = "#ffff99"; // highlight color
+    
+        setTimeout(() => {
+          commentEl.style.backgroundColor = "";
+        }, 3000);
+      }
     }
-  }
 
-  
 });
