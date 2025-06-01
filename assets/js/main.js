@@ -163,37 +163,66 @@ function sharePost(url) {
   }
 }
 
+function renderComment(comment, allComments, indent = 0) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "comment";
+  wrapper.id = `comment-${comment.id}`;
+  wrapper.style.marginLeft = `${indent}px`;
+
+  wrapper.innerHTML = `
+    <div class="comment-header">
+      <span class="comment-name">${comment.name}</span>
+      <span class="comment-time">${new Date(comment.timestamp.toDate()).toLocaleString()}</span>
+    </div>
+    <div class="comment-text">${comment.text}</div>
+    <div class="comment-actions">
+      <button onclick="likeComment('${comment.id}')">👍 ${comment.likes || 0}</button>
+      <button onclick="dislikeComment('${comment.id}')">👎 ${comment.dislikes || 0}</button>
+      <button onclick="replyToComment('${comment.id}', '${comment.name}')">Reply</button>
+      <button onclick="shareComment('${comment.text}')">Share</button>
+    </div>
+  `;
+
+  // Render children (replies)
+  if (comment.children && comment.children.length > 0) {
+    comment.children.forEach(child => {
+      const childEl = renderComment(child, allComments, indent + 30);
+      wrapper.appendChild(childEl);
+    });
+  }
+
+  return wrapper;
+}
+
 async function loadComments(postUrl) {
   const container = document.getElementById("commentsContainer");
   container.innerHTML = "<p>Loading comments...</p>";
 
   const snapshot = await window.db.collection("comments")
     .where("postUrl", "==", postUrl)
-    .orderBy("timestamp", "desc")
+    .orderBy("timestamp", "asc")
     .get();
 
   container.innerHTML = "";
-  snapshot.forEach(doc => {
-    const c = doc.data();
-    const comment = document.createElement("div");
-    comment.className = "comment";
-    comment.innerHTML = `
-      <div class="comment-header">
-        <span class="comment-name">${c.name}</span>
-        <span class="comment-time">${new Date(c.timestamp.toDate()).toLocaleString()}</span>
-      </div>
-      <div class="comment-text">${c.text}</div>
-      <div class="comment-actions">
-        <button onclick="likeComment('${doc.id}')">👍 ${c.likes || 0}</button>
-        <button onclick="dislikeComment('${doc.id}')">👎 ${c.dislikes || 0}</button>
-        <button onclick="replyToComment('${doc.id}', '${c.name}')">Reply</button>
-        <button onclick="shareComment('${c.text}')">Share</button>
-      </div>
-    `;
-    container.appendChild(comment);
-  });
-}
 
+  const comments = {};
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    comments[doc.id] = { id: doc.id, ...data, children: [] };
+  });
+
+  // Build comment tree
+  Object.values(comments).forEach(c => {
+    if (c.parentId && comments[c.parentId]) {
+      comments[c.parentId].children.push(c);
+    }
+  });
+
+  // Render top-level comments
+  Object.values(comments)
+    .filter(c => !c.parentId)
+    .forEach(c => container.appendChild(renderComment(c, comments)));
+}
 
 async function addComment(postUrl) {
   const text = document.getElementById("newComment").value.trim();
@@ -242,15 +271,35 @@ async function dislikeComment(commentId) {
   loadComments(currentPostUrl);
 }
 
-async function replyToComment(parentId, parentName) {
-  const text = prompt(`Reply to ${parentName}:`);
-  const name = prompt("Your name:");
+function replyToComment(parentId, parentName) {
+  const parentComment = document.getElementById(`comment-${parentId}`);
+  
+  // Avoid creating multiple reply boxes
+  if (parentComment.querySelector('.reply-input')) return;
+
+  const replyBox = document.createElement("div");
+  replyBox.className = "reply-input";
+  replyBox.style.marginTop = "10px";
+  replyBox.innerHTML = `
+    <textarea rows="2" placeholder="Reply..." style="width: 90%; margin-bottom: 5px;"></textarea><br/>
+    <button onclick="submitReply('${parentId}', this)">Post Reply</button>
+  `;
+
+  parentComment.appendChild(replyBox);
+}
+
+async function submitReply(parentId, button) {
+  const container = button.closest('.reply-input');
+  const textarea = container.querySelector('textarea');
+  const text = textarea.value.trim();
+  const name = prompt("Enter your name:");
+
   if (!text || !name) return;
 
   await window.db.collection("comments").add({
     postUrl: currentPostUrl,
     name,
-    text: `@${parentName} ${text}`,
+    text,
     timestamp: new Date(),
     likes: 0,
     dislikes: 0,
