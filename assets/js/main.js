@@ -93,7 +93,7 @@ async function openPostCard(url, date = "", readTime = null) {
     <div class="like-comment-section">
       <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
       <span id="likeCount">0</span> Like(s)
-	  <button onclick="sharePost('${url}')" id="shareBtn">🔗 Share</button>
+	  <br/><button onclick="sharePost('${url}')" id="shareBtn">🔗 Share</button>
     </div>
 
     <h3>Comments</h3>
