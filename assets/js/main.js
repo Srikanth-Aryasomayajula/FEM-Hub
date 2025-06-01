@@ -4,7 +4,7 @@ function createPostCard(title, summary, date = null, url = "#", readTime = null)
   card.className = "card";
   card.addEventListener("click", async (e) => {
     e.preventDefault();
-    await openPostCard(url);
+    await openPostCard(url, datePara.textContent, readTime);
   });
 
   const heading = document.createElement("h2");
@@ -61,7 +61,7 @@ async function fetchPostMeta(url) {
 }
 
 // Open post in a separate card
-async function openPostCard(url) {
+async function openPostCard(url, date = "", readTime = null) {
   const container = document.getElementById("generalPostsContainer");
   const res = await fetch(url);
   const text = await res.text();
@@ -77,7 +77,10 @@ async function openPostCard(url) {
   card.className = "post-expanded-card";
   card.innerHTML = `
     <button onclick="location.reload()" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
-    <h2 style="text-align: center; align-self: center;">${title}</h2>
+	
+	<h2 style="text-align: center; align-self: center;">${title}</h2>
+	<p class="post-date-inPost">${date} · ${readTime} min read</p>
+
 	
 	<div class="post-content">${content}</div>
 

@@ -186,6 +186,7 @@ main {
 
 .card:hover {
   transform: scale(1.02);
+  cursor: pointer;
 }
 
 .post {
@@ -213,6 +214,13 @@ main {
   font-size: 0.8rem;
   color: #666;
   margin-top: 0.5rem;
+}
+
+.post-date-inPost {
+  text-align: center;
+  font-size: 0.9rem;
+  color: gray;
+  margin-top: -10px;
 }
 
 .comment {
