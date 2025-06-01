@@ -80,8 +80,9 @@ async function openPostCard(url) {
     <button onclick="location.reload()" style="margin-bottom: 20px;">← Back</button>
     <h2>${title}</h2>
     <div class="like-comment-section" style="margin: 15px 0;">
-      ❤️ <button id="likeBtn">Like</button>
-      <span id="likeCount">0</span> Likes
+    <button onclick="incrementLike(this)">Like ❤️</button>
+	<span class="likeCount">0</span> Likes
+
     </div>
     <div style="margin-top: 20px;">${content}</div>
     <h3 style="margin-top: 30px;">Comments</h3>
@@ -95,8 +96,10 @@ async function openPostCard(url) {
   container.appendChild(card);
 }
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+function incrementLike(button) {
+  const countSpan = button.nextElementSibling;
+  let count = parseInt(countSpan.textContent);
+  countSpan.textContent = count + 1;
 }
 
 function addComment() {
@@ -116,6 +119,9 @@ function addComment() {
   document.getElementById("newComment").value = "";
 }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
 // Main code 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -169,13 +175,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   // Make Search Work
-  document.getElementById("searchInput")?.addEventListener("input", function () {
-    const search = this.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(card => {
-      const text = card.textContent.toLowerCase();
-      card.style.display = text.includes(search) ? "block" : "none";
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+		const search = this.value.toLowerCase();
+		document.querySelectorAll(".card").forEach(card => {
+		  const text = card.textContent.toLowerCase();
+		  card.style.display = text.includes(search) ? "block" : "none";
+		});
     });
-  });
+  }
+
 
 });
 
