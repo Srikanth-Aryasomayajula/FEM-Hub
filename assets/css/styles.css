@@ -217,9 +217,10 @@ main {
 }
 
 .post-date-inPost {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
   font-size: 0.9rem;
-  color: gray;
+  color: #333;
   margin-top: -10px;
 }
 
