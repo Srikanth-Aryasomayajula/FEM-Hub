@@ -125,6 +125,11 @@ function toggleLike(postUrl) {
 }
 
 async function loadComments(postUrl) {
+  if (!window.db) {
+    console.error("Firebase DB not initialized");
+    return;
+  }
+  
   const container = document.getElementById("commentsContainer");
   container.innerHTML = "<p>Loading comments...</p>";
 
