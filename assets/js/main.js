@@ -216,15 +216,24 @@ async function loadComments(postUrl) {
     .orderBy("timestamp", "asc")
     .get();
 
+  const allReplies = {};
   replySnap.forEach(doc => {
     const reply = doc.data();
     reply.id = doc.id;
     reply.children = [];
+    allReplies[doc.id] = reply;
+  });
 
-    if (reply.parentId && comments[reply.parentId]) {
-      comments[reply.parentId].children.push(reply);
+  // Attach replies to either top-level comments or to other replies
+  Object.values(allReplies).forEach(reply => {
+    const parentId = reply.parentId;
+    if (comments[parentId]) {
+      comments[parentId].children.push(reply); // top-level comment
+    } else if (allReplies[parentId]) {
+      allReplies[parentId].children.push(reply); // reply to reply
     }
   });
+
 
   container.innerHTML = "";
 
