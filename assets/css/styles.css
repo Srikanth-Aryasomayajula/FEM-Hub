@@ -316,17 +316,15 @@ button {
 }
 
 .like-tooltip {
-  display: none;
   position: absolute;
-  top: 120%;
-  left: 0;
-  background: white;
-  color: black;
+  background-color: white;
   border: 1px solid #ccc;
-  padding: 5px 10px;
-  z-index: 10;
-  white-space: nowrap;
-  box-shadow: 0px 0px 6px rgba(0,0,0,0.15);
+  padding: 8px;
+  white-space: pre-line;
+  display: none;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
 }
 
 #likeCount:hover .like-tooltip {
@@ -334,6 +332,7 @@ button {
 }
 
 #likeWrapper {
+  position: relative;
   cursor: pointer;
 }
 

@@ -174,8 +174,8 @@ async function updateLikeCount(postUrl) {
   const likeCount = snapshot.size;
 
   const likeCountSpan = document.getElementById("likeWrapper");
-  likeCountSpan.textContent = likeCount;
-  likeCountSpan.nextSibling.textContent = ` ${likeCount === 1 ? 'Like' : 'Likes'}`;
+  likeCountSpan.innerHTML = `<span class="like-full-text">${likeCount} ${likeCount === 1 ? 'Like' : 'Likes'}</span>`;
+
 
   // Collect names to show in tooltip
   const names = snapshot.docs.map(doc => doc.data().name);
