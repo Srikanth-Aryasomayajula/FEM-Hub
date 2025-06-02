@@ -106,9 +106,7 @@ async function openPostCard(url, date = "", readTime = null) {
   container.appendChild(card);
 
   // Restore likes
-  const likeBtn = document.getElementById("likeBtn");
-  const snapshot = await window.db.collection("likes").where("postUrl", "==", url).get();
-  likeBtn.textContent = snapshot.empty ? "❤️ Like" : "💔 Unlike";
+  document.getElementById("likeBtn").textContent = "❤️ Like";
   document.getElementById("likeCount").textContent = snapshot.size;
 
 
@@ -123,8 +121,8 @@ async function openPostCard(url, date = "", readTime = null) {
 
 }
 
-async function toggleLike(postUrl) {
-  const name = prompt("Enter your name:");
+async function toggleLike(postUrl, overrideName = null) {
+  const name = overrideName || prompt("Enter your name:");
   if (!name) return;
 
   const likesRef = window.db.collection("likes");
@@ -138,11 +136,20 @@ async function toggleLike(postUrl) {
   const likeBtn = document.getElementById("likeBtn");
 
   if (!existing.empty) {
-    // Unlike: delete the like
-    existing.forEach(doc => doc.ref.delete());
-    likeBtn.textContent = "❤️ Like";
+    const isYou = confirm(`The name "${name}" has already liked this post.\nIs this you?`);
+    if (isYou) {
+      const confirmUnlike = confirm("Do you want to unlike this post?");
+      if (confirmUnlike) {
+        existing.forEach(doc => doc.ref.delete());
+        likeBtn.textContent = "❤️ Like";
+      }
+    } else {
+      const newName = prompt("Please enter a different name (e.g., add a number):", name + "1");
+      if (newName && newName !== name) {
+        return toggleLike(postUrl, newName); // Recursive reattempt with new name
+      }
+    }
   } else {
-    // Like: add a new like
     await likesRef.add({
       postUrl,
       name,
@@ -153,7 +160,6 @@ async function toggleLike(postUrl) {
 
   updateLikeCount(postUrl);
 }
-
 
 async function updateLikeCount(postUrl) {
   const likesRef = window.db.collection("likes");
@@ -336,6 +342,28 @@ async function toggleLikeDislike(commentId, name, actionType) {
   let countChange = 0;
 
   if (!existing.empty) {
+    const existingDoc = existing.docs[0];
+    const data = existingDoc.data();
+  
+    const isYou = confirm(`The name "${name}" already ${data.type === "like" ? "liked" : "disliked"} this comment.\nIs this you?`);
+    if (isYou) {
+      if (data.type === actionType) {
+        await existingDoc.ref.delete();
+        countChange = -1;
+      } else {
+        await existingDoc.ref.update({ type: actionType, timestamp: new Date() });
+        countChange = 1;
+        await updateCommentField(commentId, oppositeAction + "s", -1, isNested);
+      }
+    } else {
+      const newName = prompt("Enter a different name (e.g., append a number):", name + "1");
+      if (newName && newName !== name) {
+        return toggleLikeDislike(commentId, newName, actionType); // Recursive retry
+      }
+      return;
+    }
+  } else {
+
     const doc = existing.docs[0];
     const data = doc.data();
 
