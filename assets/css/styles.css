@@ -227,7 +227,8 @@ nav a:hover {
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 8px;
-  width: 70%;
+  max-width: 900px; 
+  width: 90%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   font-size: 14px;
   word-wrap: break-word;
@@ -297,6 +298,9 @@ nav a:hover {
 
 .comment .comment {
   margin-top: 10px;
+  margin-left: 20px;   /* Indent child comments */
+  width: 100%;         /* Prevent shrink inside parent */
+  box-sizing: border-box;
 }
 
 /* Button styling */
