@@ -110,7 +110,7 @@ async function openPostCard(url, date = "", readTime = null) {
 
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
 	<p class="post-date-inPost">
-		<span>${formatDateToDDMMMYYYY(date)}</span>
+		<span>${displayDate === "Unknown Date" ? displayDate : formatDateToDDMMMYYYY(displayDate)}</span>
 		<span>${readTime !== null && readTime !== undefined ? readTime + ' min read' : ''}</span>
 	</p>
 	
