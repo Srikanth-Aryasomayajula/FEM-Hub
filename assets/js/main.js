@@ -446,7 +446,7 @@ async function toggleLikeDislike(commentId, name, actionType) {
     const isYou = confirm(`"${name}" already ${data.type === "like" ? "liked" : "disliked"} this comment. Do you want to ${data.type === "dislike" ? "like" : "dislike"} it?\nClick "OK" for Yes, "Cancel" for No.`);
     if (isYou) {
       if (data.type === actionType) {
-        showStatus(actionType === "like" ? "Liking..." : "Disliking...");
+        showStatus(data.type === "like" ? "Disliking..." : "Liking...");
 		// Toggle off
         await existingDoc.ref.delete();
         countChange = -1;
