@@ -154,7 +154,7 @@ async function openPostCard(url, date = "", readTime = null) {
 	  <br/><button onclick="sharePost('${url}')" id="shareBtn">🔗 Share</button>
     </div>
 
-    <h3>Comments</h3>
+    <h3>Discussion Forum</h3>
     <div id="commentsContainer"></div>
     <textarea id="newComment" placeholder="Add a comment..." rows="3"></textarea><br/>
     <button onclick="addComment('${url}')">Post Comment</button>
@@ -193,6 +193,8 @@ function goBack(postUrl) {
 async function toggleLike(postUrl, overrideName = null) {
   const name = overrideName || prompt("Enter your name:");
   if (!name) return;
+  
+  showStatus("Liking...");
 
   const likesRef = window.db.collection("likes");
 
@@ -214,6 +216,7 @@ async function toggleLike(postUrl, overrideName = null) {
       }
     } else {
       const newName = prompt("Please enter a different name (e.g., add a number):", name + "1");
+	  hideStatus();
       if (newName && newName !== name) {
         return toggleLike(postUrl, newName); // Recursive reattempt with new name
       }
@@ -227,7 +230,8 @@ async function toggleLike(postUrl, overrideName = null) {
     likeBtn.textContent = "💔 Unlike";
   }
 
-  updateLikeCount(postUrl);
+  await updateLikeCount(postUrl);
+  hideStatus();
 }
 
 async function updateLikeCount(postUrl) {
@@ -358,6 +362,8 @@ async function addComment(postUrl) {
   const text = document.getElementById("newComment").value.trim();
   const name = prompt("Enter your name:");
   if (!name || !text) return;
+  
+  showStatus("Posting...");
 
   await window.db.collection("comments").add({
     postUrl,
@@ -370,7 +376,9 @@ async function addComment(postUrl) {
 
 
   document.getElementById("newComment").value = '';
-  loadComments(postUrl);
+  await loadComments(postUrl);
+  
+  hideStatus();
 }
 
 function shareComment(postUrl, commentId) {
@@ -414,6 +422,9 @@ async function findCommentRef(commentId) {
 }
 
 async function toggleLikeDislike(commentId, name, actionType) {
+	
+  showStatus(actionType === "like" ? "Liking..." : "Disliking...");
+  
   const isNested = await isNestedComment(commentId);
   const collectionName = isNested ? "nestedActions" : "commentActions";
   const oppositeAction = actionType === "like" ? "dislike" : "like";
@@ -444,6 +455,8 @@ async function toggleLikeDislike(commentId, name, actionType) {
       }
     } else {
       const newName = prompt("Enter a different name (e.g., append a number):", name + "1");
+	  hideStatus();
+	  
       if (newName && newName !== name) {
         return toggleLikeDislike(commentId, newName, actionType); // Recursive retry
       }
@@ -464,6 +477,8 @@ async function toggleLikeDislike(commentId, name, actionType) {
     await updateCommentField(commentId, actionType + "s", countChange, isNested);
     await loadComments(currentPostUrl);
   }
+  
+  hideStatus();
 }
 
 async function isNestedComment(commentId) {
@@ -590,6 +605,21 @@ function getDateFromContainerMap(url) {
   return null;
 }
 
+function showStatus(message) {
+  const el = document.getElementById("actionStatus");
+  if (!el) return;
+  el.textContent = message;
+  el.style.display = "block";
+}
+
+function hideStatus() {
+  const el = document.getElementById("actionStatus");
+  if (!el) return;
+  el.style.display = "none";
+}
+
+
+
 // Main code 
 let currentPostUrl = "";
 
@@ -684,4 +714,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
   }
+  
+  const statusEl = document.createElement("div");
+  statusEl.id = "actionStatus";
+  statusEl.style.position = "fixed";
+  statusEl.style.bottom = "20px";
+  statusEl.style.left = "50%";
+  statusEl.style.transform = "translateX(-50%)";
+  statusEl.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+  statusEl.style.color = "#fff";
+  statusEl.style.padding = "8px 16px";
+  statusEl.style.borderRadius = "5px";
+  statusEl.style.display = "none";
+  statusEl.style.zIndex = 9999;
+  document.body.appendChild(statusEl);
+
+  
 });
