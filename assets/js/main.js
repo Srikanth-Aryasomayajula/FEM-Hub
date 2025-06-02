@@ -633,8 +633,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const commentToHighlight = params.get("comment");
   
   if (postToOpen) {
-    const rawDate = new Date().toISOString().split('T')[0];
-    await openPostCard(postToOpen, rawDate);
+	const meta = await fetchPostMeta(postToOpen);
+	const rawDate = new Date().toISOString().split('T')[0]; // fallback if meta.date is missing
+	await openPostCard(postToOpen, meta.date || rawDate, meta.readTime);
     
     if (commentToHighlight) {
       await loadComments(postToOpen); // ensure comments loaded again if needed (or rely on previous await in openPostCard)
