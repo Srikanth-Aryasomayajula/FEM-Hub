@@ -561,40 +561,39 @@ function getDateFromContainerMap(url) {
 
 // Main code 
 let currentPostUrl = "";
+// Map container class to relevant posts
+const containerMap = {
+  "general-card-container": [
+    { url: "blog/general_post-1.html", date: "10.12.2021" },   //date: "10.12.2021" for manual date
+    { url: "blog/general_post-2.html", date: null },
+    { url: "blog/general_post-3.html", date: null },   //date: null for today's date
+    { url: "blog/general_post-4.html", date: null },
+    { url: "blog/general_post-5.html", date: null },
+    { url: "blog/general_post-6.html", date: null },
+	{ url: "blog/general_post-7.html", date: null },
+	{ url: "blog/general_post-8.html", date: null },
+	{ url: "blog/general_post-9.html", date: null }
+  ],
+  "engineering-card-container": [
+    { url: "blog/engineering_post-1.html", date: null },
+    { url: "blog/engineering_post-2.html", date: null },
+	{ url: "blog/engineering_post-3.html", date: null },
+	{ url: "blog/engineering_post-4.html", date: null },
+	{ url: "blog/engineering_post-5.html", date: null }
+    // Add more engineering posts here
+  ],
+  "ls-dyna-card-container": [
+    { url: "blog/ls-dyna_post-1.html", date: null },
+    { url: "blog/ls-dyna_post-2.html", date: null },
+	{ url: "blog/ls-dyna_post-3.html", date: null },
+	{ url: "blog/ls-dyna_post-4.html", date: null },
+	{ url: "blog/ls-dyna_post-5.html", date: null },
+	{ url: "blog/ls-dyna_post-6.html", date: null },
+	{ url: "blog/ls-dyna_post-7.html", date: null }
+  ]
+};
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Map container class to relevant posts
-  const containerMap = {
-    "general-card-container": [
-      { url: "blog/general_post-1.html", date: "10.12.2021" },   //date: "10.12.2021" for manual date
-      { url: "blog/general_post-2.html", date: null },
-      { url: "blog/general_post-3.html", date: null },   //date: null for today's date
-      { url: "blog/general_post-4.html", date: null },
-      { url: "blog/general_post-5.html", date: null },
-      { url: "blog/general_post-6.html", date: null },
-	  { url: "blog/general_post-7.html", date: null },
-	  { url: "blog/general_post-8.html", date: null },
-	  { url: "blog/general_post-9.html", date: null }
-    ],
-    "engineering-card-container": [
-      { url: "blog/engineering_post-1.html", date: null },
-      { url: "blog/engineering_post-2.html", date: null },
-	  { url: "blog/engineering_post-3.html", date: null },
-	  { url: "blog/engineering_post-4.html", date: null },
-	  { url: "blog/engineering_post-5.html", date: null }
-      // Add more engineering posts here
-    ],
-    "ls-dyna-card-container": [
-      { url: "blog/ls-dyna_post-1.html", date: null },
-      { url: "blog/ls-dyna_post-2.html", date: null },
-	  { url: "blog/ls-dyna_post-3.html", date: null },
-	  { url: "blog/ls-dyna_post-4.html", date: null },
-	  { url: "blog/ls-dyna_post-5.html", date: null },
-	  { url: "blog/ls-dyna_post-6.html", date: null },
-	  { url: "blog/ls-dyna_post-7.html", date: null }
-    ]
-  };
-
   // Loop through each known container
   for (const [className, posts] of Object.entries(containerMap)) {
     const container = document.querySelector(`.${className}`);
