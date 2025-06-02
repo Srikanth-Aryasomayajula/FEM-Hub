@@ -286,21 +286,35 @@ function shareComment(postUrl, commentId) {
   }
 }
 
-
 async function likeComment(commentId) {
-  const ref = window.db.collection("comments").doc(commentId);
-  await ref.update({
-    likes: firebase.firestore.FieldValue.increment(1)
-  });
-  loadComments(currentPostUrl); // currentPostUrl is added next step
+  const ref = await findCommentRef(commentId);
+  if (ref) {
+    await ref.update({
+      likes: firebase.firestore.FieldValue.increment(1)
+    });
+    loadComments(currentPostUrl);
+  }
 }
 
 async function dislikeComment(commentId) {
-  const ref = window.db.collection("comments").doc(commentId);
-  await ref.update({
-    dislikes: firebase.firestore.FieldValue.increment(1)
-  });
-  loadComments(currentPostUrl);
+  const ref = await findCommentRef(commentId);
+  if (ref) {
+    await ref.update({
+      dislikes: firebase.firestore.FieldValue.increment(1)
+    });
+    loadComments(currentPostUrl);
+  }
+}
+
+async function findCommentRef(commentId) {
+  let ref = window.db.collection("comments").doc(commentId);
+  const doc = await ref.get();
+  if (doc.exists) return ref;
+
+  // Try nestedComments if not found in comments
+  ref = window.db.collection("nestedComments").doc(commentId);
+  const nestedDoc = await ref.get();
+  return nestedDoc.exists ? ref : null;
 }
 
 function replyToComment(parentId, parentName) {
