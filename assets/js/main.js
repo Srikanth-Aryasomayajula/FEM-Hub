@@ -79,6 +79,16 @@ async function openPostCard(url, date = "", readTime = null) {
   const text = await res.text();
   const parser = new DOMParser();
   const doc = parser.parseFromString(text, "text/html");
+  
+  if (!date) {
+    const metaDate = doc.querySelector('meta[name="post-date"]')?.getAttribute('content');
+    if (metaDate) {
+      date = metaDate;
+    } else {
+      const dateElem = doc.querySelector('.post-date');
+      if (dateElem) date = dateElem.textContent.trim();
+    }
+  }  
 
   const content = doc.querySelector("main.post")?.innerHTML || "<p>No content found.</p>";
   const title = doc.querySelector("h1")?.textContent || "Untitled";
