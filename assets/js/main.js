@@ -347,23 +347,21 @@ async function loadComments(postUrl) {
     }
   });
 
-  // Clear container for fresh render
-  container.innerHTML = "";
+  // Clear container for fresh render except loader
+  container.innerHTML = '<div id="loadingIndicator">Loading likes and comments...</div>';
 
-  // Render each top-level comment
+  // Render all top-level comments
+  const fragment = document.createDocumentFragment();
+
   for (const c of Object.values(comments)) {
     const commentEl = await renderComment(c, comments);
-    container.appendChild(commentEl);
+    fragment.appendChild(commentEl);
   }
 
-  // Ensure DOM has fully rendered before removing loader
-  return new Promise(resolve => {
-    requestAnimationFrame(() => {
-      const loader = document.getElementById("loadingIndicator");
-      if (loader) loader.remove();
-      resolve();
-    });
-  });
+  // Add all comments at once, then remove loader
+  const loader = document.getElementById("loadingIndicator");
+  if (loader) loader.remove();
+  container.appendChild(fragment);
 }
 
 async function addComment(postUrl) {
