@@ -124,19 +124,28 @@ async function openPostCard(url, date = "", readTime = null) {
 }
 
 async function toggleLike(postUrl) {
+  const name = prompt("Enter your name:");
+  if (!name) return;
+
   const likesRef = window.db.collection("likes");
-  const snapshot = await likesRef.where("postUrl", "==", postUrl).limit(1).get();
+
+  const existing = await likesRef
+    .where("postUrl", "==", postUrl)
+    .where("name", "==", name)
+    .limit(1)
+    .get();
 
   const likeBtn = document.getElementById("likeBtn");
 
-  if (!snapshot.empty) {
+  if (!existing.empty) {
     // Unlike: delete the like
-    snapshot.forEach(doc => doc.ref.delete());
+    existing.forEach(doc => doc.ref.delete());
     likeBtn.textContent = "❤️ Like";
   } else {
     // Like: add a new like
     await likesRef.add({
       postUrl,
+      name,
       timestamp: new Date()
     });
     likeBtn.textContent = "💔 Unlike";
@@ -144,6 +153,7 @@ async function toggleLike(postUrl) {
 
   updateLikeCount(postUrl);
 }
+
 
 async function updateLikeCount(postUrl) {
   const likesRef = window.db.collection("likes");
