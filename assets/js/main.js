@@ -330,7 +330,7 @@ async function findCommentRef(commentId) {
 }
 
 async function toggleLikeDislike(commentId, name, actionType) {
-  const isNested = commentId.includes("_");
+  const isNested = await isNestedComment(commentId);
   const collectionName = isNested ? "nestedActions" : "commentActions";
   const oppositeAction = actionType === "like" ? "dislike" : "like";
 
