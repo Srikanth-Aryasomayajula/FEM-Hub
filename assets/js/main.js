@@ -88,13 +88,12 @@ async function openPostCard(url, date = "", readTime = null) {
   const card = document.createElement("div");
   card.className = "post-expanded-card";
   card.innerHTML = `
-    <button onclick="history.back()" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
-	
+    <button onclick="goBack('${url}')" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
+
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
-	
 	<p class="post-date-inPost">
 		<span>${formatDateToDDMMMYYYY(date)}</span>
-		<span>${readTime !== null && readTime !== undefined ? readTime + ' min read' : ''}</span>
+		<span>${readTime ? readTime + ' min read' : ''}</span>
 	</p>
 	
 	<div class="post-content">${content}</div>
@@ -127,6 +126,16 @@ async function openPostCard(url, date = "", readTime = null) {
   // Load saved comments
   await loadComments(url);
 
+}
+
+function goBack(postUrl) {
+  let base = '/FEM-Hub/general.html';
+  if (postUrl.includes('engineering')) {
+    base = '/FEM-Hub/engineering.html';
+  } else if (postUrl.includes('ls-dyna')) {
+    base = '/FEM-Hub/ls-dyna.html';
+  }
+  window.location.href = base;
 }
 
 async function toggleLike(postUrl, overrideName = null) {
