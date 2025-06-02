@@ -308,7 +308,10 @@ nav a:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  width: 100%;
+  display: inline-block;           /* shrink to content width */
+  max-width: 100%;                 /* prevents overflow */
+  word-wrap: break-word;          /* wrap long words */
+  overflow-wrap: break-word;
   box-sizing: border-box;
 }
 
