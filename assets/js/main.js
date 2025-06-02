@@ -129,8 +129,10 @@ async function openPostCard(url, date = "", readTime = null) {
 }
 
 function goBack(postUrl) {
-  let base = '/FEM-Hub/general.html';
-  if (postUrl.includes('engineering')) {
+  let base = '/FEM-Hub/index.html';
+  if (postUrl.includes('general')) {
+    base = '/FEM-Hub/general.html';
+  } else if (postUrl.includes('engineering')) {
     base = '/FEM-Hub/engineering.html';
   } else if (postUrl.includes('ls-dyna')) {
     base = '/FEM-Hub/ls-dyna.html';
