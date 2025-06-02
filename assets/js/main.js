@@ -546,7 +546,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Map container class to relevant posts
   const containerMap = {
     "general-card-container": [
-      { url: "blog/general_post-1.html", date: null },   //date: "10.12.2021" for manual date
+      { url: "blog/general_post-1.html", date: "10.12.2021" },   //date: "10.12.2021" for manual date
       { url: "blog/general_post-2.html", date: null },
       { url: "blog/general_post-3.html", date: null },   //date: null for today's date
       { url: "blog/general_post-4.html", date: null },
