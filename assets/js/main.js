@@ -217,7 +217,7 @@ function renderComment(comment, allComments, indent = 0) {
 
 async function loadComments(postUrl) {
   const container = document.getElementById("commentsContainer");
-  container.innerHTML = "<p>Loading comments...</p>";
+  container.innerHTML = "<p>Loading likes and comments...</p>";
 
   // Fetch top-level comments
   const commentSnap = await window.db.collection("comments")
@@ -345,7 +345,7 @@ async function toggleLikeDislike(commentId, name, actionType) {
     const existingDoc = existing.docs[0];
     const data = existingDoc.data();
 
-    const isYou = confirm(`The name "${name}" already ${data.type === "like" ? "liked" : "disliked"} this comment.\nIs this you?`);
+    const isYou = confirm(`"${name}" already ${data.type === "like" ? "liked" : "disliked"} this comment. Do you want to ${data.type === "dislike" ? "liked" : "disliked"}?\nClick "OK" for Yes, "Cancel" for No.`);
     if (isYou) {
       if (data.type === actionType) {
         // Toggle off
