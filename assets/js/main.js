@@ -307,7 +307,9 @@ function renderComment(comment, allComments) {
 
 async function loadComments(postUrl) {
   const container = document.getElementById("commentsContainer");
-  container.innerHTML = "<p>Loading likes and comments...</p>";
+  
+  // Show loading indicator with custom styling
+  container.innerHTML = '<div id="loadingIndicator">Loading likes and comments...</div>';
 
   // Fetch top-level comments
   const commentSnap = await window.db.collection("comments")
@@ -335,6 +337,7 @@ async function loadComments(postUrl) {
     allReplies[doc.id] = reply;
   });
 
+  // Link replies to parents
   Object.values(allReplies).forEach(reply => {
     const parentId = reply.parentId;
     if (comments[parentId]) {
@@ -344,17 +347,20 @@ async function loadComments(postUrl) {
     }
   });
 
+  // Clear container for fresh render
   container.innerHTML = "";
 
+  // Render each top-level comment
   for (const c of Object.values(comments)) {
     const commentEl = await renderComment(c, comments);
     container.appendChild(commentEl);
   }
 
-  // Wait a tick for DOM to render the comments
+  // Ensure DOM has fully rendered before removing loader
   return new Promise(resolve => {
-    // Use requestAnimationFrame or setTimeout 0 to wait for rendering
     requestAnimationFrame(() => {
+      const loader = document.getElementById("loadingIndicator");
+      if (loader) loader.remove();
       resolve();
     });
   });

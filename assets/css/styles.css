@@ -387,6 +387,18 @@ button {
   display: block;
 }
 
+#loadingIndicator {
+  position: relative;
+  margin: 1rem auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-align: center;
+  width: fit-content;
+  z-index: 1;
+}
+
 #actionStatus {
   position: fixed;
   bottom: 20px;
