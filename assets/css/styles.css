@@ -6,6 +6,9 @@ html {
 /* Make main grow to fill space */
 main {
   flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -83,10 +86,6 @@ nav a:hover {
 .tagline {
   font-style: italic;
   font-size: 1.1rem;
-}
-
-main {
-  padding: 2rem;
 }
 
 .general-card-container {
