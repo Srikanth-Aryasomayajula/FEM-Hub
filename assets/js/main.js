@@ -452,7 +452,7 @@ async function toggleLikeDislike(commentId, name, actionType) {
         countChange = -1;
       } else {
         // Switch like <-> dislike
-		showStatus("Disliking...");
+		showStatus(actionType === "like" ? "Liking..." : "Disliking...");
         await existingDoc.ref.update({ type: actionType, timestamp: new Date() });
         countChange = 1;
         // Decrease count of opposite action
