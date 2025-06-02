@@ -208,9 +208,11 @@ async function toggleLike(postUrl, overrideName = null) {
 
   if (!existing.empty) {
     const isYou = confirm(`"${name}" has already liked this post. Is it you?\nClick "OK" for Yes, "Cancel" for No.`);
+	hideStatus();
     if (isYou) {
       const confirmUnlike = confirm('Do you want to unlike this post?\nClick "OK" for Yes, "Cancel" for No.');
       if (confirmUnlike) {
+		showStatus("Disiking...");
         existing.forEach(doc => doc.ref.delete());
         likeBtn.textContent = "❤️ Like";
       }
