@@ -397,7 +397,19 @@ button {
   text-align: center;
   width: fit-content;
   z-index: 1;
+
+  /* Fade effect */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  display: block; /* keep element in flow */
 }
+
+#loadingIndicator.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 #actionStatus {
   position: fixed;
@@ -408,8 +420,18 @@ button {
   color: #fff;
   padding: 8px 16px;
   border-radius: 5px;
-  display: none;
+  display: block; /* change from none for fade */
   z-index: 9999;
+
+  /* Fade effect */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#actionStatus.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .editor-form {
