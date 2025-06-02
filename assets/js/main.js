@@ -157,7 +157,7 @@ async function openPostCard(url, date = "", readTime = null) {
     <h3>Discussion Forum</h3>
     <div id="commentsContainer"></div>
     <textarea id="newComment" placeholder="Add a comment..." rows="3"></textarea><br/>
-    <button onclick="addComment('${url}')">Post Comment</button>
+    <button onclick="addComment('${url}')">Post</button>
 
   `;
 
