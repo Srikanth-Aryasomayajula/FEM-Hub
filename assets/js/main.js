@@ -5,7 +5,7 @@ const containerMap = {
     { url: "blog/general_post-2.html", date: null },
     { url: "blog/general_post-3.html", date: null },   //date: null for today's date
     { url: "blog/general_post-4.html", date: null },
-    { url: "blog/general_post-5.html", date: null },
+    { url: "blog/general_post-5.html", date: "08.12.2021" },
     { url: "blog/general_post-6.html", date: null },
 	{ url: "blog/general_post-7.html", date: null },
 	{ url: "blog/general_post-8.html", date: null },
@@ -14,7 +14,7 @@ const containerMap = {
   "engineering-card-container": [
     { url: "blog/engineering_post-1.html", date: null },
     { url: "blog/engineering_post-2.html", date: null },
-	{ url: "blog/engineering_post-3.html", date: null },
+	{ url: "blog/engineering_post-3.html", date: "11.12.2021" },
 	{ url: "blog/engineering_post-4.html", date: null },
 	{ url: "blog/engineering_post-5.html", date: null }
     // Add more engineering posts here
@@ -24,7 +24,7 @@ const containerMap = {
     { url: "blog/ls-dyna_post-2.html", date: null },
 	{ url: "blog/ls-dyna_post-3.html", date: null },
 	{ url: "blog/ls-dyna_post-4.html", date: null },
-	{ url: "blog/ls-dyna_post-5.html", date: null },
+	{ url: "blog/ls-dyna_post-5.html", date: "20.12.2021" },
 	{ url: "blog/ls-dyna_post-6.html", date: null },
 	{ url: "blog/ls-dyna_post-7.html", date: null }
   ]
