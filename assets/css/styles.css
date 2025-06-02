@@ -231,8 +231,9 @@ nav a:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   font-size: 14px;
   box-sizing: border-box;   /* Ensure padding fits within bounds */
-  overflow-x: auto;               /* Enable horizontal scroll */
-  overflow-y: hidden;             /* Prevent vertical scroll from this level */
+  /*overflow-x: auto;               /* Enable horizontal scroll */
+  /*overflow-y: hidden;             /* Prevent vertical scroll from this level */
+  overflow: visible;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
