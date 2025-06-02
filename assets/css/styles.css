@@ -305,6 +305,14 @@ nav a:hover {
   box-sizing: border-box;
 }
 
+#commentsContainer {
+  width: 100%;
+  max-width: 900px;       /* Match max width of .comment */
+  box-sizing: border-box;
+  margin-top: 1rem;
+  overflow: hidden;       /* Ensures deeply nested comments stay inside */
+}
+
 /* Button styling */
 button {
     margin-top: 10px;
