@@ -287,23 +287,17 @@ function shareComment(postUrl, commentId) {
 }
 
 async function likeComment(commentId) {
-  const ref = await findCommentRef(commentId);
-  if (ref) {
-    await ref.update({
-      likes: firebase.firestore.FieldValue.increment(1)
-    });
-    loadComments(currentPostUrl);
-  }
+  const name = prompt("Enter your name:");
+  if (!name) return;
+
+  await toggleLikeDislike(commentId, name, "like");
 }
 
 async function dislikeComment(commentId) {
-  const ref = await findCommentRef(commentId);
-  if (ref) {
-    await ref.update({
-      dislikes: firebase.firestore.FieldValue.increment(1)
-    });
-    loadComments(currentPostUrl);
-  }
+  const name = prompt("Enter your name:");
+  if (!name) return;
+
+  await toggleLikeDislike(commentId, name, "dislike");
 }
 
 async function findCommentRef(commentId) {
@@ -315,6 +309,64 @@ async function findCommentRef(commentId) {
   ref = window.db.collection("nestedComments").doc(commentId);
   const nestedDoc = await ref.get();
   return nestedDoc.exists ? ref : null;
+}
+
+async function toggleLikeDislike(commentId, name, actionType) {
+  const isNested = await isNestedComment(commentId);
+  const collectionName = isNested ? "nestedCommentLikes" : "commentLikes";
+  const likesRef = window.db.collection(collectionName);
+
+  const existing = await likesRef
+    .where("commentId", "==", commentId)
+    .where("name", "==", name)
+    .limit(1)
+    .get();
+
+  let oppositeAction = actionType === "like" ? "dislike" : "like";
+  let countChange = 0;
+
+  if (!existing.empty) {
+    const doc = existing.docs[0];
+    const data = doc.data();
+
+    if (data.type === actionType) {
+      // Same action again → remove (toggle off)
+      await doc.ref.delete();
+      countChange = -1;
+    } else {
+      // Switching from like → dislike or vice versa
+      await doc.ref.update({ type: actionType, timestamp: new Date() });
+      countChange = 1;
+
+      // Remove the previous action count
+      await updateCommentField(commentId, oppositeAction + "s", -1, isNested);
+    }
+  } else {
+    // New like/dislike
+    await likesRef.add({
+      commentId,
+      name,
+      type: actionType,
+      timestamp: new Date()
+    });
+    countChange = 1;
+  }
+
+  await updateCommentField(commentId, actionType + "s", countChange, isNested);
+  await loadComments(currentPostUrl);
+}
+
+async function isNestedComment(commentId) {
+  const nestedRef = window.db.collection("nestedComments").doc(commentId);
+  const nestedDoc = await nestedRef.get();
+  return nestedDoc.exists;
+}
+
+async function updateCommentField(commentId, field, change, isNested) {
+  const ref = window.db.collection(isNested ? "nestedComments" : "comments").doc(commentId);
+  await ref.update({
+    [field]: firebase.firestore.FieldValue.increment(change)
+  });
 }
 
 function replyToComment(parentId, parentName) {
