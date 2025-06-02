@@ -327,31 +327,32 @@ async function findCommentRef(commentId) {
 }
 
 async function toggleLikeDislike(commentId, name, actionType) {
-  const isNested = await isNestedComment(commentId);
-  const collectionName = isNested ? "nestedCommentLikes" : "commentLikes";
-  const likesRef = window.db.collection(collectionName);
+  const isNested = commentId.includes("_");
+  const collectionName = isNested ? "nestedActions" : "commentActions";
+  const oppositeAction = actionType === "like" ? "dislike" : "like";
 
-  const existing = await likesRef
+  const existing = await window.db.collection(collectionName)
     .where("commentId", "==", commentId)
     .where("name", "==", name)
-    .limit(1)
     .get();
 
-  let oppositeAction = actionType === "like" ? "dislike" : "like";
   let countChange = 0;
 
   if (!existing.empty) {
     const existingDoc = existing.docs[0];
     const data = existingDoc.data();
-  
+
     const isYou = confirm(`The name "${name}" already ${data.type === "like" ? "liked" : "disliked"} this comment.\nIs this you?`);
     if (isYou) {
       if (data.type === actionType) {
+        // Toggle off
         await existingDoc.ref.delete();
         countChange = -1;
       } else {
+        // Switch like <-> dislike
         await existingDoc.ref.update({ type: actionType, timestamp: new Date() });
         countChange = 1;
+        // Decrease count of opposite action
         await updateCommentField(commentId, oppositeAction + "s", -1, isNested);
       }
     } else {
@@ -362,26 +363,20 @@ async function toggleLikeDislike(commentId, name, actionType) {
       return;
     }
   } else {
-
-    const doc = existing.docs[0];
-    const data = doc.data();
-
-    if (data.type === actionType) {
-      // Same action again → remove (toggle off)
-      await doc.ref.delete();
-      countChange = -1;
-    } else {
-      // Switching from like → dislike or vice versa
-      await doc.ref.update({ type: actionType, timestamp: new Date() });
-      countChange = 1;
-
-      // Remove the previous action count
-      await updateCommentField(commentId, oppositeAction + "s", -1, isNested);
-    }
+    // First time like/dislike
+    await window.db.collection(collectionName).add({
+      commentId,
+      name,
+      type: actionType,
+      timestamp: new Date()
+    });
+    countChange = 1;
   }
 
-  await updateCommentField(commentId, actionType + "s", countChange, isNested);
-  await loadComments(currentPostUrl);
+  if (countChange !== 0) {
+    await updateCommentField(commentId, actionType + "s", countChange, isNested);
+    await renderComments();
+  }
 }
 
 async function isNestedComment(commentId) {
