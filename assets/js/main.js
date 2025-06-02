@@ -74,7 +74,7 @@ async function fetchPostMeta(url) {
 
 // Open post in a separate card
 async function openPostCard(url, date = "", readTime = null) {
-  const container = document.getElementById("generalPostsContainer");
+  const container = document.querySelector("main[id$='PostsContainer']");
   const res = await fetch(url);
   const text = await res.text();
   const parser = new DOMParser();
