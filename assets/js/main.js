@@ -128,6 +128,9 @@ async function openPostCard(url, date = "", readTime = null) {
   const title = doc.querySelector("h1")?.textContent || "Untitled";
   document.title = `FEM Hub - ${title}`;
   
+  // Update browser URL
+  history.pushState(null, '', `?post=${encodeURIComponent(url)}`);
+  
   const pageTitle = document.querySelector(".page-title");
   if (pageTitle) {
     pageTitle.textContent = `FEM Hub - ${title}`;
