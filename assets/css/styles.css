@@ -301,6 +301,9 @@ nav a:hover {
 }
 
 .comment .comment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* ensures children align to the left */
   margin-top: 10px;
   padding: 15px;
   background: #fff;
