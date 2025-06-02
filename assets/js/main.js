@@ -655,7 +655,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (postToOpen) {
 	try {
 		const meta = await fetchPostMeta(postToOpen);
-		const rawDate = getDateFromContainerMap(postToOpen) || meta.date || "Unknown Date";
+		
+		let rawDate = getDateFromContainerMap(postToOpen) || meta.date || "Unknown Date";
+		if (/^\d{2}\.\d{2}\.\d{4}$/.test(rawDate)) {
+			const [dd, mm, yyyy] = rawDate.split(".");
+			rawDate = `${yyyy}-${mm}-${dd}`;
+		}
+				
 		const readTime = meta.readTime || null;
 
 		// Fallback if nothing is returned
