@@ -172,9 +172,14 @@ async function updateLikeCount(postUrl) {
   const likesRef = window.db.collection("likes");
   const snapshot = await likesRef.where("postUrl", "==", postUrl).get();
   const likeCount = snapshot.size;
-  document.getElementById("likeCount").textContent = likeCount;
-  document.getElementById("likeCount").nextSibling.textContent = ` ${likeCount === 1 ? 'Like' : 'Likes'}`;
 
+  const likeCountSpan = document.getElementById("likeCount");
+  likeCountSpan.textContent = likeCount;
+  likeCountSpan.nextSibling.textContent = ` ${likeCount === 1 ? 'Like' : 'Likes'}`;
+
+  // Collect names to show in tooltip
+  const names = snapshot.docs.map(doc => doc.data().name);
+  likeCountSpan.title = names.length > 0 ? names.join(', ') : '';
 }
 
 function sharePost(postUrl) {
@@ -264,8 +269,10 @@ async function loadComments(postUrl) {
 
   container.innerHTML = "";
 
-  Object.values(comments)
-    .forEach(c => container.appendChild(renderComment(c, comments)));
+  for (const c of Object.values(comments)) {
+    const commentEl = await renderComment(c, comments);
+    container.appendChild(commentEl);
+  }
 
   // Wait a tick for DOM to render the comments
   return new Promise(resolve => {
@@ -445,9 +452,62 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-let currentPostUrl = "";
+async function getActionNames(commentId, actionType, isNested) {
+  const collectionName = isNested ? "nestedActions" : "commentActions";
+  const snapshot = await window.db.collection(collectionName)
+    .where("commentId", "==", commentId)
+    .where("type", "==", actionType)
+    .get();
+
+  return snapshot.docs.map(doc => doc.data().name);
+}
+
+// Modify renderComment to async and add tooltips
+async function renderComment(comment, allComments, indent = 0) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "comment";
+  wrapper.id = `comment-${comment.id}`;
+  wrapper.style.marginLeft = `${indent}px`;
+
+  // Default likes and dislikes count
+  const likesCount = comment.likes || 0;
+  const dislikesCount = comment.dislikes || 0;
+
+  // Determine if nested comment
+  const isNested = comment.parentId !== undefined;
+
+  // Fetch names asynchronously for tooltips
+  const likeNames = await getActionNames(comment.id, "like", isNested);
+  const dislikeNames = await getActionNames(comment.id, "dislike", isNested);
+
+  wrapper.innerHTML = `
+    <div class="comment-header">
+      <span class="comment-name">${comment.name}</span>
+      <span class="comment-time">${formatDateToDDMMMYYYY(comment.timestamp.toDate())}, ${new Date(comment.timestamp.toDate()).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</span>
+    </div>
+    <div class="comment-text">${comment.text}</div>
+    <div class="comment-actions">
+      <button title="${likeNames.length > 0 ? likeNames.join(', ') : ''}" onclick="likeComment('${comment.id}')">👍 ${likesCount}</button>
+      <button title="${dislikeNames.length > 0 ? dislikeNames.join(', ') : ''}" onclick="dislikeComment('${comment.id}')">👎 ${dislikesCount}</button>
+      <button onclick="replyToComment('${comment.id}', '${comment.name}')">Reply</button>
+      <button onclick="shareComment(currentPostUrl, '${comment.id}')">Share</button>
+    </div>
+  `;
+
+  // Render children (replies)
+  if (comment.children && comment.children.length > 0) {
+    for (const child of comment.children) {
+      const childEl = await renderComment(child, allComments, indent + 30);
+      wrapper.appendChild(childEl);
+    }
+  }
+
+  return wrapper;
+}
 
 // Main code 
+let currentPostUrl = "";
+
 document.addEventListener("DOMContentLoaded", async () => {
   // Map container class to relevant posts
   const containerMap = {
