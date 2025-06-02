@@ -495,9 +495,17 @@ async function renderComment(comment, allComments, indent = 0) {
     </div>
     <div class="comment-text">${comment.text}</div>
     <div class="comment-actions">
-      <button title="${likeNames.length > 0 ? likeNames.join(', ') : ''}" onclick="likeComment('${comment.id}')">👍 ${likesCount}</button>
-      <button title="${dislikeNames.length > 0 ? dislikeNames.join(', ') : ''}" onclick="dislikeComment('${comment.id}')">👎 ${dislikesCount}</button>
-      <button onclick="replyToComment('${comment.id}', '${comment.name}')">Reply</button>
+	
+	<span class="like-wrapper">
+	  <button onclick="likeComment('${comment.id}')">👍 ${likesCount}</button>
+	  ${likeNames.length ? `<div class="like-tooltip">${likeNames.map(n => `<div>${n}</div>`).join('')}</div>` : ''}
+	</span>
+	<span class="like-wrapper">
+	  <button onclick="dislikeComment('${comment.id}')">👎 ${dislikesCount}</button>
+	  ${dislikeNames.length ? `<div class="like-tooltip">${dislikeNames.map(n => `<div>${n}</div>`).join('')}</div>` : ''}
+	</span>
+	  
+	  <button onclick="replyToComment('${comment.id}', '${comment.name}')">Reply</button>
       <button onclick="shareComment(currentPostUrl, '${comment.id}')">Share</button>
     </div>
   `;
