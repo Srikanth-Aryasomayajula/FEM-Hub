@@ -88,12 +88,13 @@ async function openPostCard(url, date = "", readTime = null) {
   const card = document.createElement("div");
   card.className = "post-expanded-card";
   card.innerHTML = `
-    <button onclick="location.reload()" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
+    <button onclick="history.back()" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
 	
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
+	
 	<p class="post-date-inPost">
 		<span>${formatDateToDDMMMYYYY(date)}</span>
-		<span>${readTime ? readTime + ' min read' : ''}</span>
+		<span>${readTime !== null && readTime !== undefined ? readTime + ' min read' : ''}</span>
 	</p>
 	
 	<div class="post-content">${content}</div>
