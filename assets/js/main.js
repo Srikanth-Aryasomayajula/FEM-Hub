@@ -99,7 +99,7 @@ async function openPostCard(url, date = "", readTime = null) {
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
 	<p class="post-date-inPost">
 		<span>${formatDateToDDMMMYYYY(date)}</span>
-		<span>${readTime ? readTime + ' min read' : ''}</span>
+		<span>${readTime !== null && readTime !== undefined ? readTime + ' min read' : ''}</span>
 	</p>
 	
 	<div class="post-content">${content}</div>
@@ -633,9 +633,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const commentToHighlight = params.get("comment");
   
   if (postToOpen) {
-	const meta = await fetchPostMeta(postToOpen);
-	const rawDate = new Date().toISOString().split('T')[0]; // fallback if meta.date is missing
-	await openPostCard(postToOpen, meta.date || rawDate, meta.readTime);
+	try {
+		const meta = await fetchPostMeta(postToOpen);
+		const rawDate = meta.date || new Date().toISOString().split('T')[0];
+		const readTime = meta.readTime || null;
+
+		// Fallback if nothing is returned
+		await openPostCard(postToOpen, rawDate, readTime);
+	} catch (err) {
+		console.error("Failed to open shared post:", err);
+	}
     
     if (commentToHighlight) {
       await loadComments(postToOpen); // ensure comments loaded again if needed (or rely on previous await in openPostCard)
