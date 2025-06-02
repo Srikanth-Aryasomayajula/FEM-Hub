@@ -135,8 +135,8 @@ async function toggleLike(postUrl, overrideName = null) {
   const likeBtn = document.getElementById("likeBtn");
 
   if (!existing.empty) {
-    const isYou = confirm(`The name "${name}" has already liked this post.\nIs this you?`);
-    if (isYou) {
+    const isYou = prompt(`"${name}" has already liked this post.\nIs this you? (Yes/No)`);
+    if (isYou.toLowerCase() === "yes") {
       const confirmUnlike = confirm("Do you want to unlike this post?");
       if (confirmUnlike) {
         existing.forEach(doc => doc.ref.delete());
