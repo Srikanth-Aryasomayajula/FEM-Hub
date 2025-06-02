@@ -135,8 +135,8 @@ async function toggleLike(postUrl, overrideName = null) {
   const likeBtn = document.getElementById("likeBtn");
 
   if (!existing.empty) {
-    const isYou = prompt(`"${name}" has already liked this post.\nIs this you? (Yes/No)`);
-    if (isYou.toLowerCase() === "yes") {
+    const isYou = confirm(`"${name}" has already liked this post.\nClick "OK" for Yes, "Cancel" for No.`);
+    if (isYou) {
       const confirmUnlike = confirm("Do you want to unlike this post?");
       if (confirmUnlike) {
         existing.forEach(doc => doc.ref.delete());
@@ -163,7 +163,10 @@ async function toggleLike(postUrl, overrideName = null) {
 async function updateLikeCount(postUrl) {
   const likesRef = window.db.collection("likes");
   const snapshot = await likesRef.where("postUrl", "==", postUrl).get();
-  document.getElementById("likeCount").textContent = snapshot.size;
+  const likeCount = snapshot.size;
+  document.getElementById("likeCount").textContent = likeCount;
+  document.getElementById("likeCount").nextSibling.textContent = ` ${likeCount === 1 ? 'Like' : 'Likes'}`;
+
 }
 
 function sharePost(postUrl) {
