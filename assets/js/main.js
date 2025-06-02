@@ -29,7 +29,7 @@ function createPostCard(title, summary, date = null, url = "#", readTime = null)
   datePara.className = "post-date";
   const today = new Date();
   datePara.textContent = date
-    ? formatDateToDDMMMYYYY(date)
+    ? formatDateToDDMMMYYYY(date.split('.').reverse().join('-'))
     : formatDateToDDMMMYYYY(today.toISOString().split("T")[0]);
 
   card.appendChild(heading);
