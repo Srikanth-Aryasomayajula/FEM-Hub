@@ -29,7 +29,7 @@ function createPostCard(title, summary, date = null, url = "#", readTime = null)
   
   const readTimePara = document.createElement("p");
   readTimePara.className = "read-time";
-  readTimePara.textContent = `${readTime} min read`;
+  readTimePara.textContent = readTime ? `${readTime} min read` : '';
 
   const infoWrapper = document.createElement("div");
   infoWrapper.className = "card-info";
@@ -52,7 +52,7 @@ async function fetchPostMeta(url) {
   
   const content = doc.querySelector('main.post')?.textContent || "";
   const wordCount = content.trim().split(/\s+/).length;
-  let readTime = Math.ceil(wordCount / 200); // Average 200 wpm
+  let readTime = Math.max(1, Math.ceil(wordCount / 200)); // Average 200 wpm
   
   // Optionally extract date if you add it similarly
   const date = null; 
@@ -85,7 +85,7 @@ async function openPostCard(url, date = "", readTime = null) {
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
 	<p class="post-date-inPost">
 		<span>${new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
-		<span>${readTime} min read</span>
+		<span>${readTime ? readTime + ' min read' : ''}</span>
 	</p>
 	
 	<div class="post-content">${content}</div>
@@ -107,7 +107,6 @@ async function openPostCard(url, date = "", readTime = null) {
 
   // Restore likes
   document.getElementById("likeBtn").textContent = "❤️ Like";
-  document.getElementById("likeCount").textContent = snapshot.size;
 
 
   // Load saved likes
@@ -379,15 +378,6 @@ async function toggleLikeDislike(commentId, name, actionType) {
       // Remove the previous action count
       await updateCommentField(commentId, oppositeAction + "s", -1, isNested);
     }
-  } else {
-    // New like/dislike
-    await likesRef.add({
-      commentId,
-      name,
-      type: actionType,
-      timestamp: new Date()
-    });
-    countChange = 1;
   }
 
   await updateCommentField(commentId, actionType + "s", countChange, isNested);
