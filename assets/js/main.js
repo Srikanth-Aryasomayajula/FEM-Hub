@@ -120,7 +120,7 @@ async function openPostCard(url, date = "", readTime = null) {
       displayDate = metaDate;
     } else {
       // fallback to empty or a fixed string to avoid today's date
-      displayDate = "Unknown Date-01";
+      displayDate = "Unknown Date";
     }
   }
 
@@ -142,7 +142,7 @@ async function openPostCard(url, date = "", readTime = null) {
 
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
 	<p class="post-date-inPost">
-		<span>${displayDate === "Unknown Date-2" ? displayDate : formatDateToDDMMMYYYY(displayDate)}</span>
+		<span>${displayDate === "Unknown Date" ? displayDate : formatDateToDDMMMYYYY(displayDate)}</span>
 		<span>${readTime !== null && readTime !== undefined ? readTime + ' min read' : ''}</span>
 	</p>
 	
@@ -585,7 +585,7 @@ async function renderComment(comment, allComments, indent = 0) {
 
 function getDateFromContainerMap(url) {
   for (const posts of Object.values(containerMap)) {
-    const found = posts.find(post => post.url === url);
+    const found = posts.find(post => post.url === decodeURIComponent(url));
     if (found) return found.date;
   }
   return null;
@@ -655,7 +655,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (postToOpen) {
 	try {
 		const meta = await fetchPostMeta(postToOpen);
-		const rawDate = getDateFromContainerMap(postToOpen) || meta.date || "Unknown Date-3";
+		const rawDate = getDateFromContainerMap(postToOpen) || meta.date || "Unknown Date";
 		const readTime = meta.readTime || null;
 
 		// Fallback if nothing is returned
