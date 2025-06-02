@@ -231,7 +231,8 @@ nav a:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   font-size: 14px;
   box-sizing: border-box;   /* Ensure padding fits within bounds */
-  overflow: hidden;         /* Prevent child from spilling out */
+  overflow-x: auto;               /* Enable horizontal scroll */
+  overflow-y: hidden;             /* Prevent vertical scroll from this level */
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -304,8 +305,8 @@ nav a:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  display: inline-block;
-  /*width: fit-content;*/
+  display: block;
+  width: fit-content;
   max-width: 100%;                 /* prevents overflow */
   word-wrap: break-word;          /* wrap long words */
   overflow-wrap: break-word;
