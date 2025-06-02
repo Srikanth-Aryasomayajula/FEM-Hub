@@ -345,7 +345,7 @@ async function toggleLikeDislike(commentId, name, actionType) {
     const existingDoc = existing.docs[0];
     const data = existingDoc.data();
 
-    const isYou = confirm(`"${name}" already ${data.type === "like" ? "liked" : "disliked"} this comment. Do you want to ${data.type === "dislike" ? "like" : "dislike"}?\nClick "OK" for Yes, "Cancel" for No.`);
+    const isYou = confirm(`"${name}" already ${data.type === "like" ? "liked" : "disliked"} this comment. Do you want to ${data.type === "dislike" ? "like" : "dislike"} it?\nClick "OK" for Yes, "Cancel" for No.`);
     if (isYou) {
       if (data.type === actionType) {
         // Toggle off
