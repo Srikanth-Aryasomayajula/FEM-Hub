@@ -587,3 +587,151 @@ footer p {
   background: #f4f4f4;
   padding: 1rem;
 }
+
+
+/* General Mobile Styles */
+@media (max-width: 768px) {
+  /* Main Content Padding */
+  main {
+    padding: 1rem;
+  }
+
+  /* Header Adjustments */
+  header {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  /* Navigation Styling */
+  nav {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  nav a {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 1rem;
+  }
+
+  /* Banner Image */
+  .banner img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Logo Positioning */
+  .logo {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 1rem auto;
+  }
+
+  .logo img {
+    height: 60px;
+  }
+
+  /* Search Bar */
+  .search-bar-container {
+    width: 90%;
+    margin: 1rem auto;
+    position: relative;
+  }
+
+  #searchInput {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  /* Card Layout */
+  .general-card-container,
+  .engineering-card-container,
+  .ls-dyna-card-container {
+    flex-direction: column;
+    align-items: center;
+    margin-right: 0;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 300px;
+    margin: 1rem 0;
+  }
+
+  /* Post Layout */
+  .post-expanded-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  /* Footer Styling */
+  footer {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* Scroll-to-Top Button */
+  .scroll-top-btn {
+    bottom: 1.25em;
+    right: 1.25em;
+    width: 3.125em;
+    height: 3.125em;
+    font-size: 1.25em;
+  }
+
+  /* Contact Form Adjustments */
+  .contact-form {
+    width: 90%;
+    margin: 2rem auto;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+  }
+
+  /* Editor Form */
+  .editor-form {
+    width: 90%;
+    margin: 2rem auto;
+  }
+
+  .editor-form input,
+  .editor-form textarea {
+    width: 100%;
+  }
+
+  /* Subscribe Form */
+  .subscribe-form {
+    width: 90%;
+    margin: 2rem auto;
+  }
+
+  /* Comment Section */
+  #commentsContainer {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .comment {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* Button Styling */
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+}
+
