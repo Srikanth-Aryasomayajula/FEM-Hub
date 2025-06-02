@@ -375,7 +375,7 @@ async function toggleLikeDislike(commentId, name, actionType) {
 
   if (countChange !== 0) {
     await updateCommentField(commentId, actionType + "s", countChange, isNested);
-    await renderComments();
+    await loadComments(currentPostUrl);
   }
 }
 
