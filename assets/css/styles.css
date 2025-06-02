@@ -227,7 +227,7 @@ nav a:hover {
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 8px;
-  max-width: 900px; 
+  max-width: 1200px; 
   width: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   font-size: 14px;
@@ -298,7 +298,7 @@ nav a:hover {
   margin-top: 10px;
 }
 
-.comment .comment {
+.comment > .comment {
   margin-top: 10px;
   padding-left: 20px;
   width: 100%;         /* Prevent shrink inside parent */
@@ -307,7 +307,7 @@ nav a:hover {
 
 #commentsContainer {
   width: 100%;
-  max-width: 900px;       /* Match max width of .comment */
+  max-width: 1200px;       /* Match max width of .comment */
   box-sizing: border-box;
   margin-top: 1rem;
   overflow: hidden;       /* Ensures deeply nested comments stay inside */
