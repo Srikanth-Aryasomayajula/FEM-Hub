@@ -120,7 +120,7 @@ async function openPostCard(url, date = "", readTime = null) {
       displayDate = metaDate;
     } else {
       // fallback to empty or a fixed string to avoid today's date
-      displayDate = "Unknown Date-1";
+      displayDate = "Unknown Date-01";
     }
   }
 
