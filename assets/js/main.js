@@ -100,7 +100,7 @@ async function openPostCard(url, date = "", readTime = null) {
 
     <div class="like-comment-section">
       <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
-      <span id="likeCount">0</span> Likes
+      <span id="likeWrapper"><span id="likeCount">0</span> Likes</span>
 	  <br/><button onclick="sharePost('${url}')" id="shareBtn">🔗 Share</button>
     </div>
 
@@ -173,13 +173,23 @@ async function updateLikeCount(postUrl) {
   const snapshot = await likesRef.where("postUrl", "==", postUrl).get();
   const likeCount = snapshot.size;
 
-  const likeCountSpan = document.getElementById("likeCount");
+  const likeCountSpan = document.getElementById("likeWrapper");
   likeCountSpan.textContent = likeCount;
   likeCountSpan.nextSibling.textContent = ` ${likeCount === 1 ? 'Like' : 'Likes'}`;
 
   // Collect names to show in tooltip
   const names = snapshot.docs.map(doc => doc.data().name);
-  likeCountSpan.title = names.length > 0 ? names.join(', ') : '';
+  likeCountSpan.title = '';
+  if (names.length > 0) {
+    const tooltipBox = document.createElement('div');
+    tooltipBox.className = 'like-tooltip';
+    names.forEach(n => {
+      const line = document.createElement('div');
+      line.textContent = n;
+      tooltipBox.appendChild(line);
+    });
+    likeCountSpan.appendChild(tooltipBox);
+  }
 }
 
 function sharePost(postUrl) {
@@ -282,8 +292,6 @@ async function loadComments(postUrl) {
     });
   });
 }
-
-
 
 async function addComment(postUrl) {
   const text = document.getElementById("newComment").value.trim();

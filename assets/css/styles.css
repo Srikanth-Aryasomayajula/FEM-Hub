@@ -310,6 +310,37 @@ button {
     border-radius: 25px;
 }
 
+#likeCount {
+  position: relative;
+  cursor: pointer;
+}
+
+.like-tooltip {
+  display: none;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  z-index: 10;
+  white-space: nowrap;
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.15);
+}
+
+#likeCount:hover .like-tooltip {
+  display: block;
+}
+
+#likeWrapper {
+  cursor: pointer;
+}
+
+#likeWrapper:hover .like-tooltip {
+  display: block;
+}
+
 .editor-form {
   max-width: 600px;
   margin: 2rem auto;
