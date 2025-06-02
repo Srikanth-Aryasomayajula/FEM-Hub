@@ -523,6 +523,8 @@ async function submitReply(parentId, button) {
   const name = prompt("Enter your name:");
 
   if (!text || !name) return;
+  
+  showStatus("Posting...");
 
   await window.db.collection("nestedComments").add({
     postUrl: currentPostUrl,
@@ -534,7 +536,8 @@ async function submitReply(parentId, button) {
     parentId
   });
 
-  loadComments(currentPostUrl);
+  await loadComments(currentPostUrl);
+  hideStatus();
 }
 
 function scrollToTop() {
@@ -722,16 +725,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   const statusEl = document.createElement("div");
   statusEl.id = "actionStatus";
-  statusEl.style.position = "fixed";
-  statusEl.style.bottom = "20px";
-  statusEl.style.left = "50%";
-  statusEl.style.transform = "translateX(-50%)";
-  statusEl.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-  statusEl.style.color = "#fff";
-  statusEl.style.padding = "8px 16px";
-  statusEl.style.borderRadius = "5px";
-  statusEl.style.display = "none";
-  statusEl.style.zIndex = 9999;
   document.body.appendChild(statusEl);
 
   
