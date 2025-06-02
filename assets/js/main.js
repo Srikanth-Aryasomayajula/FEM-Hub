@@ -551,6 +551,14 @@ async function renderComment(comment, allComments, indent = 0) {
   return wrapper;
 }
 
+function getDateFromContainerMap(url) {
+  for (const posts of Object.values(containerMap)) {
+    const found = posts.find(post => post.url === url);
+    if (found) return found.date;
+  }
+  return null;
+}
+
 // Main code 
 let currentPostUrl = "";
 
@@ -647,7 +655,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (postToOpen) {
 	try {
 		const meta = await fetchPostMeta(postToOpen);
-		const rawDate = meta.date || new Date().toISOString().split('T')[0];
+		const rawDate = getDateFromContainerMap(postToOpen) || meta.date || "Unknown Date";
 		const readTime = meta.readTime || null;
 
 		// Fallback if nothing is returned
