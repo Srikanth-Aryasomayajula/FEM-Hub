@@ -301,8 +301,9 @@ nav a:hover {
 
 .comment .comment {
   margin-top: 10px;
-  padding: 15px 15px 15px 0;     /* Reset left padding */
-  padding-left: 15px !important; /* Fixed indent */
+  margin-left: 30px;
+  padding: 15px;
+  /* padding-left: 15px !important; /* Fixed indent */
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;

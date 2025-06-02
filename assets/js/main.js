@@ -269,16 +269,15 @@ function sharePost(postUrl) {
   }
 }
 
-function renderComment(comment, allComments, indent = 0) {
+function renderComment(comment, allComments) {
   const wrapper = document.createElement("div");
   wrapper.className = "comment";
   wrapper.id = `comment-${comment.id}`;
-  wrapper.style.marginLeft = `${indent}px`;
 
   wrapper.innerHTML = `
     <div class="comment-header">
       <span class="comment-name">${comment.name}</span>
-	  <span class="comment-time">${formatDateToDDMMMYYYY(comment.timestamp.toDate())}, ${new Date(comment.timestamp.toDate()).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</span>
+      <span class="comment-time">${formatDateToDDMMMYYYY(comment.timestamp.toDate())}, ${new Date(comment.timestamp.toDate()).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</span>
     </div>
     <div class="comment-text">${comment.text}</div>
     <div class="comment-actions">
@@ -292,7 +291,7 @@ function renderComment(comment, allComments, indent = 0) {
   // Render children (replies)
   if (comment.children && comment.children.length > 0) {
     comment.children.forEach(child => {
-      const childEl = renderComment(child, allComments, indent + 30);
+      const childEl = renderComment(child, allComments);
       wrapper.appendChild(childEl);
     });
   }
