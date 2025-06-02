@@ -514,10 +514,15 @@ function replyToComment(parentId, parentName) {
   replyBox.style.marginTop = "10px";
   replyBox.innerHTML = `
     <textarea rows="2" placeholder="Reply..." style="width: 90%; margin-bottom: 5px;"></textarea><br/>
-    <button onclick="submitReply('${parentId}', this)">Post Reply</button>
+    <button onclick="submitReply('${parentId}', this)">Post</button>
+    <button onclick="this.parentElement.remove()">Cancel</button>
   `;
 
   parentComment.appendChild(replyBox);
+
+  // Focus the textarea
+  const textarea = replyBox.querySelector("textarea");
+  textarea.focus();
 }
 
 async function submitReply(parentId, button) {
