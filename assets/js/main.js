@@ -92,7 +92,7 @@ async function openPostCard(url, date = "", readTime = null) {
 
     <div class="like-comment-section">
       <button onclick="toggleLike('${url}')" id="likeBtn">❤️ Like</button>
-      <span id="likeCount">0</span> Like(s)
+      <span id="likeCount">0</span> Likes
 	  <br/><button onclick="sharePost('${url}')" id="shareBtn">🔗 Share</button>
     </div>
 
@@ -135,9 +135,9 @@ async function toggleLike(postUrl, overrideName = null) {
   const likeBtn = document.getElementById("likeBtn");
 
   if (!existing.empty) {
-    const isYou = confirm(`"${name}" has already liked this post.\nClick "OK" for Yes, "Cancel" for No.`);
+    const isYou = confirm(`"${name}" has already liked this post. Is it you?\nClick "OK" for Yes, "Cancel" for No.`);
     if (isYou) {
-      const confirmUnlike = confirm("Do you want to unlike this post?");
+      const confirmUnlike = confirm("Do you want to unlike this post?\nClick "OK" for Yes, "Cancel" for No.");
       if (confirmUnlike) {
         existing.forEach(doc => doc.ref.delete());
         likeBtn.textContent = "❤️ Like";
