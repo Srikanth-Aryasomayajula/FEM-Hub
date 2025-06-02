@@ -1,3 +1,11 @@
+// Function to set the date format
+function formatDateToDDMMMYYYY(dateStr) {
+  // dateStr expected in 'YYYY-MM-DD' or similar standard format
+  const d = new Date(dateStr);
+  if (isNaN(d)) return dateStr; // fallback if invalid date
+  return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
 // Function to create a post card (same as before)
 function createPostCard(title, summary, date = null, url = "#", readTime = null) {
   const card = document.createElement("a");
@@ -20,9 +28,9 @@ function createPostCard(title, summary, date = null, url = "#", readTime = null)
   const datePara = document.createElement("p");
   datePara.className = "post-date";
   const today = new Date();
-  datePara.textContent = date 
-    ? date.split('-').reverse().join('.') 
-    : today.toISOString().split("T")[0].split('-').reverse().join('.');
+  datePara.textContent = date
+    ? formatDateToDDMMMYYYY(date)
+    : formatDateToDDMMMYYYY(today.toISOString().split("T")[0]);
 
   card.appendChild(heading);
   card.appendChild(summaryPara);
@@ -84,7 +92,7 @@ async function openPostCard(url, date = "", readTime = null) {
 	
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
 	<p class="post-date-inPost">
-		<span>${new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+		<span>${formatDateToDDMMMYYYY(date)}</span>
 		<span>${readTime ? readTime + ' min read' : ''}</span>
 	</p>
 	
@@ -193,7 +201,7 @@ function renderComment(comment, allComments, indent = 0) {
   wrapper.innerHTML = `
     <div class="comment-header">
       <span class="comment-name">${comment.name}</span>
-      <span class="comment-time">${new Date(comment.timestamp.toDate()).toLocaleString()}</span>
+      <span class="comment-time">${formatDateToDDMMMYYYY(comment.timestamp.toDate())}</span>
     </div>
     <div class="comment-text">${comment.text}</div>
     <div class="comment-actions">
