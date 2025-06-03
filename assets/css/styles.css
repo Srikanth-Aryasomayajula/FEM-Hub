@@ -59,6 +59,15 @@ nav a:hover {
   background-color: #f9c412;
 }
 
+nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 9rem;
+  right: 2rem;
+}
+
 .mobile-menu-button {
   display: none;
 }
@@ -645,7 +654,7 @@ footer p {
     cursor: pointer;
     color: white;
     position: absolute;
-    top: -7rem;
+    top: -6rem;
     right: 0;
     z-index: 1000;
   }
@@ -656,8 +665,8 @@ footer p {
     background: white;
     padding: 1rem;
     position: absolute;
-    top: -6rem;
-    right: 2.5rem;
+    top: -4.5rem;
+    right: 3rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     z-index: 999;
