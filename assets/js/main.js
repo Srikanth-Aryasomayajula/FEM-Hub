@@ -641,7 +641,7 @@ function hideStatus() {
 // Enable toggle menu for the mobile site
 function setupMobileMenu() {
   const toggleBtn = document.getElementById("menuToggleBtn");
-  const navLinks = document.getElementById("navLinks");
+  const navLinks = document.getElementById("navMenu");
 
   if (toggleBtn && navLinks) {
     toggleBtn.addEventListener("click", () => {

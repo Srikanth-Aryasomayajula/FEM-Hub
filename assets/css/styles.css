@@ -637,21 +637,14 @@ footer p {
     z-index: 1000;
   }
   
-  #navLinks {
+  /* Initially hide menu links on mobile */
+  #navMenu:not(.show) a {
     display: none;
-    flex-direction: column;
-    background-color: #333;
-    padding: 10px;
   }
 
-  #navLinks.show {
-    display: flex;
-  }
-
-  #navLinks a {
-    padding: 10px 0;
-    color: white;
-    text-decoration: none;
+  /* Show links when .show is toggled */
+  #navMenu.show a {
+    display: block;
   }
   
   /* Banner Image */
