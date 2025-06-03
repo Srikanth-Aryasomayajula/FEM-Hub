@@ -739,24 +739,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   statusEl.id = "actionStatus";
   document.body.appendChild(statusEl);
 
-  // Mobile menu toggle
-  const toggleBtn = document.getElementById("menuToggleBtn");
-  const menu = document.getElementById("menuContainer");
-
-  if (toggleBtn && menu) {
-    toggleBtn.addEventListener("click", () => {
-      menu.classList.toggle("show-menu");
-    });
-
-    document.addEventListener("click", (event) => {
-      if (
-        menu.classList.contains("show-menu") &&
-        !menu.contains(event.target) &&
-        !toggleBtn.contains(event.target)
-      ) {
-        menu.classList.remove("show-menu");
-      }
-    });
-  }
   
 });
