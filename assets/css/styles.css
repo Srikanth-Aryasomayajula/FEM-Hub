@@ -666,10 +666,10 @@ footer p {
 
   /* Logo Positioning */
   .logo {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    margin: 0;
+    position: relative; /*absolute;*/
+    top: auto;/*1rem;*/
+    left: auto; /*1rem;*/
+    margin: 1rem auto;/*0;*/
   }
 
   .logo img {
