@@ -637,6 +637,23 @@ footer p {
     z-index: 1000;
   }
   
+  #navLinks {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10px;
+  }
+
+  #navLinks.show {
+    display: flex;
+  }
+
+  #navLinks a {
+    padding: 10px 0;
+    color: white;
+    text-decoration: none;
+  }
+  
   /* Banner Image */
   .banner img {
     width: 100%;
