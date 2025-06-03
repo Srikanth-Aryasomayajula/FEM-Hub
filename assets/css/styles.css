@@ -617,7 +617,6 @@ footer p {
     justify-content: center;
 	width: fit-content;
     gap: 1rem;
-    margin-top: 1rem;
   }
 
   nav a {
@@ -646,7 +645,9 @@ footer p {
 
   /* Show links when .show is toggled */
   #navMenu.show a {
-    display: block;
+    /*display: block;*/
+	display: flex;
+    flex-direction: column;
   }
   
   /* Banner Image */
