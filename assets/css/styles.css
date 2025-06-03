@@ -627,9 +627,9 @@ footer p {
 
   .mobile-menu-button {
     display: block;
-	font-size: 2.5rem;
-	margin-top: 0;
-	width: auto;
+    font-size: 2.5rem;
+    margin-top: 0;
+    width: auto;
     background: none;
     border: none;
     cursor: pointer;
@@ -637,17 +637,37 @@ footer p {
     position: relative;
     z-index: 1000;
   }
-  
-  /* Initially hide menu links on mobile */
+
+  /* Make nav vertical only on mobile */
+  #navMenu {
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #333;
+    padding: 1rem;
+    position: absolute;
+    top: 5rem;
+    right: 1rem;
+    z-index: 999;
+  }
+
+  /* Initially hide all links */
   #navMenu:not(.show) a {
     display: none;
   }
 
-  /* Show links when .show is toggled */
+  /* Show vertically stacked links when toggled */
   #navMenu.show a {
-    /*display: block;*/
-	display: flex;
-    flex-direction: column;
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  #navMenu a {
+    background-color: white;
+    color: black;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    text-align: left;
   }
   
   /* Banner Image */
@@ -663,6 +683,7 @@ footer p {
     top: auto;
     left: auto;
     margin: 1rem 1rem 0 1rem;
+	width: fit-content;
   }
 
   .logo img {
