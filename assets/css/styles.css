@@ -59,6 +59,15 @@ nav a:hover {
   background-color: #f9c412;
 }
 
+.mobile-menu-button {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
 .banner img {
 	width: calc(100vw * 0.60);
 	max-width: 70%; 
@@ -619,6 +628,34 @@ footer p {
     border-radius: 25px;
     font-size: 1rem;
   }
+
+  .mobile-menu-button {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: white;
+    padding: 1rem;
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 999;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+
+
 
   /* Banner Image */
   .banner img {

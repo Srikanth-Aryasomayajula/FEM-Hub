@@ -739,5 +739,37 @@ document.addEventListener("DOMContentLoaded", async () => {
   statusEl.id = "actionStatus";
   document.body.appendChild(statusEl);
 
+
+  // Enable toggle behavior after header is loaded
+  function setupMobileMenu() {
+    const toggleBtn = document.getElementById("menuToggleBtn");
+    const navLinks = document.getElementById("navLinks");
   
+    if (toggleBtn && navLinks) {
+      toggleBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+  
+      // Close when clicking outside
+      document.addEventListener("click", (event) => {
+        if (
+          navLinks.classList.contains("show") &&
+          !navLinks.contains(event.target) &&
+          !toggleBtn.contains(event.target)
+        ) {
+          navLinks.classList.remove("show");
+        }
+      });
+    }
+  }
+
+  // Initialize mobile menu once header is loaded
+  const headerEl = document.getElementById("header");
+  if (headerEl) {
+    const observer = new MutationObserver(() => {
+      setupMobileMenu();
+    });
+    observer.observe(headerEl, { childList: true });
+  }
+
 });
