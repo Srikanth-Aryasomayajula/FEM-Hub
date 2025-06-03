@@ -646,7 +646,7 @@ footer p {
     color: white;
     position: absolute;
     top: -7rem;
-    right: -10rem;
+    right: 0;
     z-index: 1000;
   }
 
@@ -657,7 +657,7 @@ footer p {
     padding: 1rem;
     position: absolute;
     top: -6rem;
-    right: -7rem;
+    right: 2.5rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     z-index: 999;
