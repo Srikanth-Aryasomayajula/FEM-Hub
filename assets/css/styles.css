@@ -634,19 +634,19 @@ footer p {
     border: none;
     cursor: pointer;
     color: white;
-    position: relative;
+    position: absolute;
     z-index: 1000;
   }
 
   /* Make nav vertical only on mobile */
   #navMenu {
     flex-direction: column;
-    align-items: flex-start;
-    background-color: #333;
-    padding: 1rem;
+    align-items: flex-end;
+    background-color: transparent;
+	gap: 0;
     position: absolute;
-    top: 5rem;
-    right: 1rem;
+	top: 5vh;           /* Align with logo vertically */
+    right: 5vw;         /* 5% from right */
     z-index: 999;
   }
 
@@ -679,9 +679,9 @@ footer p {
 
   /* Logo Positioning */
   .logo {
-    position: relative;
-    top: auto;
-    left: auto;
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
     margin: 1rem 1rem 0 1rem;
 	width: fit-content;
   }
