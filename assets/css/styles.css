@@ -664,14 +664,13 @@ footer p {
 
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
-	color: black;
     display: block;
     width: 100%;
     margin: 0.5rem 0;
   }
 
   #navMenu a {
-    color: white;
+    color: black;
     text-decoration: none;
     margin: 0.5rem 0;
   }
