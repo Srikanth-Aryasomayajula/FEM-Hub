@@ -623,6 +623,7 @@ footer p {
     padding: 0.5rem 1rem;
     border-radius: 25px;
     font-size: 1rem;
+	background-color: black;
   }
 
   .mobile-menu-button {
