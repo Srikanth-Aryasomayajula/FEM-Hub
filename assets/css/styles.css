@@ -654,15 +654,22 @@ footer p {
     display: none;
   }
 
+  #navMenu.show {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
     display: block;
-    width: 100%;
+    color: black;
+    text-decoration: underline;
     margin: 0.5rem 0;
+	cursor: pointer;
   }
 
   #navMenu a {
-    color: white;
     text-decoration: none;
     margin: 0.5rem 0;
   }
