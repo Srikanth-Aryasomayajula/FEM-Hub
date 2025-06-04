@@ -628,7 +628,7 @@ footer p {
   .mobile-menu-button {
     display: block;
     font-size: 2.5rem;
-    margin-top: 0;
+    margin-top: 5vh;
     width: auto;
     background: none;
     border: none;
@@ -645,7 +645,6 @@ footer p {
     background-color: transparent;
 	gap: 0;
     position: absolute;
-	top: 5vh;           /* Align with logo vertically */
     right: 5vw;         /* 5% from right */
     z-index: 999;
   }
@@ -680,9 +679,7 @@ footer p {
   /* Logo Positioning */
   .logo {
     position: absolute;
-    top: 5vh;
     left: 5vw;
-    margin: 1rem 1rem 0 1rem;
 	width: fit-content;
   }
 
