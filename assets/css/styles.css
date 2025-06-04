@@ -655,7 +655,10 @@ footer p {
   }
 
   #navMenu.show {
-    background-color: white;
+    background-color: black;
+	color: white;
+	position: absolute;
+	right: calc(5vw+40px);
     padding: 1rem;
     border-radius: 8px;
   }
