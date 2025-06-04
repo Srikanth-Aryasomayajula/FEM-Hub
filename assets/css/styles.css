@@ -662,11 +662,9 @@ footer p {
   }
 
   #navMenu a {
-    background-color: white;
-    color: black;
-    padding: 0.75rem 1rem;
-    border-radius: 10px;
-    text-align: left;
+    color: white;
+    text-decoration: none;
+    margin: 0.5rem 0;
   }
   
   /* Banner Image */
