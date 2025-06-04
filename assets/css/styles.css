@@ -655,8 +655,7 @@ footer p {
   }
 
   #navMenu.show {
-    background-color: black;
-	color: white;
+    background-color: white;
 	position: absolute;
 	right: calc(5vw+40px);
     padding: 1rem;
@@ -665,6 +664,7 @@ footer p {
 
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
+	color: black;
     display: block;
     width: 100%;
     margin: 0.5rem 0;
