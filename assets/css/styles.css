@@ -623,7 +623,7 @@ footer p {
     padding: 0.5rem 1rem;
     border-radius: 25px;
     font-size: 1rem;
-	background-color: black;
+	background-color: blue;
   }
 
   .mobile-menu-button {
@@ -671,7 +671,7 @@ footer p {
   }
 
   #navMenu a {
-    color: black;
+    color: white;
     text-decoration: none;
     margin: 0.5rem 0;
   }
