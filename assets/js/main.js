@@ -756,17 +756,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
   
-  const statusEl = document.createElement("div");
-  statusEl.id = "actionStatus";
-  document.body.appendChild(statusEl);
-
-  // Initialize mobile menu once header is loaded
-  const headerEl = document.getElementById("header");
-  if (headerEl) {
-    const observer = new MutationObserver(() => {
-      setupMobileMenu();
-    });
-    observer.observe(headerEl, { childList: true });
-  }
+//  const statusEl = document.createElement("div");
+//  statusEl.id = "actionStatus";
+//  document.body.appendChild(statusEl);
+//
+//  // Initialize mobile menu once header is loaded
+//  const headerEl = document.getElementById("header");
+//  if (headerEl) {
+//    const observer = new MutationObserver(() => {
+//      setupMobileMenu();
+//    });
+//    observer.observe(headerEl, { childList: true });
+//  }
   
 });
