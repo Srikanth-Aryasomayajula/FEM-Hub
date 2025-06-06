@@ -245,6 +245,13 @@ nav a:hover {
 	text-align: justify;
 }
 
+.back-button {
+	font-size: 1rem;
+	font-weight: bold;
+	padding: 10px 30px;
+	margin-left: -30px;
+}
+
 .comment {
   background: #fff;
   border: 1px solid #ddd;

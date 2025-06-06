@@ -141,7 +141,7 @@ async function openPostCard(url, date = "", readTime = null) {
   const card = document.createElement("div");
   card.className = "post-expanded-card";
   card.innerHTML = `
-    <button onclick="goBack('${url}')" style="font-size: 1rem; font-weight: bold; padding: 10px 30px; margin-left: -30px;">Back</button>
+    <button class="back-button" onclick="goBack('${url}')">Back</button>
 
 	<h2 style="text-align: center; align-self: center;">${title}</h2>
 	<p class="post-date-inPost">
