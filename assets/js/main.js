@@ -766,12 +766,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const observer = new MutationObserver(() => {
       setupMobileMenu();
     });
-    observer.observe(headerEl, { childList: true });
+    // Delay the observer by a few ms
+    setTimeout(() => {
+      observer.observe(headerEl, { childList: true });
+    }, 50);
   }
-  
-  // Delay the observer by a few ms
-  setTimeout(() => {
-    observer.observe(headerEl, { childList: true });
-  }, 50);
   
 });
