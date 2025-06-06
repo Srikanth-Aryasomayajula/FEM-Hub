@@ -63,6 +63,17 @@ nav a:hover {
   display: none;
 }
 
+.welcome-title {
+  text-align: center;
+  align-self: center;
+  margin: 20px 400px;
+}
+
+.index-p {
+	margin: 10px 400px;
+	text-align: justify;
+}
+
 .banner img {
 	width: calc(100vw * 0.60);
 	max-width: 70%; 
@@ -658,7 +669,7 @@ footer p {
   #navMenu.show {
     background-color: white;
 	position: absolute;
-	right: calc(5vw+40px);
+	right: calc(5vw + 80px);
     padding: 1rem;
     border-radius: 8px;
   }
