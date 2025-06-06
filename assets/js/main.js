@@ -285,7 +285,7 @@ function renderComment(comment, allComments) {
 
   wrapper.innerHTML = `
     <div class="comment-header">
-      <span class="comment-name">${comment.name}</span>
+      <span class="comment-name">${comment.name}</span><br/>
       <span class="comment-time">${formatDateToDDMMMYYYY(comment.timestamp.toDate())}, ${new Date(comment.timestamp.toDate()).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true })}</span>
     </div>
     <div class="comment-text">${comment.text}</div>

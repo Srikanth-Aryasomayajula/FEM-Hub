@@ -622,7 +622,6 @@ footer p {
 
 /* General Mobile Styles */
 @media (max-width: 768px) {
-  /* Main Content Padding */
   main {
     padding: 1rem;
   }
@@ -656,19 +655,6 @@ footer p {
     font-size: 1rem;
 	background-color: blue;
   }
-
-  /*.mobile-menu-button {
-    display: block;
-    font-size: 2.5rem;
-    margin-top: 5vh;
-    width: auto;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: white;
-    position: fixed;
-    z-index: 1000;
-  }*/
   
   .mobile-menu-button {
     display: block;
@@ -683,17 +669,7 @@ footer p {
 	width: fit-content;
   }
 
-  /* Make nav vertical only on mobile */
-  /*#navMenu {
-    flex-direction: column;
-    align-items: flex-end;
-    background-color: transparent;
-	gap: 0;
-    position: fixed;
-    right: 5vw;         
-    z-index: 999;
-  }*/
-  
+  /* Make nav vertical only on mobile */ 
   #navMenu {
     background-color: transparent;
     position: fixed;
@@ -707,16 +683,6 @@ footer p {
   #navMenu:not(.show) a {
     display: none;
   }
-
-  /*#navMenu.show {
-    display: flex;
-	background-color: white;
-	position: absolute;
-	right: calc(5vw + 80px);
-    padding: 1rem;
-    border-radius: 8px;
-	min-width: 180px;
-  }*/
   
   #navMenu.show {
 	display: flex;
@@ -826,6 +792,9 @@ footer p {
 	margin-bottom: 40px;
   }
   
+  .comment .comment {
+    max-width: 80%;  
+  }
   /* Footer Styling */
   footer {
     padding: 1rem;
