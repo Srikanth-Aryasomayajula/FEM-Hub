@@ -775,9 +775,8 @@ footer p {
     padding: 1rem;
   }
 
-
   .back-button {
-	margin-left: -30px;
+	margin-left: 0;
   }
   /* Footer Styling */
   footer {
