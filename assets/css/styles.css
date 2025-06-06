@@ -678,7 +678,7 @@ footer p {
     cursor: pointer;
     color: white;
     position: fixed;
-    top: 5vh;
+    top: 0.01px;
     right: 5vw;
   }
 
@@ -720,21 +720,23 @@ footer p {
   #navMenu.show {
 	display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     background-color: white;
     position: absolute;
-    top: 70px;              
-    right: 5vw;
-    padding: 1rem;
+	gap: 0;
+    top: 30px;              
+    right:calc(5vw + 80px);
+    padding: 1rem 0;
     border-radius: 8px;
-    min-width: 180px;
+    min-width: 190px;
+	z-index: 9999;
   }
 
 
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
     display: block;
-    width: 100%;
+    width: 65%;
     margin: 0.5rem 0;
   }
 
