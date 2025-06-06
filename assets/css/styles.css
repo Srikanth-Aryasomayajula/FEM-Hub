@@ -66,11 +66,11 @@ nav a:hover {
 .welcome-title {
   text-align: center;
   align-self: center;
-  margin: 20px 40px;
+  margin: 20px 400px;
 }
 
 .index-p {
-	margin: 10px 40px;
+	margin: 10px 400px;
 	text-align: justify;
 }
 
@@ -687,6 +687,14 @@ footer p {
     margin: 0.5rem 0;
   }
   
+  .welcome-title {
+    margin: 20px 40px;
+  }
+  
+  .index-p {
+  	margin: 10px 40px;
+  }
+  
   /* Banner Image */
   .banner img {
     width: 100%;
@@ -708,8 +716,8 @@ footer p {
 
   /* Search Bar */
   .search-bar-container {
-    width: 90%;
-    margin: 1rem auto;
+    width: 80%;
+    margin: 1rem 1rem;
     position: relative;
   }
 
