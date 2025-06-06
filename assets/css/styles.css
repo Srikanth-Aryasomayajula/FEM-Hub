@@ -619,6 +619,10 @@ footer p {
     text-align: center;
   }
 
+  body {
+    min-height: 100vh;
+  }
+
   /* Navigation Styling */
   nav {
     position: relative;
