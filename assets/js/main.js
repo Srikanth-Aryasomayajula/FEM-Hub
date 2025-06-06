@@ -638,28 +638,17 @@ function hideStatus() {
   el.style.display = "none";
 }
 
+// Enable toggle menu for the mobile site
 function setupMobileMenu() {
   const toggleBtn = document.getElementById("menuToggleBtn");
   const navLinks = document.getElementById("navMenu");
 
-  const mainContainers = [
-    document.getElementById("generalPostsContainer"),
-    document.getElementById("engineeringPostsContainer"),
-    document.getElementById("ls-dynaPostsContainer")
-  ];
-
   if (toggleBtn && navLinks) {
     toggleBtn.addEventListener("click", () => {
       navLinks.classList.toggle("show");
-
-      // Add z-index or position context if needed
-      mainContainers.forEach((container) => {
-        if (container) {
-          container.style.position = 'relative';
-        }
-      });
     });
 
+    // Close when clicking outside
     document.addEventListener("click", (event) => {
       if (
         navLinks.classList.contains("show") &&

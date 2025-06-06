@@ -695,6 +695,21 @@ footer p {
 	min-width: 180px;
   }
 
+  .general-card-container #navMenu.show,
+  .engineering-card-container #navMenu.show,
+  .ls-dyna-card-container #navMenu.show {
+    background-color: white;
+    position: absolute;
+    right: calc(5vw + 80px);
+    padding: 1rem;
+    border-radius: 8px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 999;
+  }
+
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
     display: block;
