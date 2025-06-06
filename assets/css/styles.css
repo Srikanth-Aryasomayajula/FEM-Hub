@@ -66,17 +66,18 @@ nav a:hover {
 .welcome-title {
   text-align: center;
   align-self: center;
-  margin: 20px 400px;
+  margin: 20px 40px;
 }
 
 .index-p {
-	margin: 10px 400px;
+	margin: 10px 40px;
 	text-align: justify;
 }
 
 .banner img {
 	width: calc(100vw * 0.60);
 	max-width: 70%; 
+	margin-top: 40px;
 	padding-top: 1rem;
 	height: auto; 
 	display: block; 
