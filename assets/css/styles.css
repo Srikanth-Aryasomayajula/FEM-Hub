@@ -676,7 +676,7 @@ footer p {
     align-items: flex-end;
     background-color: transparent;
 	gap: 0;
-    position: absolute;
+    position: fixed;
     right: 5vw;         /* 5% from right */
     z-index: 999;
   }
@@ -758,9 +758,11 @@ footer p {
   .general-card-container,
   .engineering-card-container,
   .ls-dyna-card-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-right: 0;
+    padding: 1rem;
   }
 
   .card {
