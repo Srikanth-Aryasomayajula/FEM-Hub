@@ -77,11 +77,10 @@ nav a:hover {
 .banner img {
 	width: calc(100vw * 0.60);
 	max-width: 70%; 
-	margin-top: 40px;
 	padding-top: 1rem;
 	height: auto; 
 	display: block; 
-	margin: 0 auto;
+	margin: 40px auto auto auto;
 }
 
 .logo {
