@@ -281,7 +281,7 @@ nav a:hover {
   font-weight: normal;
   color: #777;
   font-size: 12px;
-  float: right;
+  max-width: 50px; 
 }
 
 .comment-text {
@@ -793,6 +793,9 @@ footer p {
 	margin-bottom: 40px;
   }
   
+  .comment-time {
+    max-width: 25px; 
+  }
   .comment .comment {
     max-width: 80%;  
   }
