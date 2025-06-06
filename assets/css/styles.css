@@ -41,6 +41,7 @@ nav {
   position: absolute;
   top: 3rem;
   right: 2rem;
+  margin-top: 3.5px;
 }
 
 nav a {
