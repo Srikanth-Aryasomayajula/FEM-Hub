@@ -695,6 +695,8 @@ footer p {
     top: 30px;              
     right:calc(5vw + 50px);
     padding: 1rem 0;
+	outline: 2px solid black;
+	outline-offset: -4px;
     border-radius: 8px;
     min-width: 190px;
 	z-index: 9999;
