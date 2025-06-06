@@ -657,7 +657,7 @@ footer p {
 	background-color: blue;
   }
 
-  .mobile-menu-button {
+  /*.mobile-menu-button {
     display: block;
     font-size: 2.5rem;
     margin-top: 5vh;
@@ -668,39 +668,46 @@ footer p {
     color: white;
     position: fixed;
     z-index: 1000;
+  }*/
+  
+  .mobile-menu-button {
+    display: block;
+    font-size: 2.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    position: fixed;
+    top: 5vh;
+    right: 5vw;
   }
 
   /* Make nav vertical only on mobile */
+  /*#navMenu {
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: transparent;
+	gap: 0;
+    position: fixed;
+    right: 5vw;         
+    z-index: 999;
+  }*/
+  
   #navMenu {
     background-color: transparent;
     position: fixed;
+    top: 0;
     right: 5vw;
     z-index: 999;
   }
-  
-  /* New: create a new wrapper to hold nav links only */
-  #navMenu .nav-links {
-    display: none;
-    flex-direction: column;
-    align-items: flex-end;
-    background-color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    min-width: 180px;
-    margin-top: 3rem; /* pushes it below the button */
-  }
-  
-  /* Show links when navMenu has .show */
-  #navMenu.show .nav-links {
-    display: flex;
-  }
-  
+
+
   /* Initially hide all links */
   #navMenu:not(.show) a {
     display: none;
   }
 
-  #navMenu.show {
+  /*#navMenu.show {
     display: flex;
 	background-color: white;
 	position: absolute;
@@ -708,7 +715,18 @@ footer p {
     padding: 1rem;
     border-radius: 8px;
 	min-width: 180px;
+  }*/
+  
+  #navMenu.show {
+    background-color: white;
+    position: absolute;
+    top: 70px;              
+    right: 5vw;
+    padding: 1rem;
+    border-radius: 8px;
+    min-width: 180px;
   }
+
 
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
