@@ -666,7 +666,7 @@ footer p {
     border: none;
     cursor: pointer;
     color: white;
-    position: absolute;
+    position: fixed;
     z-index: 1000;
   }
 
@@ -692,6 +692,7 @@ footer p {
 	right: calc(5vw + 80px);
     padding: 1rem;
     border-radius: 8px;
+	min-width: 180px;
   }
 
   /* Show vertically stacked links when toggled */
@@ -778,6 +779,12 @@ footer p {
   .back-button {
 	margin-left: 0;
   }
+  
+  .post-date-inPost {
+    margin-top: 0;
+	margin-bottom: 40px;
+  }
+  
   /* Footer Styling */
   footer {
     padding: 1rem;
@@ -839,4 +846,3 @@ footer p {
     font-size: 1rem;
   }
 }
-

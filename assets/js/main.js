@@ -769,4 +769,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     observer.observe(headerEl, { childList: true });
   }
   
+  // Delay the observer by a few ms
+  setTimeout(() => {
+    observer.observe(headerEl, { childList: true });
+  }, 50);
+  
 });
