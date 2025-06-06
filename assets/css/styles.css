@@ -629,6 +629,7 @@ footer p {
     justify-content: center;
 	width: fit-content;
     gap: 1rem;
+	margin-top: 0;
   }
 
   nav a {
