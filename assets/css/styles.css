@@ -677,7 +677,7 @@ footer p {
     border: none;
     cursor: pointer;
     color: white;
-    position: fixed;
+    position: absolute;
     top: 0.01px;
     right: 5vw;
   }
@@ -881,7 +881,7 @@ footer p {
 
   /* Button Styling */
   button {
-    width: 30%;
+    width: 40%;
     padding: 0.75rem;
     font-size: 1rem;
   }
