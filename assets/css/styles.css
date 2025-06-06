@@ -770,11 +770,15 @@ footer p {
 
   /* Post Layout */
   .post-expanded-card {
-    width: 100%;
+    width: 90%;
     max-width: 100%;
     padding: 1rem;
   }
 
+
+  .back-button {
+	margin-left: -30px;
+  }
   /* Footer Styling */
   footer {
     padding: 1rem;
