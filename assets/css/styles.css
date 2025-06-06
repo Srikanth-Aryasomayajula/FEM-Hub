@@ -159,6 +159,13 @@ nav a:hover {
   border-color: #007bff;
 }
 
+.page-title {
+	text-align: center;
+	align-self: center;
+	margin: 20px 400px;
+	transform: translateX(-80px);
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -701,6 +708,9 @@ footer p {
   	margin: 10px 40px;
   }
   
+  .page-title {
+	margin: 20px 40px;
+  }
   /* Banner Image */
   .banner img {
     width: 100%;
