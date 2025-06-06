@@ -104,6 +104,13 @@ async function fetchPostMeta(url) {
   return { title, summary, date, readTime };
 }
 
+function hideSearchBar() {
+  const searchBar = document.querySelector(".search-bar-container");
+  if (searchBar) {
+    searchBar.style.display = "none";
+  }
+}
+
 // Open post in a separate card
 async function openPostCard(url, date = "", readTime = null) {
   const container = document.querySelector("main[id$='PostsContainer']");
@@ -137,6 +144,7 @@ async function openPostCard(url, date = "", readTime = null) {
   }
 
   container.innerHTML = "";
+  hideSearchBar();
 
   const card = document.createElement("div");
   card.className = "post-expanded-card";
