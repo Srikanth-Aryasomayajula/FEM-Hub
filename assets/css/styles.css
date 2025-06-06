@@ -680,6 +680,7 @@ footer p {
     position: absolute;
     top: 0.01px;
     right: 5vw;
+	width: fit-content;
   }
 
   /* Make nav vertical only on mobile */
@@ -725,7 +726,7 @@ footer p {
     position: absolute;
 	gap: 0;
     top: 30px;              
-    right:calc(5vw + 80px);
+    right:calc(5vw + 50px);
     padding: 1rem 0;
     border-radius: 8px;
     min-width: 190px;
