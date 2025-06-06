@@ -672,15 +672,29 @@ footer p {
 
   /* Make nav vertical only on mobile */
   #navMenu {
-    flex-direction: column;
-    align-items: flex-end;
     background-color: transparent;
-	gap: 0;
     position: fixed;
-    right: 5vw;         /* 5% from right */
+    right: 5vw;
     z-index: 999;
   }
-
+  
+  /* New: create a new wrapper to hold nav links only */
+  #navMenu .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    min-width: 180px;
+    margin-top: 3rem; /* pushes it below the button */
+  }
+  
+  /* Show links when navMenu has .show */
+  #navMenu.show .nav-links {
+    display: flex;
+  }
+  
   /* Initially hide all links */
   #navMenu:not(.show) a {
     display: none;
