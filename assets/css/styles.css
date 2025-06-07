@@ -242,6 +242,44 @@ nav a:hover {
 	text-align: justify;
 }
 
+.post-content ul,
+.post-content ol {
+  margin: 1rem 0 1rem 2rem;  /* spacing and indent */
+  padding-left: 1rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  text-align: justify; /* aligns list item text like your paragraphs */
+}
+
+/* Optional: Style nested lists differently if needed */
+.post-content ul ul,
+.post-content ol ol {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.post-content ul {
+  list-style-type: disc; /* Default bullet (can be circle, square, etc.) */
+}
+
+.post-content ol {
+  list-style-type: decimal; /* Default numbering (can be lower-alpha, upper-roman, etc.) */
+}
+
+.post-content code {
+  font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+  /*background-color: #f5f5f5;  /* Light gray background */
+  /*color: #c7254e;             /* Slightly red/pink color for visibility */
+  /*padding: 0.2em 0.4em;       /* Small padding around code */
+  /*border-radius: 4px;         /* Rounded corners */
+  font-size: 1em;          /* Slightly smaller than normal text */
+  white-space: nowrap;        /* Prevent code from wrapping */
+}
+
+
 .back-button {
 	font-size: 1rem;
 	font-weight: bold;
