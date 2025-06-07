@@ -710,24 +710,28 @@ function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   // Create img element
   const img = document.createElement('img');
   img.className = 'post-image';
-  // Don't reuse the span's id for the image
   img.alt = altText;
-  img.src = `./images/${name}.${format}`;
+  const imagePath = `./images/${name}.${format}`;
+  img.src = imagePath;
+
+  // Handle error if image fails to load
+  img.onerror = () => {
+    throw new Error(`insertImage: Image file not found at path "${imagePath}"`);
+  };
 
   // Create button element
   const btn = document.createElement('button');
   btn.className = 'expand-btn';
   btn.style.transform = `scale(${1 / scale})`;
   btn.style.transformOrigin = 'center';
-  btn.setAttribute('onclick', `expandImage('./images/${name}.${format}')`);
+  btn.setAttribute('onclick', `expandImage('${imagePath}')`);
   btn.textContent = 'Expand';
 
   container.appendChild(img);
   container.appendChild(btn);
 
-  targetEl.replaceWith(container); // Replace the placeholder span with the image container
+  targetEl.replaceWith(container);
 }
-
 
 // Main code 
 let currentPostUrl = "";
