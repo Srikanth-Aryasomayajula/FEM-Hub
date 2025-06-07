@@ -669,6 +669,16 @@ function setupMobileMenu() {
   }
 }
 
+function expandImage(src) {
+  const overlay = document.createElement("div");
+  overlay.className = "expanded-image-overlay";
+  overlay.innerHTML = `
+    <button class="close-expanded" onclick="document.body.removeChild(this.parentElement)">✕</button>
+    <img src="${src}" alt="Expanded Image">
+  `;
+  document.body.appendChild(overlay);
+}
+
 // Main code 
 let currentPostUrl = "";
 
