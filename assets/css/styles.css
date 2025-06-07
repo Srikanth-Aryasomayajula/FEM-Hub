@@ -239,6 +239,7 @@ nav a:hover {
 }
 
 .post-content p {
+	font-size: 1.2em;
 	text-align: justify;
 }
 
@@ -275,7 +276,7 @@ nav a:hover {
   /*color: #c7254e;             /* Slightly red/pink color for visibility */
   /*padding: 0.2em 0.4em;       /* Small padding around code */
   /*border-radius: 4px;         /* Rounded corners */
-  font-size: 1em;          /* Slightly smaller than normal text */
+  font-size: 1.3em;          /* Slightly larger than normal text */
   white-space: nowrap;        /* Prevent code from wrapping */
 }
 
