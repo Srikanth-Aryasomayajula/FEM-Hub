@@ -543,7 +543,7 @@ button {
   border: none;
   border-radius: 4px;
   padding: 0.2rem 0.5rem;
-  font-size: 0.8rem;
+  font-size: 12px;
   cursor: pointer;
   z-index: 2;
 }
