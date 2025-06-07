@@ -31,26 +31,24 @@
       <button class="expand-btn" style="transform: scale(calc(1 / var(--container-scale))); transform-origin: center;">Expand</button>
     </div>-->
 	
-    <span id="TypesOfStructuralAnalyses"></span>
 	<script>
-	  insertImage({
-		name: "TypesOfStructuralAnalyses",
-		format: "jpg",
-		altText: "Types of Structural Analyses",
-		webZoom: 0.7,
-		mobileZoom: 1.0
-	  });
-	</script>
-	
-	<span id="QuasiStaticGraphs"></span>
-	<script>
-	  insertImage({
-		name: "QuasiStaticGraphs",
-		format: "jpg",
-		altText: "Quasi Static Graphs",
-		webZoom: 0.7,
-		mobileZoom: 1.0
-	  });
+	  (async () => {
+		await insertImage({
+		  name: "TypesOfStructuralAnalyses",
+		  format: "jpg",
+		  altText: "Types of Structural Analyses",
+		  webZoom: 0.7,
+		  mobileZoom: 1.0
+		});
+
+		await insertImage({
+		  name: "QuasiStaticGraphs",
+		  format: "jpg",
+		  altText: "Quasi Static Graphs",
+		  webZoom: 0.7,
+		  mobileZoom: 1.0
+		});
+	  })();
 	</script>
 
 	<p><b>Static Analysis: </b>Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force.</p>

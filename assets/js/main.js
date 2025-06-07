@@ -689,13 +689,25 @@ function expandImage(src) {
   document.body.appendChild(overlay);
 }
 
-function insertImage({ name, format, altText, webZoom, mobileZoom }) {
+async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   const isMobile = window.innerWidth <= 768;
   const scale = isMobile ? mobileZoom : webZoom;
-
+  const imagePath = `./images/${name}.${format}`;
   const targetEl = document.getElementById(name);
+
   if (!targetEl) {
     console.warn(`insertImage: No element found with id="${name}"`);
+    return;
+  }
+
+  // Check if the image file exists
+  try {
+    const response = await fetch(imagePath, { method: 'HEAD' });
+    if (!response.ok) {
+      throw new Error(`Image not found at path: ${imagePath}`);
+    }
+  } catch (error) {
+    console.error(error.message);
     return;
   }
 
@@ -705,19 +717,13 @@ function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   container.style.setProperty('--container-scale', scale);
   container.style.transform = `scale(${scale})`;
   container.style.transformOrigin = 'center';
-  container.setAttribute('onclick', `expandImage('./images/${name}.${format}')`);
+  container.setAttribute('onclick', `expandImage('${imagePath}')`);
 
   // Create img element
   const img = document.createElement('img');
   img.className = 'post-image';
   img.alt = altText;
-  const imagePath = `./images/${name}.${format}`;
   img.src = imagePath;
-
-  // Handle error if image fails to load
-  img.onerror = () => {
-    throw new Error(`insertImage: Image file not found at path "${imagePath}"`);
-  };
 
   // Create button element
   const btn = document.createElement('button');
@@ -732,6 +738,7 @@ function insertImage({ name, format, altText, webZoom, mobileZoom }) {
 
   targetEl.replaceWith(container);
 }
+
 
 // Main code 
 let currentPostUrl = "";
