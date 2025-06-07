@@ -710,7 +710,7 @@ function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   // Create img element
   const img = document.createElement('img');
   img.className = 'post-image';
-  img.id = name;
+  // Don't reuse the span's id for the image
   img.alt = altText;
   img.src = `./images/${name}.${format}`;
 
@@ -725,8 +725,9 @@ function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   container.appendChild(img);
   container.appendChild(btn);
 
-  targetEl.replaceWith(container); // Replace the placeholder span with the image
+  targetEl.replaceWith(container); // Replace the placeholder span with the image container
 }
+
 
 // Main code 
 let currentPostUrl = "";
