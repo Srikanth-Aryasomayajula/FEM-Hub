@@ -111,6 +111,12 @@ function hideSearchBar() {
   }
 }
 
+// Define the function globally
+async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
+  console.log(name);
+  console.log(format);
+}
+
 // Open post in a separate card
 async function openPostCard(url, date = "", readTime = null) {
   const container = document.querySelector("main[id$='PostsContainer']");
