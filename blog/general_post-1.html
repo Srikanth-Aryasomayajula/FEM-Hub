@@ -15,6 +15,13 @@
   <script src="../assets/js/firebase-init.js" defer></script>
   <script src="../assets/js/load-navbar.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <script>
+    // Define the function globally
+    async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
+      console.log(name);
+      console.log(format);
+    }
+  </script>
 </head>
 <body>
   <div id="header"></div>
@@ -32,6 +39,15 @@
     </div>-->
 	
 	<div id="TypesOfStructuralAnalyses"></div>
+	<script>
+	  insertImage({
+		name: "TypesOfStructuralAnalyses",
+		format: "jpg",
+		altText: "Types Of Structural Analyses",
+		webZoom: 0.7,
+		mobileZoom: 1.0
+	  });
+	</script>
 
 	<p><b>Static Analysis: </b>Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force.</p>
 
@@ -72,26 +88,6 @@
   </main>
 
   <div id="footer"></div>
-  
-  <!-- Insert the insertImage function inline -->
-  <script>
-  window.addEventListener('load', () => {
-    const targetEl = document.getElementById('TypesOfStructuralAnalyses');
-    if (!targetEl) {
-      console.error('Element with id "TypesOfStructuralAnalyses" not found');
-      return;
-    }
-    const img = document.createElement('img');
-    img.src = './images/TypesOfStructuralAnalyses.jpg';
-    img.alt = 'Types of Structural Analyses';
-    img.style.width = '300px';
-    img.onerror = () => {
-      console.error('Image failed to load');
-    };
-    targetEl.appendChild(img);
-    console.log('Image appended successfully');
-  });
-  </script>
   
 </body>
 </html>
