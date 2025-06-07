@@ -520,6 +520,8 @@ button {
   display: block;
   margin: 1rem auto;
   max-width: 100%;
+  border: 1px solid black;
+  box-sizing: border-box; /* Ensures the border stays inside the box */
 }
 
 .post-image {
