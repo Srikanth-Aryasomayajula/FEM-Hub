@@ -31,7 +31,7 @@
       <button class="expand-btn" style="transform: scale(calc(1 / var(--container-scale))); transform-origin: center;">Expand</button>
     </div>-->
 	
-	<span id="TypesOfStructuralAnalyses"></span>
+	<div id="TypesOfStructuralAnalyses"></div>
 
 	<p><b>Static Analysis: </b>Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force.</p>
 
@@ -75,14 +75,19 @@
   
   <!-- Run insertImage() only after entire body is parsed -->
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      insertImage({
-        name: "TypesOfStructuralAnalyses",
-        format: "jpg",
-        altText: "Types of Structural Analyses",
-        webZoom: 0.7,
-        mobileZoom: 1.0
-      });
+    // Wait for the window 'load' event to ensure all scripts are loaded and DOM ready
+    window.addEventListener('load', () => {
+      if (typeof insertImage === 'function') {
+        insertImage({
+          name: "TypesOfStructuralAnalyses",
+          format: "jpg",
+          altText: "Types of Structural Analyses",
+          webZoom: 0.7,
+          mobileZoom: 1.0
+        }).catch(console.error);
+      } else {
+        console.error("insertImage function not found!");
+      }
     });
   </script>
   
