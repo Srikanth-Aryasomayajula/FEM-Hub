@@ -73,21 +73,81 @@
 
   <div id="footer"></div>
   
-  <!-- Run insertImage() only after entire body is parsed -->
+  <!-- Insert the insertImage function inline -->
   <script>
-    // Wait for the window 'load' event to ensure all scripts are loaded and DOM ready
-    window.addEventListener('load', () => {
-      if (typeof insertImage === 'function') {
-        insertImage({
-          name: "TypesOfStructuralAnalyses",
-          format: "jpg",
-          altText: "Types of Structural Analyses",
-          webZoom: 0.7,
-          mobileZoom: 1.0
-        }).catch(console.error);
-      } else {
-        console.error("insertImage function not found!");
+    async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
+      console.log(`Trying to insert image: ${name}.${format}`);
+
+      const isMobile = window.innerWidth <= 768;
+      const scale = isMobile ? mobileZoom : webZoom;
+      const imagePath = `./images/${name}.${format}`;
+      const targetEl = document.getElementById(name);
+
+      if (!targetEl) {
+        console.warn(`insertImage: No element found with id="${name}"`);
+        return;
       }
+
+      try {
+        const response = await fetch(imagePath, { method: 'HEAD' });
+        if (!response.ok) {
+          throw new Error(`Image not found at path: ${imagePath}`);
+        }
+        console.log(`Image found at ${imagePath}`);
+      } catch (error) {
+        console.error(error.message);
+        return;
+      }
+
+      const container = document.createElement('div');
+      container.className = 'post-image-container';
+      container.style.setProperty('--container-scale', scale);
+      container.style.transform = `scale(${scale})`;
+      container.style.transformOrigin = 'center';
+      container.setAttribute('onclick', `expandImage('${imagePath}')`);
+      container.style.border = '2px dashed red'; // TEMP border for visibility
+
+      const img = document.createElement('img');
+      img.className = 'post-image';
+      img.alt = altText;
+      img.src = imagePath;
+      img.onerror = () => {
+        console.error(`Failed to load image: ${img.src}`);
+        img.style.border = '2px solid red';
+        img.alt = 'Image failed to load';
+      };
+
+      const btn = document.createElement('button');
+      btn.className = 'expand-btn';
+      btn.style.transform = `scale(${1 / scale})`;
+      btn.style.transformOrigin = 'center';
+      btn.textContent = 'Expand';
+
+      container.appendChild(img);
+      container.appendChild(btn);
+
+      targetEl.replaceWith(container);
+
+      console.log(`Image inserted into DOM for id="${name}"`);
+      console.log("insertImage() called for", name);
+      console.log("Target element is:", targetEl);
+    }
+
+    // Placeholder for expandImage function
+    function expandImage(imagePath) {
+      alert(`Expand image clicked: ${imagePath}`);
+      // Or implement your actual expand logic here
+    }
+
+    // Call insertImage after window load
+    window.addEventListener('load', () => {
+      insertImage({
+        name: "TypesOfStructuralAnalyses",
+        format: "jpg",
+        altText: "Types of Structural Analyses",
+        webZoom: 0.7,
+        mobileZoom: 1.0
+      }).catch(console.error);
     });
   </script>
   
