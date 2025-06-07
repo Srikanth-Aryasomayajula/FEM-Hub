@@ -111,15 +111,15 @@ function hideSearchBar() {
   }
 }
 
-console.log("Is this function running?");
+
 // Insert image in the card
 async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
-	console.log("Yes");
+
   console.log(`Trying to insert image: ${name}.${format}`);
 
   const isMobile = window.innerWidth <= 768;
   const scale = isMobile ? mobileZoom : webZoom;
-  const imagePath = `./images/${name}.${format}`;
+  const imagePath = `../images/${name}.${format}`;
   const targetEl = document.getElementById(name);
 
   if (!targetEl) {
