@@ -746,6 +746,9 @@ async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   targetEl.replaceWith(container);
 
   console.log(`Image inserted into DOM for id="${name}"`);
+  
+  console.log("insertImage() called for", name);
+  console.log("Target element is:", targetEl);
 }
 
 // Main code 
