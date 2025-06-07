@@ -669,49 +669,6 @@ function setupMobileMenu() {
   }
 }
 
-function setupGlobalSearch() {
-  const searchInput = document.getElementById("searchInput");
-  const resultsContainer = document.getElementById("searchResultsContainer");
-
-  if (!searchInput || !resultsContainer) return;
-
-  searchInput.addEventListener("input", async function () {
-    const search = this.value.toLowerCase();
-    resultsContainer.innerHTML = ""; // Clear previous results
-
-    if (search.length < 2) return;
-
-    const pages = [
-      "/FEM-Hub/general.html",
-      "/FEM-Hub/engineering.html",
-      "/FEM-Hub/ls-dyna.html"
-    ];
-
-    for (const page of pages) {
-      try {
-        const res = await fetch(page);
-        const text = await res.text();
-        const doc = new DOMParser().parseFromString(text, "text/html");
-
-        // Adjust the selector based on your HTML structure
-        const mainContent = doc.querySelector("main");
-        if (!mainContent) continue;
-
-        const cards = mainContent.querySelectorAll(".card");
-
-        cards.forEach(card => {
-          if (card.textContent.toLowerCase().includes(search)) {
-            resultsContainer.appendChild(card.cloneNode(true));
-          }
-        });
-      } catch (err) {
-        console.error(`Error loading ${page}:`, err);
-      }
-    }
-  });
-}
-
-
 // Main code 
 let currentPostUrl = "";
 
@@ -806,8 +763,5 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
   }
-  
-  // Global Search Function for index.html
-  setupGlobalSearch();
   
 });
