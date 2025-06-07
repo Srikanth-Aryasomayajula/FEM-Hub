@@ -846,4 +846,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
   
+  window.insertImage = insertImage;
 });
