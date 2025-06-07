@@ -801,7 +801,6 @@ footer p {
 	z-index: 9999;
   }
 
-
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
     display: block;
@@ -884,6 +883,11 @@ footer p {
     max-width: 100%;
     padding: 1rem;
   }
+  
+  .expanded-image-overlay {
+    width: 100%;
+    height: 100%;
+  }
 
   .back-button {
 	margin-left: 0;
@@ -892,6 +896,19 @@ footer p {
   .post-date-inPost {
     margin-top: 0;
 	margin-bottom: 40px;
+  }
+  
+  .post-content p {
+	font-size: 1em;
+}
+
+  .post-content ul,
+  .post-content ol {
+  	font-size: 1em;
+  }
+  
+  .post-content code {
+      font-size: 1.1em;          /* Slightly larger than normal text */
   }
   
   .comment-time {
