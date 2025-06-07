@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FEM Hub - Exploring the Dynamics of FEM</title>
+  <title>FEM Hub - Understanding Structural Analyses in FEM - Part 1: Static vs. Dynamic Analysis</title>
   <meta name="post-summary" content="An introductory dive into the finite element method and its modern applications. An introductory dive into the finite element method and its modern applications." />
   <link rel="stylesheet" href="../assets/css/styles.css" />
 
@@ -18,10 +18,61 @@
 </head>
 <body>
   <div id="header"></div>
-  <h1>Exploring the Dynamics of FEM</h1>
+  <h1>Understanding Structural Analyses in FEM - Part 1: Static vs. Dynamic Analysis</h1>
 
   <main class="post">
-    <p>This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here. This is the full content of Post One. Write your detailed post here.</p>
+    <p>Welcome to FEM Hub's exploration of structural analyses in Finite Element Method (FEM). In this comprehensive series, we'll unravel the intricate world of structural analysis, beginning with a deep dive into the difference between static and dynamic analyses.</p>
+
+
+	<p>While we've touched on various aspects of FEM before, this marks the beginning of our focused journey into the heart of finite element analysis and its applications. As we progress, we'll delve into additional dimensions of structural analyses, including implicit vs. explicit, linear vs. nonlinear, and more. Join us on this journey to gain a solid grasp of structural analyses in FEM. Your exploration of this fascinating field begins here!</p>
+	
+	<div class="post-image-container">
+      <img src="../images/TypesOfStructuralAnalyses.png" alt="Types of Structural Analyses" class="post-image" id="TypesOfStructuralAnalyses">
+      <button class="expand-btn" onclick="expandImage('../images/TypesOfStructuralAnalyses.png')">Expand</button>
+    </div>
+
+	<p>Static Analysis: Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force. 
+
+Force, displacement, velocity, acceleration are not functions of time. Steady-state conditions, with no consideration of time.
+
+The assumption is that materials and loads do not change with time.
+
+Suitable for structures subjected to slow, constant, or quasi-static loading conditions.
+
+Governing equation is [K]{x} = {F}, where [K] is the stiffness matrix, {x} and {F} are the displacement and force vectors.  
+
+Less solution time
+
+Output: stress, displacement
+
+Inertial loads (due to g) are not considered.
+
+Only the stiffness matrix is solved.
+
+Example: A person sitting on a chair.
+
+Dynamic Analysis: It deals with the time-dependent behavior of structures. This analysis considers the effects of forces and displacements as they change over time. 
+
+Force, displacement, velocity, acceleration are functions of time.
+
+Governing equation, [M]{ẍ} + [c]{ẋ} + [K]{x} = {F}, where [M] is the mass matrix, [C] is the damping matrix, {ẍ} and {ẋ} are acceleration and velocity vectors respectively.
+
+More solution time
+
+Output: stress, displacement, velocity, acceleration w.r.t. time/frequency
+
+Free Vibration: Displacement, velocity, acceleration are functions of time but there’s no external force. 
+
+Example: A mass is oscillating freely in a spring mass system.
+
+Forced Vibration: External force is also present
+
+Inertial loads are also taken into consideration.
+
+Stiffness matrix is solved along with mass matrix (and damping matrix, if not zero).
+
+Example: Load applied on a spring.</p>
+	
   </main>
 
   <div id="footer"></div>
