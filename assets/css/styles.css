@@ -535,6 +535,13 @@ button {
   justify-content: center;  /* or space-between / space-around if you prefer */
   gap: 20px;                /* spacing between images */
   flex-wrap: wrap;          /* allows wrapping on small screens */
+  align-items: flex-start; /* Optional: align vertically if button heights vary */
+}
+
+.image-row > .post-image-container {
+  flex: 0 0 auto; /* Don't grow or shrink */
+  width: auto;    /* Let content decide width */
+  margin: 0;      /* Remove vertical margin override */
 }
 
 /* Expand button on top-right corner */
