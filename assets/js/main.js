@@ -690,9 +690,11 @@ function expandImage(src) {
 }
 
 async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
+  console.log(`Trying to insert image: ${name}.${format}`);
+
   const isMobile = window.innerWidth <= 768;
   const scale = isMobile ? mobileZoom : webZoom;
-  const imagePath = `https://srikanth-aryasomayajula.github.io/FEM-Hub/images/${name}.${format}`;
+  const imagePath = `./images/${name}.${format}`;
   const targetEl = document.getElementById(name);
 
   if (!targetEl) {
@@ -700,12 +702,12 @@ async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
     return;
   }
 
-  // Check if the image file exists
   try {
     const response = await fetch(imagePath, { method: 'HEAD' });
     if (!response.ok) {
       throw new Error(`Image not found at path: ${imagePath}`);
     }
+    console.log(`Image found at ${imagePath}`);
   } catch (error) {
     console.error(error.message);
     return;
@@ -718,27 +720,33 @@ async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   container.style.transform = `scale(${scale})`;
   container.style.transformOrigin = 'center';
   container.setAttribute('onclick', `expandImage('${imagePath}')`);
+  container.style.border = '2px dashed red'; // TEMP border for visibility
 
   // Create img element
   const img = document.createElement('img');
   img.className = 'post-image';
   img.alt = altText;
   img.src = imagePath;
+  img.onerror = () => {
+    console.error(`Failed to load image: ${img.src}`);
+    img.style.border = '2px solid red';
+    img.alt = 'Image failed to load';
+  };
 
   // Create button element
   const btn = document.createElement('button');
   btn.className = 'expand-btn';
   btn.style.transform = `scale(${1 / scale})`;
   btn.style.transformOrigin = 'center';
-  btn.setAttribute('onclick', `expandImage('${imagePath}')`);
   btn.textContent = 'Expand';
 
   container.appendChild(img);
   container.appendChild(btn);
 
   targetEl.replaceWith(container);
-}
 
+  console.log(`Image inserted into DOM for id="${name}"`);
+}
 
 // Main code 
 let currentPostUrl = "";
