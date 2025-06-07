@@ -547,8 +547,8 @@ button {
   position: fixed;
   top: 0;
   left: 0;
-  width: 125%;
-  height: 125%;
+  width: 110%;
+  height: 110%;
   background: rgba(10, 10, 10, 0.9);
   display: flex;
   justify-content: center;
@@ -909,6 +909,12 @@ footer p {
   
   .post-content code {
       font-size: 1.1em;          /* Slightly larger than normal text */
+  }
+  
+  /* Close (X) button */
+  .close-expanded {
+    top: 20px;
+    right: 30px;
   }
   
   .comment-time {
