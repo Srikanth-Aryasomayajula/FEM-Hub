@@ -692,7 +692,7 @@ function expandImage(src) {
 async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   const isMobile = window.innerWidth <= 768;
   const scale = isMobile ? mobileZoom : webZoom;
-  const imagePath = `./images/${name}.${format}`;
+  const imagePath = `https://srikanth-aryasomayajula.github.io/FEM-Hub/images/${name}.${format}`;
   const targetEl = document.getElementById(name);
 
   if (!targetEl) {
