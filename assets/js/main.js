@@ -671,13 +671,13 @@ function setupMobileMenu() {
 
 function setupGlobalSearch() {
   const searchInput = document.getElementById("searchInput");
+  const resultsContainer = document.getElementById("searchResultsContainer");
 
-  if (!searchInput) return;
+  if (!searchInput || !resultsContainer) return;
 
   searchInput.addEventListener("input", async function () {
     const search = this.value.toLowerCase();
-    const container = document.getElementById("generalPostsContainer") || document.querySelector("main");
-    container.innerHTML = ""; // Clear previous results
+    resultsContainer.innerHTML = ""; // ✅ Only clear results, not full main
 
     if (search.length < 2) return;
 
@@ -696,7 +696,7 @@ function setupGlobalSearch() {
 
         cards.forEach(card => {
           if (card.textContent.toLowerCase().includes(search)) {
-            container.appendChild(card.cloneNode(true));
+            resultsContainer.appendChild(card.cloneNode(true));
           }
         });
       } catch (err) {
@@ -705,7 +705,6 @@ function setupGlobalSearch() {
     }
   });
 }
-
 
 // Main code 
 let currentPostUrl = "";
