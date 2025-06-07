@@ -30,7 +30,7 @@ header {
 .header-container {
   position: relative;
   display: flex;
-  justify-content: center; /* center nav */
+  justify-content: center;
   align-items: center;
 }
 
@@ -108,7 +108,6 @@ nav a:hover {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  /*height: 100%; /* ensures full height so .card-info can be pushed to bottom */
   margin-right: 150px;
 }
 
@@ -117,7 +116,6 @@ nav a:hover {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  /*height: 100%; /* ensures full height so .card-info can be pushed to bottom */
   margin-right: 150px;
 }
 
@@ -126,7 +124,6 @@ nav a:hover {
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  /*height: 100%; /* ensures full height so .card-info can be pushed to bottom */
   margin-right: 150px;
 }
 
@@ -679,7 +676,6 @@ footer p {
     z-index: 999;
   }
 
-
   /* Initially hide all links */
   #navMenu:not(.show) a {
     display: none;
@@ -706,7 +702,7 @@ footer p {
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
     display: block;
-    width: 65%;
+    width: 70%;
     margin: 0.5rem 0;
   }
 
