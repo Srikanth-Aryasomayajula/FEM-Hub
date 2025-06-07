@@ -669,6 +669,44 @@ function setupMobileMenu() {
   }
 }
 
+function setupGlobalSearch() {
+  const searchInput = document.getElementById("searchInput");
+
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", async function () {
+    const search = this.value.toLowerCase();
+    const container = document.getElementById("generalPostsContainer") || document.querySelector("main");
+    container.innerHTML = ""; // Clear previous results
+
+    if (search.length < 2) return;
+
+    const pages = [
+      "/FEM-Hub/general.html",
+      "/FEM-Hub/engineering.html",
+      "/FEM-Hub/ls-dyna.html"
+    ];
+
+    for (const page of pages) {
+      try {
+        const res = await fetch(page);
+        const text = await res.text();
+        const doc = new DOMParser().parseFromString(text, "text/html");
+        const cards = doc.querySelectorAll(".card");
+
+        cards.forEach(card => {
+          if (card.textContent.toLowerCase().includes(search)) {
+            container.appendChild(card.cloneNode(true));
+          }
+        });
+      } catch (err) {
+        console.error(`Error loading ${page}:`, err);
+      }
+    }
+  });
+}
+
+
 // Main code 
 let currentPostUrl = "";
 
@@ -765,39 +803,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   // Global Search Function for index.html
-  const searchInput = document.getElementById("searchInput");
-  
-  if (searchInput) {
-    searchInput.addEventListener("input", async function () {
-      const search = this.value.toLowerCase();
-      const container = document.getElementById("generalPostsContainer") || document.querySelector("main");
-      container.innerHTML = ""; // Clear previous results
-  
-      if (search.length < 2) return; // Optional: require at least 2 characters
-  
-      const pages = [
-        "/FEM-Hub/general.html",
-        "/FEM-Hub/engineering.html",
-        "/FEM-Hub/ls-dyna.html"
-      ];
-  
-      for (const page of pages) {
-        try {
-          const res = await fetch(page);
-          const text = await res.text();
-          const doc = new DOMParser().parseFromString(text, "text/html");
-          const cards = doc.querySelectorAll(".card");
-  
-          cards.forEach(card => {
-            if (card.textContent.toLowerCase().includes(search)) {
-              container.appendChild(card.cloneNode(true));
-            }
-          });
-        } catch (err) {
-          console.error(`Error loading ${page}:`, err);
-        }
-      }
-    });
-  }
+  setupGlobalSearch();
   
 });
