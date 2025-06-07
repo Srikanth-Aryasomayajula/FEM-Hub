@@ -677,31 +677,51 @@ function setupGlobalSearch() {
 
   searchInput.addEventListener("input", async function () {
     const search = this.value.toLowerCase();
-    resultsContainer.innerHTML = ""; // ✅ Only clear results, not full main
+    resultsContainer.innerHTML = ""; // Clear previous results
 
     if (search.length < 2) return;
 
     const pages = [
-      "/FEM-Hub/general.html",
-      "/FEM-Hub/engineering.html",
-      "/FEM-Hub/ls-dyna.html"
+      { url: "/FEM-Hub/general.html", label: "General" },
+      { url: "/FEM-Hub/engineering.html", label: "Engineering" },
+      { url: "/FEM-Hub/ls-dyna.html", label: "LS-DYNA" },
     ];
 
-    for (const page of pages) {
+    for (const { url, label } of pages) {
       try {
-        const res = await fetch(page);
+        const res = await fetch(url);
         const text = await res.text();
         const doc = new DOMParser().parseFromString(text, "text/html");
         const cards = doc.querySelectorAll(".card");
 
         cards.forEach(card => {
           if (card.textContent.toLowerCase().includes(search)) {
-            resultsContainer.appendChild(card.cloneNode(true));
+            const titleEl = card.querySelector("h2, h3, h4, .card-title") || {};
+            const summaryEl = card.querySelector("p") || {};
+            const linkEl = card.querySelector("a") || {};
+
+            const title = titleEl.textContent?.trim() || "Untitled";
+            const summary = summaryEl.textContent?.trim() || "";
+            const link = linkEl.href || url;
+
+            const result = document.createElement("div");
+            result.className = "card search-result";
+            result.innerHTML = `
+              <h3><a href="${link}">${title}</a></h3>
+              <p>${summary}</p>
+              <small>From: ${label}</small>
+            `;
+
+            resultsContainer.appendChild(result);
           }
         });
       } catch (err) {
-        console.error(`Error loading ${page}:`, err);
+        console.error(`Error fetching ${url}:`, err);
       }
+    }
+
+    if (!resultsContainer.hasChildNodes()) {
+      resultsContainer.innerHTML = `<p>No results found.</p>`;
     }
   });
 }
