@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FEM Hub - Stress Analysis in Composites</title>
+  <title>FEM Hub - Understanding Structural Analyses in FEM - Part 2: Linear vs. Nonlinear Analysis</title>
   <meta name="post-summary" content="Understanding how FEM helps analyze composite materials." />
   <!-- uncomment this if you want to modify readtime manually
   <meta name="read-time" content="3"> -->
@@ -14,10 +14,70 @@
 <body>
   <!-- Separate header and footer containers -->
   <div id="header"></div>
-  <h1>Stress Analysis in Composites</h1>
+  <h1>Understanding Structural Analyses in FEM - Part 2: Linear vs. Nonlinear Analysis</h1>
 
   <main class="post">
-    <p>This is the full content of Post Two. Write your detailed post here.</p>
+    <p>Welcome back to our journey through structural analysis in the world of Finite Element Method (FEM). In this second installment, we delve into a critical distinction: linear vs. nonlinear analyses. Understanding this differentiation is essential for solving complex engineering problems.</p>
+
+
+	<p>In our previous post, we explored the difference between static and dynamic analyses, setting the stage for a more profound understanding of structural analysis in FEM. Now, we turn our focus to the question of linearity, a fundamental aspect that significantly impacts how we approach structural problems.</p>
+
+
+	<p><b>Linear Analysis:</b> Linear analysis assumes that the behavior of materials and structures is governed by linear relationship between forces and displacements.</p>
+	
+		<ul>
+		<li><b>Proportionality: </b>Stress and strain are directly proportional. The material behaves elastically within its linear range.</li>
+		<li>Stiffness matrix is constant.</li>
+		<li>Solving process is relatively short.</li>
+		<li>This is used as a first estimate prior performing nonlinear analysis.</li>
+		<li><b>Superposition:</b> Linear analysis allows for the superposition of effects. This means you can combine the results of different loads or boundary conditions.</li>
+		<li>Linear analysis is valuable for structures that experience relatively small deformations and loads within the linear elastic range of materials.</li>
+		<li>It's efficient and straightforward to apply.</li>
+	</ul>
+	<br>
+	
+	<p><b>Nonlinear Analysis:</b> Nonlinear analysis acknowledges that real-world behavior often deviates from linearity, especially under large deformations, material nonlinearity, and other complex conditions. The relation between applied forces and displacements is nonlinear.</p>
+	
+	<ul>
+		<li>Nonlinear effects can originate from geometric nonlinearity (large deformations), material nonlinearity (elasto-plastic material) and contact.</li>
+		<li>Stiffness matrix is not constant, and hence, a different solving strategy is used.</li>
+		<li>Crudely, a nonlinear system is one whose behavior is not simply the sum of its parts or their multiples. Hence, they are often difficult (or impossible) to model.</li>
+	</ul>
+		
+		<p>There are 3 types of nonlinearities.</p>
+		
+	<ul>
+		<li><b>Geometric Nonlinearity: </b>The structural deformations are considered in formulating the constitutive and equilibrium equations.</li>
+		<ul>
+			<li><b>Large deformation analysis based on geometric nonlinearity: </b>Applications like metal forming, tire analysis, medical device analysis require large deformation nonlinear analysis.</li>
+			<li><b>Small deformation analysis based on geometric nonlinearity: </b>Applications like analysis involving cables, arches and shells (slender structures undergoing finite displacements and rotations).</li>
+			<li><b>Note:</b> Deformations over 5% are usually considered as large deformations.</li>
+		</ul>
+	</ul>
+	<br>
+	
+	<ul>
+		<li><b>Material nonlinearity: </b>Nonlinear behavior of the material based on the current deformation, deformation history, rate of deformation, temperature, pressure, etc.</li>
+		<ul>
+			<li><b>Example: </b>Large strain (visco) elasto-plasticity and hyperelasticity (rubber and plastic materials).</li>
+			<li>For reference, types of materials are shown in the following figure.</li>
+		</ul>
+	</ul>
+	<div class="post-image-container" onclick="expandImage('./images/MaterialTypes.jpg')">
+      <img src="./images/MaterialTypes.jpg" alt="Material Types" class="post-image" id="MaterialTypes">
+      <button class="expand-btn" onclick="expandImage('./images/MaterialTypes.jpg')">Expand</button>
+    </div>
+
+
+
+
+
+
+
+
+
+	
+	
   </main>
 
   <div id="footer"></div>
