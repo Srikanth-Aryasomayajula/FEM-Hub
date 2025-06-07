@@ -32,10 +32,9 @@
     </div>-->
 	
 	<div id="image-placeholder"></div>
-
 	<script>
-	  // Call insertImage when the DOM is ready
-	  document.addEventListener("DOMContentLoaded", () => {
+	  // Delay call until main.js is loaded and function available
+	  window.addEventListener('load', () => {
 		insertImage({
 		  name: "TypesOfStructuralAnalyses",
 		  format: "jpg",
