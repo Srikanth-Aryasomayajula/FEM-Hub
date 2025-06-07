@@ -260,6 +260,7 @@ nav a:hover {
 /* Optional: Style nested lists differently if needed */
 .post-content ul ul,
 .post-content ol ol {
+	font-size: 1.2em;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
 }
@@ -915,7 +916,11 @@ footer p {
 }
 
   .post-content ul,
-  .post-content ol {
+  .post-content ol,
+  .post-content ul ul,
+  .post-content ul ol,
+  .post-content ol ul,
+  .post-content ol ol {
   	font-size: 1em;
   }
   
