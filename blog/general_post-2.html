@@ -85,9 +85,9 @@
 		</ul>
 	</ul>
 
-	<div class="post-image-container" onclick="expandImage('./images/QuasiStaticGraphs.jpg')">
-      <img src="./images/QuasiStaticGraphs.jpg" alt="QuasiStatic Graphs" class="post-image" id="QuasiStaticGraphs" style="transform: scale(1); transform-origin: center;">
-      <button class="expand-btn" onclick="expandImage('./images/QuasiStaticGraphs.jpg')">Expand</button>
+	<div class="post-image-container" onclick="expandImage('./images/QuasiStaticGraphs.jpg')" style="--container-scale: 0.7; transform: scale(var(--container-scale)); transform-origin: center;">
+      <img src="./images/QuasiStaticGraphs.jpg" alt="QuasiStatic Graphs" class="post-image" id="QuasiStaticGraphs">
+      <button class="expand-btn" onclick="expandImage('./images/QuasiStaticGraphs.jpg')" style="transform: scale(calc(1 / var(--container-scale))); transform-origin: center;">Expand</button>
     </div>
 
 
