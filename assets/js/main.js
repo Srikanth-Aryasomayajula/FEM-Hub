@@ -689,6 +689,48 @@ function expandImage(src) {
   document.body.appendChild(overlay);
 }
 
+function insertImage({name, format, altText, webZoom, mobileZoom, containerId = 'image-placeholder'}) {
+  const isMobile = window.innerWidth <= 768;
+  const scale = isMobile ? mobileZoom : webZoom;
+
+  // Create container div
+  const container = document.createElement('div');
+  container.className = 'post-image-container';
+  container.style.setProperty('--container-scale', scale);
+  container.style.transform = `scale(${scale})`;
+  container.style.transformOrigin = 'center';
+  container.setAttribute('onclick', `expandImage('./images/${name}.${format}')`);
+
+  // Create img element
+  const img = document.createElement('img');
+  img.className = 'post-image';
+  img.id = name;
+  img.alt = altText;
+  img.src = `./images/${name}.${format}`;
+
+  // Create button element
+  const btn = document.createElement('button');
+  btn.className = 'expand-btn';
+  // Inverse scale for button to keep normal size
+  btn.style.transform = `scale(${1 / scale})`;
+  btn.style.transformOrigin = 'center';
+  btn.setAttribute('onclick', `expandImage('./images/${name}.${format}')`);
+  btn.textContent = 'Expand';
+
+  // Append children
+  container.appendChild(img);
+  container.appendChild(btn);
+
+  // Insert into placeholder container in DOM
+  const placeholder = document.getElementById(containerId);
+  if (!placeholder) {
+    console.warn(`insertImage: No element found with id="${containerId}"`);
+    return;
+  }
+  placeholder.innerHTML = ''; // Clear existing content if any
+  placeholder.appendChild(container);
+}
+
 // Main code 
 let currentPostUrl = "";
 
