@@ -322,7 +322,7 @@ nav a:hover {
   font-weight: normal;
   color: #777;
   font-size: 12px;
-  max-width: 50px; 
+  max-width: 150px; 
 }
 
 .comment-text {
@@ -939,9 +939,11 @@ footer p {
   .expanded-image-overlay img {
     width: 95%;
   }
+  
   .comment-time {
-    max-width: 25px; 
+    max-width: 100px; 
   }
+  
   .comment .comment {
     max-width: 80%;  
   }
