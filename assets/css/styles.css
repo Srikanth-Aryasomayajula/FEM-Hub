@@ -285,6 +285,12 @@ nav a:hover {
     white-space: nowrap;        /* Prevent code from wrapping */
 }
 
+.image-row {
+  display: flex;
+  justify-content: center;  /* or space-between / space-around if you prefer */
+  gap: 20px;                /* spacing between images */
+  flex-wrap: wrap;          /* allows wrapping on small screens */
+}
 
 .back-button {
 	font-size: 1rem;
