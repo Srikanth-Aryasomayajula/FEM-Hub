@@ -240,7 +240,7 @@ nav a:hover {
 }
 
 .post-content p {
-	font-size: 1.2em;
+	font-size: 1.2rem;
 	text-align: justify;
 }
 
@@ -248,7 +248,7 @@ nav a:hover {
 .post-content ul ul,
 .post-content ol,
 .post-content ol ol {
-	font-size: 1.2em;
+	font-size: 1.2rem;
 	margin: 1rem 0 1rem 2rem;  /* spacing and indent */
 	padding-left: 1rem;
 }
@@ -262,7 +262,7 @@ nav a:hover {
 /* Optional: Style nested lists differently if needed */
 .post-content ul ul,
 .post-content ol ol {
-	font-size: 1.2em;
+	font-size: 1.2rem;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
 }
@@ -281,7 +281,7 @@ nav a:hover {
     /*color: #c7254e;             /* Slightly red/pink color for visibility */
     /*padding: 0.2em 0.4em;       /* Small padding around code */
     /*border-radius: 4px;         /* Rounded corners */
-    font-size: 1.3em;          /* Slightly larger than normal text */
+    font-size: 1.3rem;          /* Slightly larger than normal text */
     white-space: nowrap;        /* Prevent code from wrapping */
 }
 
@@ -914,7 +914,7 @@ footer p {
   }
   
   .post-content p {
-	font-size: 1em;
+	font-size: 1rem;
 }
 
   .post-content ul,
@@ -923,11 +923,11 @@ footer p {
   .post-content ul ol,
   .post-content ol ul,
   .post-content ol ol {
-  	font-size: 1em;
+  	font-size: 1rem;
   }
   
   .post-content code {
-      font-size: 1.1em;          /* Slightly larger than normal text */
+      font-size: 1.1rem;          /* Slightly larger than normal text */
   }
   
   /* Close (X) button */
