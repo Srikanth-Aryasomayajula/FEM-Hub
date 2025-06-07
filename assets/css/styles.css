@@ -515,8 +515,8 @@ button {
 
 .post-image-container {
   position: relative;
-  display: inline-block;
-  margin: 1rem 0;
+  display: block;
+  margin: 1rem auto;
   max-width: 100%;
 }
 
