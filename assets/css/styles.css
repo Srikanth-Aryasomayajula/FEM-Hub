@@ -533,8 +533,8 @@ button {
 /* Expand button on top-right corner */
 .expand-btn {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 8px;
+  right: 80px;
   width: fit-content;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
