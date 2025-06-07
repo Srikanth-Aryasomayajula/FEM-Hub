@@ -672,10 +672,20 @@ function setupMobileMenu() {
 function expandImage(src) {
   const overlay = document.createElement("div");
   overlay.className = "expanded-image-overlay";
+
   overlay.innerHTML = `
     <button class="close-expanded" onclick="document.body.removeChild(this.parentElement)">✕</button>
-    <img src="${src}" alt="Expanded Image">
+    <img src="${src}" alt="Expanded Image" />
   `;
+
+  // Clicking the overlay outside the image closes the expanded view
+  overlay.addEventListener("click", (event) => {
+    // If the click target is the overlay itself (not the image or button)
+    if (event.target === overlay) {
+      document.body.removeChild(overlay);
+    }
+  });
+
   document.body.appendChild(overlay);
 }
 
