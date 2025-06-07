@@ -682,49 +682,35 @@ function setupGlobalSearch() {
     if (search.length < 2) return;
 
     const pages = [
-      { url: "/FEM-Hub/general.html", label: "General" },
-      { url: "/FEM-Hub/engineering.html", label: "Engineering" },
-      { url: "/FEM-Hub/ls-dyna.html", label: "LS-DYNA" },
+      "/FEM-Hub/general.html",
+      "/FEM-Hub/engineering.html",
+      "/FEM-Hub/ls-dyna.html"
     ];
 
-    for (const { url, label } of pages) {
+    for (const page of pages) {
       try {
-        const res = await fetch(url);
+        const res = await fetch(page);
         const text = await res.text();
         const doc = new DOMParser().parseFromString(text, "text/html");
-        const cards = doc.querySelectorAll(".card");
+
+        // Adjust the selector based on your HTML structure
+        const mainContent = doc.querySelector("main");
+        if (!mainContent) continue;
+
+        const cards = mainContent.querySelectorAll(".card");
 
         cards.forEach(card => {
           if (card.textContent.toLowerCase().includes(search)) {
-            const titleEl = card.querySelector("h2, h3, h4, .card-title") || {};
-            const summaryEl = card.querySelector("p") || {};
-            const linkEl = card.querySelector("a") || {};
-
-            const title = titleEl.textContent?.trim() || "Untitled";
-            const summary = summaryEl.textContent?.trim() || "";
-            const link = linkEl.href || url;
-
-            const result = document.createElement("div");
-            result.className = "card search-result";
-            result.innerHTML = `
-              <h3><a href="${link}">${title}</a></h3>
-              <p>${summary}</p>
-              <small>From: ${label}</small>
-            `;
-
-            resultsContainer.appendChild(result);
+            resultsContainer.appendChild(card.cloneNode(true));
           }
         });
       } catch (err) {
-        console.error(`Error fetching ${url}:`, err);
+        console.error(`Error loading ${page}:`, err);
       }
-    }
-
-    if (!resultsContainer.hasChildNodes()) {
-      resultsContainer.innerHTML = `<p>No results found.</p>`;
     }
   });
 }
+
 
 // Main code 
 let currentPostUrl = "";
