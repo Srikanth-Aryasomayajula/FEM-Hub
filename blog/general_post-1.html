@@ -32,18 +32,6 @@
     </div>-->
 	
 	<span id="TypesOfStructuralAnalyses"></span>
-	<script>
-	document.addEventListener('DOMContentLoaded', () => {
-	  insertImage({
-		name: "TypesOfStructuralAnalyses",
-		format: "jpg",
-		altText: "Types of Structural Analyses",
-		webZoom: 0.7,
-		mobileZoom: 1.0
-	  });
-	});
-	</script>
-
 
 	<p><b>Static Analysis: </b>Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force.</p>
 
@@ -84,5 +72,19 @@
   </main>
 
   <div id="footer"></div>
+  
+  <!-- Run insertImage() only after entire body is parsed -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      insertImage({
+        name: "TypesOfStructuralAnalyses",
+        format: "jpg",
+        altText: "Types of Structural Analyses",
+        webZoom: 0.7,
+        mobileZoom: 1.0
+      });
+    });
+  </script>
+  
 </body>
 </html>
