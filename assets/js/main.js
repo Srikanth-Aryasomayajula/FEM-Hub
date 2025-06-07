@@ -92,7 +92,7 @@ async function fetchPostMeta(url) {
   
   const content = doc.querySelector('main.post')?.textContent || "";
   const wordCount = content.trim().split(/\s+/).length;
-  let readTime = Math.max(1, Math.ceil(wordCount / 200)); // Average 200 wpm
+  let readTime = Math.max(1, Math.ceil(wordCount / 175)); // Average 175 wpm
   
   // Optionally extract date if you add it similarly
   const date = null; 

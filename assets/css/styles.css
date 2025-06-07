@@ -928,6 +928,9 @@ footer p {
     right: 30px;
   }
   
+  .expanded-image-overlay img {
+    width: 95%;
+  }
   .comment-time {
     max-width: 25px; 
   }
