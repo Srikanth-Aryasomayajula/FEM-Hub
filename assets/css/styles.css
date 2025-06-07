@@ -492,6 +492,7 @@ button {
   position: absolute;
   top: 6px;
   right: 6px;
+  width: fit-content;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   border: none;

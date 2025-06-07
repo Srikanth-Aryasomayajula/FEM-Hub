@@ -31,47 +31,39 @@
       <button class="expand-btn" onclick="expandImage('./images/TypesOfStructuralAnalyses.jpg')">Expand</button>
     </div>
 
-	<p>Static Analysis: Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force. 
+	<p><b>Static Analysis: </b>Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force.</p>
 
-Force, displacement, velocity, acceleration are not functions of time. Steady-state conditions, with no consideration of time.
+	<ul>
+		<li>Force, displacement, velocity, acceleration are not functions of time. Steady-state conditions, with no consideration of time.</li>
+		<li>The assumption is that materials and loads do not change with time.</li>
+		<li>Suitable for structures subjected to slow, constant, or quasi-static loading conditions.</li>
+		<li>Governing equation is <code><b>[K]{x} = {F}</b></code>, where <code><b>[K]</b></code> is the stiffness matrix, <code><b>{x}<b></code> and <code><b>{F}</b></code> are the displacement and force vectors.</li>
+		<li>Less solution time</li>
+		<li><b>Output: </b>stress, displacement</li>
+		<li>Inertial loads (due to g) are not considered.</li>
+		<li>Only the stiffness matrix is solved.</li>
+		<li><b>Example: </b>A person sitting on a chair.</li>
+	</ul>
 
-The assumption is that materials and loads do not change with time.
+	<p><b>Dynamic Analysis: </b>It deals with the time-dependent behavior of structures. This analysis considers the effects of forces and displacements as they change over time.</p>
 
-Suitable for structures subjected to slow, constant, or quasi-static loading conditions.
+	<ul>
+		<li>Force, displacement, velocity, acceleration are functions of time.</li>
+		<li>Governing equation: <code><b>[M]{ẍ} + [C]{ẋ} + [K]{x} = {F}</b></code>, where <code>[M]</code> is the mass matrix, <code><b>[C]</b></code> is the damping matrix, and <code><b>{ẍ}</b>, <b>{ẋ}</b></code> are acceleration and velocity vectors.</li>
+		<li><b>More solution time</b></li>
+		<li><b>Output: </b>stress, displacement, velocity, acceleration w.r.t. time/frequency</li>
+	</ul>
 
-Governing equation is [K]{x} = {F}, where [K] is the stiffness matrix, {x} and {F} are the displacement and force vectors.  
+	<p><b>Free Vibration:</b> Displacement, velocity, acceleration are functions of time but there’s no external force.<br>
+	<b>Example:</b> A mass is oscillating freely in a spring mass system.</p>
 
-Less solution time
+	<p><b>Forced Vibration:</b> External force is also present</p>
 
-Output: stress, displacement
-
-Inertial loads (due to g) are not considered.
-
-Only the stiffness matrix is solved.
-
-Example: A person sitting on a chair.
-
-Dynamic Analysis: It deals with the time-dependent behavior of structures. This analysis considers the effects of forces and displacements as they change over time. 
-
-Force, displacement, velocity, acceleration are functions of time.
-
-Governing equation, [M]{ẍ} + [c]{ẋ} + [K]{x} = {F}, where [M] is the mass matrix, [C] is the damping matrix, {ẍ} and {ẋ} are acceleration and velocity vectors respectively.
-
-More solution time
-
-Output: stress, displacement, velocity, acceleration w.r.t. time/frequency
-
-Free Vibration: Displacement, velocity, acceleration are functions of time but there’s no external force. 
-
-Example: A mass is oscillating freely in a spring mass system.
-
-Forced Vibration: External force is also present
-
-Inertial loads are also taken into consideration.
-
-Stiffness matrix is solved along with mass matrix (and damping matrix, if not zero).
-
-Example: Load applied on a spring.</p>
+	<ul>
+		<li>Inertial loads are also taken into consideration.</li>
+		<li>Stiffness matrix is solved along with mass matrix (and damping matrix, if not zero).</li>
+		<li><b>Example:</b> Load applied on a spring.</li>
+	</ul>
 	
   </main>
 
