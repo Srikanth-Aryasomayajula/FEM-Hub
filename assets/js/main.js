@@ -689,9 +689,15 @@ function expandImage(src) {
   document.body.appendChild(overlay);
 }
 
-function insertImage({name, format, altText, webZoom, mobileZoom, containerId = 'image-placeholder'}) {
+function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   const isMobile = window.innerWidth <= 768;
   const scale = isMobile ? mobileZoom : webZoom;
+
+  const targetEl = document.getElementById(name);
+  if (!targetEl) {
+    console.warn(`insertImage: No element found with id="${name}"`);
+    return;
+  }
 
   // Create container div
   const container = document.createElement('div');
@@ -711,24 +717,15 @@ function insertImage({name, format, altText, webZoom, mobileZoom, containerId = 
   // Create button element
   const btn = document.createElement('button');
   btn.className = 'expand-btn';
-  // Inverse scale for button to keep normal size
   btn.style.transform = `scale(${1 / scale})`;
   btn.style.transformOrigin = 'center';
   btn.setAttribute('onclick', `expandImage('./images/${name}.${format}')`);
   btn.textContent = 'Expand';
 
-  // Append children
   container.appendChild(img);
   container.appendChild(btn);
 
-  // Insert into placeholder container in DOM
-  const placeholder = document.getElementById(containerId);
-  if (!placeholder) {
-    console.warn(`insertImage: No element found with id="${containerId}"`);
-    return;
-  }
-  placeholder.innerHTML = ''; // Clear existing content if any
-  placeholder.appendChild(container);
+  targetEl.replaceWith(container); // Replace the placeholder span with the image
 }
 
 // Main code 

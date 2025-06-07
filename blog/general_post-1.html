@@ -31,19 +31,20 @@
       <button class="expand-btn" style="transform: scale(calc(1 / var(--container-scale))); transform-origin: center;">Expand</button>
     </div>-->
 	
-	<div id="image-placeholder"></div>
-	<script>
-	  // Delay call until main.js is loaded and function available
-	  window.addEventListener('load', () => {
-		insertImage({
-		  name: "TypesOfStructuralAnalyses",
-		  format: "jpg",
-		  altText: "Types of Structural Analyses",
-		  webZoom: 0.7,
-		  mobileZoom: 1.0
-		});
-	  });
-	</script>
+    <span id="TypesOfStructuralAnalyses"></span>
+
+    <script>
+      // Call insertImage when the DOM is ready
+      document.addEventListener("DOMContentLoaded", () => {
+        insertImage({
+          name: "TypesOfStructuralAnalyses",
+          format: "jpg",
+          altText: "Types of Structural Analyses",
+          webZoom: 0.7,
+          mobileZoom: 1.0
+        });
+      });
+    </script>
 
 	<p><b>Static Analysis: </b>Static analysis is the foundation of structural analysis. It's employed when the structure is in equilibrium and subjected to a constant load or force.</p>
 
