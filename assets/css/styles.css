@@ -702,7 +702,7 @@ footer p {
   /* Show vertically stacked links when toggled */
   #navMenu.show a {
     display: block;
-    width: 70%;
+    width: 65%;
     margin: 0.5rem 0;
   }
 
