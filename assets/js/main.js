@@ -141,7 +141,7 @@ async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   container.style.transform = `scale(${scale})`;
   container.style.transformOrigin = 'center';
   container.setAttribute('onclick', `expandImage('${imagePath}')`);
-  container.style.border = '2px solid black'; 
+  //container.style.border = '2px solid black'; 
 
   // Create img element
   const img = document.createElement('img');
