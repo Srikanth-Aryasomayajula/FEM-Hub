@@ -114,8 +114,6 @@ function hideSearchBar() {
 // Insert image in the card
 async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
 
-  console.log(`Trying to insert image: ${name}.${format}`);
-
   const isMobile = window.innerWidth <= 768;
   const scale = isMobile ? mobileZoom : webZoom;
   const imagePath = `${window.location.origin}/FEM-Hub/images/${name}.${format}`;
@@ -131,7 +129,6 @@ async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
     if (!response.ok) {
       throw new Error(`Image not found at path: ${imagePath}`);
     }
-    console.log(`Image found at ${imagePath}`);
   } catch (error) {
     console.error(error.message);
     return;
@@ -168,11 +165,6 @@ async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   container.appendChild(btn);
 
   targetEl.replaceWith(container);
-
-  console.log(`Image inserted into DOM for id="${name}"`);
-  
-  console.log("insertImage() called for", name);
-  console.log("Target element is:", targetEl);
 }
 
 // Open post in a separate card
