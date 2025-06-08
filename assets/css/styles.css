@@ -905,6 +905,12 @@ footer p {
     height: 100%;
   }
 
+  /* Expand button on top-right corner */
+  .expand-btn {
+    top: -0.25rem;
+    right: 0.75rem;
+  }
+  
   .back-button {
 	margin-left: 0;
   }
