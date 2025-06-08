@@ -302,8 +302,6 @@ nav a:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   font-size: 14px;
   box-sizing: border-box;   /* Ensure padding fits within bounds */
-  /*overflow-x: auto;               /* Enable horizontal scroll */
-  /*overflow-y: hidden;             /* Prevent vertical scroll from this level */
   overflow: visible;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -530,6 +528,15 @@ button {
   border-radius: 6px;
   transition: all 0.3s ease;
   cursor: zoom-in;
+}
+
+.image-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem; /* optional spacing between images */
+  justify-content: center; /* or 'space-between', 'start', etc. */
+  align-items: center;
+  flex-wrap: wrap; /* optional, allows wrapping on smaller screens */
 }
 
 /* Expand button on top-right corner */
