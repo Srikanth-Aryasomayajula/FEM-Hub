@@ -530,21 +530,6 @@ button {
   cursor: zoom-in;
 }
 
-.image-row {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 1rem;
-  flex-wrap: wrap;
-  transform: scale(1); /* ensures stacking context */
-}
-
-.image-row > .post-image-container {
-  transform-origin: top left;
-  /* Ensure scaled size affects layout context */
-  position: relative;
-}
-
 /* Expand button on top-right corner */
 .expand-btn {
   position: absolute;
