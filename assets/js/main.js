@@ -144,7 +144,7 @@ async function insertImage({ name, format, altText, webZoom, mobileZoom }) {
   container.style.transform = `scale(${scale})`;
   container.style.transformOrigin = 'center';
   container.setAttribute('onclick', `expandImage('${imagePath}')`);
-  container.style.border = '2px dashed red'; // TEMP border for visibility
+  container.style.border = '2px solid black'; 
 
   // Create img element
   const img = document.createElement('img');
@@ -247,15 +247,18 @@ async function openPostCard(url, date = "", readTime = null) {
   
   // Track current post URL
   currentPostUrl = url;
-  
-  // Insert images dynamically
-  await insertImage({
-    name: "TypesOfStructuralAnalyses",
-    format: "jpg",            // or png / webp etc.
-    altText: "Types Of Structural Analyses",
-    webZoom: 0.7,
-    mobileZoom: 1.0
-  });
+
+  // Insert images dynamically from post content
+  const imageDivs = card.querySelectorAll("div[id][data-img-format]");
+  for (const div of imageDivs) {
+    await insertImage({
+      name: div.id,
+      format: div.dataset.imgFormat,
+      altText: div.dataset.imgAlt || "",
+      webZoom: parseFloat(div.dataset.imgWebZoom) || 1.0,
+      mobileZoom: parseFloat(div.dataset.imgMobileZoom) || 1.0
+    });
+  }
 
   // Load saved comments
   await loadComments(url);
