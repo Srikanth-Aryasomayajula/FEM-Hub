@@ -531,12 +531,18 @@ button {
 }
 
 .image-row {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
-  gap: 1rem; /* optional spacing between images */
-  justify-content: center; /* or 'space-between', 'start', etc. */
-  align-items: center;
-  flex-wrap: wrap; /* optional, allows wrapping on smaller screens */
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  transform: scale(1); /* ensures stacking context */
+}
+
+.image-row > .post-image-container {
+  transform-origin: top left;
+  /* Ensure scaled size affects layout context */
+  position: relative;
 }
 
 /* Expand button on top-right corner */
