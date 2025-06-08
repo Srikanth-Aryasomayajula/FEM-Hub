@@ -247,6 +247,15 @@ async function openPostCard(url, date = "", readTime = null) {
   
   // Track current post URL
   currentPostUrl = url;
+  
+  // Insert images dynamically
+  await insertImage({
+    name: "TypesOfStructuralAnalyses",
+    format: "jpg",            // or png / webp etc.
+    altText: "Types Of Structural Analyses",
+    webZoom: 0.7,
+    mobileZoom: 1.0
+  });
 
   // Load saved comments
   await loadComments(url);
