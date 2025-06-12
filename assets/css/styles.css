@@ -598,6 +598,14 @@ button {
   margin-top: 1rem;
 }
 
+.thank-you-message {
+  display: none;
+  color: green;
+  font-weight: bold;
+  margin-top: 9rem;
+  margin-left: 5rem;
+}
+
 .post-image-container {
   position: relative;
   display: block;
@@ -1111,6 +1119,10 @@ footer p {
     margin-bottom: 1rem;
   }
 
+  .thank-you-message {
+    margin-top: 0;
+    margin-left: 5rem;
+  }
   /* Comment Section */
   #commentsContainer {
     width: 100%;
