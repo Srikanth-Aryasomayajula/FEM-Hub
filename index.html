@@ -50,7 +50,7 @@
 	  <!-- Right Side -->
 	  <form class="subscribe-form" action="https://formspree.io/f/mwpbobdq" method="POST">
 	  
-	  <input type="hidden" name="_redirect" value="https://srikanth-aryasomayajula.github.io/FEM-Hub/#thank-you" />
+	  <input type="hidden" name="_redirect" value="https://srikanth-aryasomayajula.github.io/FEM-Hub/?subscribed=true" />
 	  
 		<label for="firstname">First Name</label>
 		<input type="text" name="firstname" id="firstname" placeholder="e.g. Jane" required>
@@ -82,11 +82,16 @@
 
 	<script>
 	  document.addEventListener("DOMContentLoaded", function () {
-		if (window.location.hash === "#thank-you") {
-		  const msg = document.getElementById("thank-you");
-		  if (msg) msg.style.display = "block";
-		  // Optional: Remove the hash from the URL
-		  history.replaceState(null, null, window.location.pathname);
+		const params = new URLSearchParams(window.location.search);
+		if (params.get("subscribed") === "true") {
+		  const thankYouMsg = document.getElementById("thank-you");
+		  if (thankYouMsg) {
+			thankYouMsg.style.display = "block";
+		  }
+
+		  // Remove the query param to avoid repeated message on reload
+		  const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+		  window.history.replaceState({}, document.title, newUrl);
 		}
 	  });
 	</script>
