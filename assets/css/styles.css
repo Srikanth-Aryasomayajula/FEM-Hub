@@ -504,15 +504,6 @@ button {
   margin-top: 0.5rem;
 }
 
-/*.subscribe-form {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}*/
-
 /* === Container Layout === */
 .subscribe-container {
   display: flex;
@@ -606,7 +597,6 @@ button {
   color: #4d4d4d;
   margin-top: 1rem;
 }
-
 
 .post-image-container {
   position: relative;
@@ -1084,10 +1074,40 @@ footer p {
     width: 100%;
   }
 
-  /* Subscribe Form */
+  .subscribe-container {
+    flex-direction: column;
+    max-width: 90%;
+  }
+
+  .subscribe-info,
   .subscribe-form {
-    width: 90%;
-    margin: 2rem auto;
+    flex: 1 1 100%;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .subscribe-form {
+    align-items: center;
+  }
+
+  .subscribe-form label,
+  .subscribe-form input,
+  .subscribe-form button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .subscribe-form input {
+    margin: 0 auto 1rem auto;
+  }
+
+  .subscribe-form button {
+    max-width: 300px;
+  }
+
+  .form-image {
+    max-width: 120px;
+    margin-bottom: 1rem;
   }
 
   /* Comment Section */
