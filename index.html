@@ -102,13 +102,12 @@
 	  function showThankYou() {
 		const form = document.querySelector('.subscribe-form');
 		const status = document.getElementById('form-status');
-		
-		form.style.position = 'relative';
 
-		// Slight delay to simulate async
+		form.style.position = 'relative'; // 🔧 Add this line
+
 		setTimeout(() => {
 		  form.style.display = 'none';
-		  status.style.display = 'block';
+		  status.style.display = 'flex'; // because of flexbox centering
 		}, 500);
 	  }
 	</script>
