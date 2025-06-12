@@ -518,7 +518,7 @@ button {
   display: flex;
   flex-direction: row; /* Ensures horizontal layout */
   width: 100%;          /* Ensures the container fills available width */
-  max-width: 900px;
+  max-width: 700px;
   margin: 2rem auto;
   background: #fff;
   border-radius: 12px;
@@ -528,7 +528,7 @@ button {
 
 /* === Left Side (Info + Image) === */
 .subscribe-info {
-  flex: 0 0 50%;
+  flex: 0 0 40%;
   padding: 2rem;
   background-color: #f9f9f9;
   text-align: center;
@@ -553,7 +553,7 @@ button {
 
 /* === Right Side (Form) === */
 .subscribe-form {
-  flex: 0 0 50%;
+  flex: 0 0 45%;
   padding: 2rem;
   display: flex;
   flex-direction: column;
