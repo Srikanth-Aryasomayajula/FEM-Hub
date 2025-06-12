@@ -598,6 +598,18 @@ button {
   margin-top: 1rem;
 }
 
+.thank-you-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px; /* Adjust as needed */
+  font-size: 1.2rem;
+  color: green;
+  font-weight: bold;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .post-image-container {
   position: relative;
   display: block;
