@@ -1088,6 +1088,7 @@ footer p {
 
   .subscribe-form {
     align-items: center;
+	max-width: 75%;
   }
 
   .subscribe-form label,
