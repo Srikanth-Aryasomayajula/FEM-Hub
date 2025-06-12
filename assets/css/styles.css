@@ -504,14 +504,83 @@ button {
   margin-top: 0.5rem;
 }
 
-.subscribe-form {
+/*.subscribe-form {
   max-width: 700px;
   margin: 2rem auto;
   padding: 1rem;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
+}*/
+
+/* === Subscription Form Styles === */
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
+
+.subscribe-form label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.subscribe-form input[type="text"],
+.subscribe-form input[type="email"] {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.subscribe-form input[type="text"]:focus,
+.subscribe-form input[type="email"]:focus {
+  outline: none;
+  border-color: #0066ff;
+}
+
+.subscribe-form button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.2rem;
+  background-color: #0066ff;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.subscribe-form button[type="submit"]:hover {
+  background-color: #0052cc;
+}
+
+.subscribe-form button[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+/* Placeholder styling—will be replaced by your image */
+.subscribe-form .form-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+
 
 .post-image-container {
   position: relative;
