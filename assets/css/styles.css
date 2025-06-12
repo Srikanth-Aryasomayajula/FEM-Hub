@@ -528,7 +528,7 @@ button {
 
 /* === Left Side (Info + Image) === */
 .subscribe-info {
-  flex: 0 0 40%;
+  flex: 0 0 37%;
   padding: 2rem;
   background-color: #f9f9f9;
   text-align: center;
@@ -537,11 +537,13 @@ button {
 .subscribe-info h2 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
+  color: #4d4d4d;
 }
 
 .subscribe-info p {
   font-size: 1rem;
   margin-bottom: 1.5rem;
+  color: #686868;
 }
 
 .form-image {
@@ -601,7 +603,7 @@ button {
 
 .privacy-text {
   font-size: 0.85rem;
-  color: #777;
+  color: #4d4d4d;
   margin-top: 1rem;
 }
 
