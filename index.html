@@ -48,9 +48,7 @@
 	  </div>
 
 	  <!-- Right Side -->
-	  <form class="subscribe-form" action="https://formspree.io/f/mwpbobdq" method="POST">
-	  
-	  <input type="hidden" name="_redirect" value="https://srikanth-aryasomayajula.github.io/FEM-Hub/?subscribed=true" />
+	  <form class="subscribe-form" action="https://formspree.io/f/mwpbobdq" method="POST" target="hidden_iframe" onsubmit="showThankYou();">
 	  
 		<label for="firstname">First Name</label>
 		<input type="text" name="firstname" id="firstname" placeholder="e.g. Jane" required>
@@ -66,11 +64,11 @@
 		<p class="privacy-text">We respect your privacy. Unsubscribe at any time.</p>
 	  </form>
 	  
-	  <!-- Custom thank-you or error message goes here -->
-	  <p id="form-status" class="privacy-text" style="display: none; color: green;"></p>
+	  <!-- Hidden iframe to prevent redirection -->
+	  <iframe name="hidden_iframe" style="display: none;"></iframe>
 	  
-	  <p id="thank-you" class="privacy-text" style="display: none; color: green; font-weight: bold; margin-top: 1rem;">🎉 Thank you for subscribing!</p>
-	</div>
+	  <!-- Thank-you message (initially hidden) -->
+	  <p id="form-status" class="privacy-text" style="display: none; color: green; font-weight: bold; margin-top: 1rem;">🎉 Thank you for subscribing!</p>
 	
 	</main>
 	<!-- Back to Top Button -->
@@ -81,20 +79,18 @@
 	<div id="footer"></div>
 
 	<script>
-	  document.addEventListener("DOMContentLoaded", function () {
-		const params = new URLSearchParams(window.location.search);
-		if (params.get("subscribed") === "true") {
-		  const thankYouMsg = document.getElementById("thank-you");
-		  if (thankYouMsg) {
-			thankYouMsg.style.display = "block";
-		  }
+	  function showThankYou() {
+		const form = document.querySelector('.subscribe-form');
+		const status = document.getElementById('form-status');
 
-		  // Remove the query param to avoid repeated message on reload
-		  const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-		  window.history.replaceState({}, document.title, newUrl);
-		}
-	  });
+		// Slight delay to simulate async
+		setTimeout(() => {
+		  form.style.display = 'none';
+		  status.style.display = 'block';
+		}, 500);
+	  }
 	</script>
+
 
 </body>
 </html>
