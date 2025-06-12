@@ -62,6 +62,9 @@
 
 		<p class="privacy-text">We respect your privacy. Unsubscribe at any time.</p>
 	  </form>
+	  
+	  <!-- Custom thank-you or error message goes here -->
+	  <p id="form-status" class="privacy-text" style="display: none; color: green;"></p>
 	</div>
 	
 	</main>
@@ -71,6 +74,41 @@
 	</button>
 
 	<div id="footer"></div>
+
+	<script>
+	  const form = document.querySelector('.subscribe-form');
+	  const status = document.getElementById('form-status');
+
+	  form.addEventListener('submit', async function (e) {
+		e.preventDefault();
+		const data = new FormData(form);
+		const action = form.action;
+
+		try {
+		  const response = await fetch(action, {
+			method: 'POST',
+			body: data,
+			headers: {
+			  'Accept': 'application/json'
+			}
+		  });
+
+		  if (response.ok) {
+			status.style.display = 'block';
+			status.style.color = 'green';
+			status.textContent = '🎉 Thank you for subscribing!';
+			form.reset();
+		  } else {
+			const result = await response.json();
+			throw new Error(result.message || 'Something went wrong');
+		  }
+		} catch (error) {
+		  status.style.display = 'block';
+		  status.style.color = 'red';
+		  status.textContent = `⚠️ Oops! ${error.message}`;
+		}
+	  });
+	</script>
 
 </body>
 </html>
