@@ -39,16 +39,30 @@
 	</div> -->
 	
 	<!-- Subscribe Form -->
-	<form  class="subscribe-form" action="https://formspree.io/f/mjkrwreq" method="POST">
+	<div class="subscribe-container">
+	  <!-- Left Side -->
+	  <div class="subscribe-info">
+		<h2>Subscribe!</h2>
+		<p>Subscribe to get our latest content by E-Mail.</p>
 		<img src="images/subscribe.png" alt="Subscribe" class="form-image">
-		<label for="name">Your Name</label>
-		<input type="text" name="name" id="name" placeholder="e.g. Jane Doe" required>
+	  </div>
 
-		<label for="email">Your Email</label>
+	  <!-- Right Side -->
+	  <form class="subscribe-form" action="https://formspree.io/f/mjkrwreq" method="POST">
+		<label for="firstname">First Name</label>
+		<input type="text" name="firstname" id="firstname" placeholder="e.g. Jane" required>
+
+		<label for="lastname">Last Name</label>
+		<input type="text" name="lastname" id="lastname" placeholder="e.g. Doe" required>
+		
+		<label for="email">Email Address</label>
 		<input type="email" name="email" id="email" placeholder="you@example.com" required>
 
 		<button type="submit">Subscribe</button>
-	</form>
+
+		<p class="privacy-text">We respect your privacy. Unsubscribe at any time.</p>
+	  </form>
+	</div>
 	
 	</main>
 	<!-- Back to Top Button -->
